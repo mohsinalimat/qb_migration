@@ -1,0 +1,2382 @@
+{
+    "bill_payments": [
+        {
+            "txn_id": "3AB3-1071530698",
+            "ref_no": "335",
+            "date": "2020-06-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "031",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "429D-1071524130",
+            "ref_no": "338",
+            "date": "2020-06-25",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 1109.15,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1109.15
+                }
+            ]
+        },
+        {
+            "txn_id": "408A-1071510768",
+            "ref_no": "339",
+            "date": "2020-06-27",
+            "vend_name": "Custom Kitchens of Bayshore",
+            "vend_list_id": "7B0000-1071524812",
+            "total_amt": 3076.32,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 3076.32
+                }
+            ]
+        },
+        {
+            "txn_id": "9EA0-1182132428",
+            "ref_no": "340",
+            "date": "2020-06-30",
+            "vend_name": "Zeng Building Supplies",
+            "vend_list_id": "800000BD-1181226959",
+            "total_amt": 11807.8,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 11807.8
+                }
+            ]
+        },
+        {
+            "txn_id": "3A41-1071530236",
+            "ref_no": "346",
+            "date": "2020-07-01",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 112.75,
+            "applied": [
+                {
+                    "ref_no": "6/03",
+                    "amount": 112.75
+                }
+            ]
+        },
+        {
+            "txn_id": "3B0C-1071530932",
+            "ref_no": "347",
+            "date": "2020-07-07",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 4050.0
+                }
+            ]
+        },
+        {
+            "txn_id": "6C43-1197695717",
+            "ref_no": "352",
+            "date": "2020-07-12",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 1000.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A50-1071530285",
+            "ref_no": "353",
+            "date": "2020-07-14",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 76.55,
+            "applied": [
+                {
+                    "ref_no": "6/03",
+                    "amount": 76.55
+                }
+            ]
+        },
+        {
+            "txn_id": "3ABA-1071530708",
+            "ref_no": "354",
+            "date": "2020-07-14",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "032",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3E8E-1071498954",
+            "ref_no": "357",
+            "date": "2020-07-18",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q3/03",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "3B11-1071530948",
+            "ref_no": "358",
+            "date": "2020-07-21",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 200.0,
+            "applied": [
+                {
+                    "ref_no": "03-12345",
+                    "amount": 200.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9EA5-1182132441",
+            "ref_no": "359",
+            "date": "2020-07-31",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 4050.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3265-1071513156",
+            "ref_no": "364",
+            "date": "2020-08-01",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 97.5,
+            "applied": [
+                {
+                    "ref_no": "95-H43n",
+                    "amount": 97.5
+                }
+            ]
+        },
+        {
+            "txn_id": "3A46-1071530250",
+            "ref_no": "365",
+            "date": "2020-08-01",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 119.39,
+            "applied": [
+                {
+                    "ref_no": "7/03",
+                    "amount": 119.39
+                }
+            ]
+        },
+        {
+            "txn_id": "3193-1071510594",
+            "ref_no": "366",
+            "date": "2020-08-07",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 3828.7,
+            "applied": [
+                {
+                    "ref_no": "39482",
+                    "amount": 3828.7
+                }
+            ]
+        },
+        {
+            "txn_id": "42A2-1071524160",
+            "ref_no": "371",
+            "date": "2020-08-08",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 1214.89,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1214.89
+                }
+            ]
+        },
+        {
+            "txn_id": "3AC1-1071530716",
+            "ref_no": "372",
+            "date": "2020-08-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "033",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3A57-1071530300",
+            "ref_no": "373",
+            "date": "2020-08-15",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 84.04,
+            "applied": [
+                {
+                    "ref_no": "7/03",
+                    "amount": 84.04
+                }
+            ]
+        },
+        {
+            "txn_id": "3AE9-1071530810",
+            "ref_no": "376",
+            "date": "2020-08-18",
+            "vend_name": "Holly Heating and Electric",
+            "vend_list_id": "750000-1071527895",
+            "total_amt": 0.0,
+            "applied": []
+        },
+        {
+            "txn_id": "3E9D-1071499247",
+            "ref_no": "377",
+            "date": "2020-08-18",
+            "vend_name": "Holly Heating and Electric",
+            "vend_list_id": "750000-1071527895",
+            "total_amt": 145.0,
+            "applied": [
+                {
+                    "ref_no": "03-12345",
+                    "amount": 145.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A4B-1071530263",
+            "ref_no": "383",
+            "date": "2020-09-05",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 122.68,
+            "applied": [
+                {
+                    "ref_no": "8/03",
+                    "amount": 122.68
+                }
+            ]
+        },
+        {
+            "txn_id": "3AC8-1071530728",
+            "ref_no": "388",
+            "date": "2020-09-12",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "034",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "34EE-1071513243",
+            "ref_no": "389",
+            "date": "2020-09-15",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 490.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 490.0
+                }
+            ]
+        },
+        {
+            "txn_id": "34F3-1071513243",
+            "ref_no": "390",
+            "date": "2020-09-15",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 525.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 525.0
+                }
+            ]
+        },
+        {
+            "txn_id": "34FA-1071513244",
+            "ref_no": "391",
+            "date": "2020-09-15",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 590.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 590.0
+                }
+            ]
+        },
+        {
+            "txn_id": "34FF-1071513244",
+            "ref_no": "392",
+            "date": "2020-09-15",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 1570.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1570.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3506-1071513244",
+            "ref_no": "393",
+            "date": "2020-09-15",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 380.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 380.0
+                }
+            ]
+        },
+        {
+            "txn_id": "350B-1071513244",
+            "ref_no": "394",
+            "date": "2020-09-15",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 750.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 750.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3510-1071513244",
+            "ref_no": "395",
+            "date": "2020-09-15",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 4998.95,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 4998.95
+                }
+            ]
+        },
+        {
+            "txn_id": "3519-1071513244",
+            "ref_no": "396",
+            "date": "2020-09-15",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 4000.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 4000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "351E-1071513244",
+            "ref_no": "397",
+            "date": "2020-09-15",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 7719.95,
+            "applied": [
+                {
+                    "ref_no": "6206",
+                    "amount": 1440.0
+                },
+                {
+                    "ref_no": "6203",
+                    "amount": 6279.95
+                }
+            ]
+        },
+        {
+            "txn_id": "352F-1071513244",
+            "ref_no": "398",
+            "date": "2020-09-15",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 675.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 675.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3FC1-1071507335",
+            "ref_no": "400",
+            "date": "2020-09-26",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 2540.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 2540.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3536-1071513333",
+            "ref_no": "407",
+            "date": "2020-10-01",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 446.39,
+            "applied": [
+                {
+                    "ref_no": "`",
+                    "amount": 446.39
+                }
+            ]
+        },
+        {
+            "txn_id": "3543-1071513333",
+            "ref_no": "408",
+            "date": "2020-10-01",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 638.0,
+            "applied": [
+                {
+                    "ref_no": "6209",
+                    "amount": 638.0
+                }
+            ]
+        },
+        {
+            "txn_id": "354A-1071513333",
+            "ref_no": "409",
+            "date": "2020-10-01",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 597.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 597.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A5E-1071530322",
+            "ref_no": "415",
+            "date": "2020-10-13",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 49.43,
+            "applied": [
+                {
+                    "ref_no": "8/03",
+                    "amount": 49.43
+                }
+            ]
+        },
+        {
+            "txn_id": "3A65-1071530337",
+            "ref_no": "416",
+            "date": "2020-10-13",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 68.35,
+            "applied": [
+                {
+                    "ref_no": "9/03",
+                    "amount": 68.35
+                }
+            ]
+        },
+        {
+            "txn_id": "3ACF-1071530737",
+            "ref_no": "417",
+            "date": "2020-10-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "035",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "4C3-933290528",
+            "ref_no": "418",
+            "date": "2020-10-15",
+            "vend_name": "Hamlin Metal",
+            "vend_list_id": "50000-933272656",
+            "total_amt": 239.0,
+            "applied": [
+                {
+                    "ref_no": "125",
+                    "amount": 239.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4C8-933290563",
+            "ref_no": "419",
+            "date": "2020-10-15",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 670.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 670.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4CD-933290593",
+            "ref_no": "420",
+            "date": "2020-10-15",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 500.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 500.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3EA2-1071499347",
+            "ref_no": "421",
+            "date": "2020-10-15",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 150.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 150.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3E93-1071498974",
+            "ref_no": "424",
+            "date": "2020-10-17",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 0.0,
+            "applied": []
+        },
+        {
+            "txn_id": "631-933357058",
+            "ref_no": "429",
+            "date": "2020-10-29",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 1780.0,
+            "applied": [
+                {
+                    "ref_no": "903-01",
+                    "amount": 1780.0
+                }
+            ]
+        },
+        {
+            "txn_id": "7E7-933364468",
+            "ref_no": "430",
+            "date": "2020-10-31",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 1400.0,
+            "applied": [
+                {
+                    "ref_no": "501",
+                    "amount": 1400.0
+                }
+            ]
+        },
+        {
+            "txn_id": "7F2-933364491",
+            "ref_no": "431",
+            "date": "2020-10-31",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 250.0,
+            "applied": [
+                {
+                    "ref_no": "10K98L",
+                    "amount": 250.0
+                }
+            ]
+        },
+        {
+            "txn_id": "7F7-933364504",
+            "ref_no": "432",
+            "date": "2020-10-31",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 400.0,
+            "applied": [
+                {
+                    "ref_no": "502-K",
+                    "amount": 400.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9EAA-1182132459",
+            "ref_no": "433",
+            "date": "2020-10-31",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q4/03",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "9EAF-1182132459",
+            "ref_no": "434",
+            "date": "2020-10-31",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 1325.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1325.0
+                }
+            ]
+        },
+        {
+            "txn_id": "35BC-1071514012",
+            "ref_no": "440",
+            "date": "2020-11-07",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 250.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 250.0
+                }
+            ]
+        },
+        {
+            "txn_id": "35C1-1071514012",
+            "ref_no": "441",
+            "date": "2020-11-07",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 180.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 180.0
+                }
+            ]
+        },
+        {
+            "txn_id": "35C6-1071514013",
+            "ref_no": "442",
+            "date": "2020-11-07",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 3813.6,
+            "applied": [
+                {
+                    "ref_no": "954592",
+                    "amount": 658.0
+                },
+                {
+                    "ref_no": "73942",
+                    "amount": 3155.6
+                }
+            ]
+        },
+        {
+            "txn_id": "35F9-1071514013",
+            "ref_no": "443",
+            "date": "2020-11-07",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 400.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 400.0
+                }
+            ]
+        },
+        {
+            "txn_id": "892-933372018",
+            "ref_no": "449",
+            "date": "2020-11-14",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 800.0,
+            "applied": [
+                {
+                    "ref_no": "954592",
+                    "amount": 800.0
+                }
+            ]
+        },
+        {
+            "txn_id": "89F-933372071",
+            "ref_no": "450",
+            "date": "2020-11-14",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 440.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 440.0
+                }
+            ]
+        },
+        {
+            "txn_id": "8A4-933372097",
+            "ref_no": "451",
+            "date": "2020-11-14",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 3200.0,
+            "applied": [
+                {
+                    "ref_no": "89-095",
+                    "amount": 3200.0
+                }
+            ]
+        },
+        {
+            "txn_id": "8AB-933372135",
+            "ref_no": "452",
+            "date": "2020-11-14",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 850.0,
+            "applied": [
+                {
+                    "ref_no": "1097-031",
+                    "amount": 850.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3AD6-1071530756",
+            "ref_no": "453",
+            "date": "2020-11-14",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "036",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3B16-1071530992",
+            "ref_no": "459",
+            "date": "2020-11-17",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 0.0,
+            "applied": []
+        },
+        {
+            "txn_id": "3616-1071514117",
+            "ref_no": "461",
+            "date": "2020-11-21",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 1940.4,
+            "applied": [
+                {
+                    "ref_no": "12849",
+                    "amount": 1940.4
+                }
+            ]
+        },
+        {
+            "txn_id": "CA3-933781482",
+            "ref_no": "464",
+            "date": "2020-11-28",
+            "vend_name": "Hopkins Construction Rentals",
+            "vend_list_id": "F0000-933272656",
+            "total_amt": 300.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 300.0
+                }
+            ]
+        },
+        {
+            "txn_id": "CA8-933781518",
+            "ref_no": "465",
+            "date": "2020-11-28",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 500.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 500.0
+                }
+            ]
+        },
+        {
+            "txn_id": "CAD-933781555",
+            "ref_no": "466",
+            "date": "2020-11-28",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 600.0,
+            "applied": [
+                {
+                    "ref_no": "954592",
+                    "amount": 600.0
+                }
+            ]
+        },
+        {
+            "txn_id": "CBA-933781584",
+            "ref_no": "467",
+            "date": "2020-11-28",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 800.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 800.0
+                }
+            ]
+        },
+        {
+            "txn_id": "CBF-933781744",
+            "ref_no": "468",
+            "date": "2020-11-28",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 6790.0,
+            "applied": [
+                {
+                    "ref_no": "6214",
+                    "amount": 5780.0
+                },
+                {
+                    "ref_no": "6214",
+                    "amount": 1010.0
+                }
+            ]
+        },
+        {
+            "txn_id": "CCE-933781788",
+            "ref_no": "469",
+            "date": "2020-11-28",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 2000.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 2000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "CD3-933781815",
+            "ref_no": "470",
+            "date": "2020-11-28",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 500.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 500.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3FB5-1071507296",
+            "ref_no": "472",
+            "date": "2020-11-30",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 656.23,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 656.23
+                }
+            ]
+        },
+        {
+            "txn_id": "9EBA-1182132473",
+            "ref_no": "473",
+            "date": "2020-11-30",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 686.0,
+            "applied": [
+                {
+                    "ref_no": "430",
+                    "amount": 375.0
+                },
+                {
+                    "ref_no": "6215",
+                    "amount": 311.0
+                }
+            ]
+        },
+        {
+            "txn_id": "DCC-933784407",
+            "ref_no": "477",
+            "date": "2020-12-01",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 2700.0,
+            "applied": [
+                {
+                    "ref_no": "89-095",
+                    "amount": 2700.0
+                }
+            ]
+        },
+        {
+            "txn_id": "34DA-1071513173",
+            "ref_no": "480",
+            "date": "2020-12-05",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 1938.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1938.0
+                }
+            ]
+        },
+        {
+            "txn_id": "369C-1071520917",
+            "ref_no": "481",
+            "date": "2020-12-05",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 1500.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1500.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36A1-1071520917",
+            "ref_no": "482",
+            "date": "2020-12-05",
+            "vend_name": "Hamlin Metal",
+            "vend_list_id": "50000-933272656",
+            "total_amt": 950.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 950.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36A8-1071520917",
+            "ref_no": "483",
+            "date": "2020-12-05",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 900.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 900.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36AD-1071520917",
+            "ref_no": "484",
+            "date": "2020-12-05",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 5325.0,
+            "applied": [
+                {
+                    "ref_no": "3847498",
+                    "amount": 5000.0
+                },
+                {
+                    "ref_no": "",
+                    "amount": 325.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36B8-1071520917",
+            "ref_no": "485",
+            "date": "2020-12-05",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 2150.0,
+            "applied": [
+                {
+                    "ref_no": "497",
+                    "amount": 2000.0
+                },
+                {
+                    "ref_no": "",
+                    "amount": 150.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36C3-1071520917",
+            "ref_no": "486",
+            "date": "2020-12-05",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 2445.0,
+            "applied": [
+                {
+                    "ref_no": "430",
+                    "amount": 1995.0
+                },
+                {
+                    "ref_no": "",
+                    "amount": 450.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3AF3-1071530856",
+            "ref_no": "492",
+            "date": "2020-12-08",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 700.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 700.0
+                }
+            ]
+        },
+        {
+            "txn_id": "E7B-933786152",
+            "ref_no": "493",
+            "date": "2020-12-10",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 8000.0,
+            "applied": [
+                {
+                    "ref_no": "6214",
+                    "amount": 8000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "E86-933786172",
+            "ref_no": "494",
+            "date": "2020-12-10",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 2400.0,
+            "applied": [
+                {
+                    "ref_no": "187-H9",
+                    "amount": 2400.0
+                }
+            ]
+        },
+        {
+            "txn_id": "E8D-933786190",
+            "ref_no": "495",
+            "date": "2020-12-10",
+            "vend_name": "Gallion Masonry",
+            "vend_list_id": "340000-933272659",
+            "total_amt": 1000.0,
+            "applied": [
+                {
+                    "ref_no": "ROCK-02",
+                    "amount": 1000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "EA1-933786254",
+            "ref_no": "496",
+            "date": "2020-12-10",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 1000.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "F19-933787355",
+            "ref_no": "497",
+            "date": "2020-12-11",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 4000.0,
+            "applied": [
+                {
+                    "ref_no": "485",
+                    "amount": 4000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36D0-1071520950",
+            "ref_no": "498",
+            "date": "2020-12-12",
+            "vend_name": "Fay, Maureen Lynn, CPA",
+            "vend_list_id": "330000-933272659",
+            "total_amt": 250.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 250.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3ADD-1071530768",
+            "ref_no": "499",
+            "date": "2020-12-12",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "038",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3AE4-1071530780",
+            "ref_no": "500",
+            "date": "2020-12-12",
+            "vend_name": "Express Delivery Service",
+            "vend_list_id": "320000-933272659",
+            "total_amt": 70.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 70.0
+                }
+            ]
+        },
+        {
+            "txn_id": "F8C-933788729",
+            "ref_no": "501",
+            "date": "2020-12-15",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 625.0,
+            "applied": [
+                {
+                    "ref_no": "430",
+                    "amount": 625.0
+                }
+            ]
+        },
+        {
+            "txn_id": "26AE-1071525105",
+            "ref_no": "502",
+            "date": "2020-12-15",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 640.92,
+            "applied": [
+                {
+                    "ref_no": "6229",
+                    "amount": 640.92
+                }
+            ]
+        },
+        {
+            "txn_id": "326A-1071513156",
+            "ref_no": "503",
+            "date": "2020-12-15",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 754.5,
+            "applied": [
+                {
+                    "ref_no": "35698",
+                    "amount": 754.5
+                }
+            ]
+        },
+        {
+            "txn_id": "3638-1071514176",
+            "ref_no": "504",
+            "date": "2020-12-15",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 6935.75,
+            "applied": [
+                {
+                    "ref_no": "6218",
+                    "amount": 200.75
+                },
+                {
+                    "ref_no": "6220",
+                    "amount": 810.0
+                },
+                {
+                    "ref_no": "6221",
+                    "amount": 5925.0
+                }
+            ]
+        },
+        {
+            "txn_id": "36E3-1071525466",
+            "ref_no": "505",
+            "date": "2020-12-15",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 45.0,
+            "applied": [
+                {
+                    "ref_no": "20001",
+                    "amount": 45.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3FDC-1071507556",
+            "ref_no": "506",
+            "date": "2020-12-15",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 1631.52,
+            "applied": [
+                {
+                    "ref_no": "20934",
+                    "amount": 790.0
+                },
+                {
+                    "ref_no": "",
+                    "amount": 101.23
+                },
+                {
+                    "ref_no": "",
+                    "amount": 740.29
+                }
+            ]
+        },
+        {
+            "txn_id": "406A-1071510380",
+            "ref_no": "507",
+            "date": "2020-12-15",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 1358.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 805.0
+                },
+                {
+                    "ref_no": "",
+                    "amount": 553.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4085-1071510757",
+            "ref_no": "508",
+            "date": "2020-12-15",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 1476.23,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1476.23
+                }
+            ]
+        },
+        {
+            "txn_id": "427B-1071523854",
+            "ref_no": "509",
+            "date": "2020-12-15",
+            "vend_name": "Hopkins Construction Rentals",
+            "vend_list_id": "F0000-933272656",
+            "total_amt": 450.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 450.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4280-1071523891",
+            "ref_no": "510",
+            "date": "2020-12-15",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 896.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 896.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4287-1071523939",
+            "ref_no": "511",
+            "date": "2020-12-15",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 696.52,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 696.52
+                }
+            ]
+        },
+        {
+            "txn_id": "428C-1071523939",
+            "ref_no": "512",
+            "date": "2020-12-15",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 400.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 400.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4291-1071523972",
+            "ref_no": "513",
+            "date": "2020-12-15",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 1610.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1610.0
+                }
+            ]
+        },
+        {
+            "txn_id": "431F-1071527444",
+            "ref_no": "514",
+            "date": "2020-12-15",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 5700.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 5700.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A33-1071530066",
+            "ref_no": "174",
+            "date": "2019-07-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "020",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3E67-1071498733",
+            "ref_no": "175",
+            "date": "2019-07-19",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q3/02",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "2B71-1071507483",
+            "ref_no": "183",
+            "date": "2019-08-05",
+            "vend_name": "City of East Bayshore",
+            "vend_list_id": "630000-1071521572",
+            "total_amt": 225.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 225.0
+                }
+            ]
+        },
+        {
+            "txn_id": "2B76-1071507483",
+            "ref_no": "184",
+            "date": "2019-08-05",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 144.75,
+            "applied": [
+                {
+                    "ref_no": "6100",
+                    "amount": 144.75
+                }
+            ]
+        },
+        {
+            "txn_id": "2B7B-1071507483",
+            "ref_no": "185",
+            "date": "2019-08-05",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 2080.0,
+            "applied": [
+                {
+                    "ref_no": "6101",
+                    "amount": 2080.0
+                }
+            ]
+        },
+        {
+            "txn_id": "2B80-1071507483",
+            "ref_no": "186",
+            "date": "2019-08-05",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 234.0,
+            "applied": [
+                {
+                    "ref_no": "6102",
+                    "amount": 234.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A3A-1071530074",
+            "ref_no": "190",
+            "date": "2019-08-12",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "021",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "2B87-1071507512",
+            "ref_no": "199",
+            "date": "2019-09-02",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 429.87,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 429.87
+                }
+            ]
+        },
+        {
+            "txn_id": "3A6C-1071530472",
+            "ref_no": "201",
+            "date": "2019-09-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "022",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "9E7B-1182132327",
+            "ref_no": "203",
+            "date": "2019-09-30",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 806.0,
+            "applied": [
+                {
+                    "ref_no": "213",
+                    "amount": 806.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A73-1071530481",
+            "ref_no": "211",
+            "date": "2019-10-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "023",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3E6C-1071498752",
+            "ref_no": "212",
+            "date": "2019-10-14",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q4/02",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "34D5-1071513143",
+            "ref_no": "213",
+            "date": "2019-10-15",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 694.0,
+            "applied": [
+                {
+                    "ref_no": "203",
+                    "amount": 694.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9E86-1182132345",
+            "ref_no": "214",
+            "date": "2019-10-31",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 1287.0,
+            "applied": [
+                {
+                    "ref_no": "6219",
+                    "amount": 1287.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A7A-1071530492",
+            "ref_no": "221",
+            "date": "2019-11-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "024",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3A81-1071530500",
+            "ref_no": "232",
+            "date": "2019-12-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "025",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3AF8-1071530878",
+            "ref_no": "242",
+            "date": "2020-01-03",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "applied": [
+                {
+                    "ref_no": "837842",
+                    "amount": 4050.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A88-1071530511",
+            "ref_no": "243",
+            "date": "2020-01-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "026",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3E71-1071498776",
+            "ref_no": "246",
+            "date": "2020-01-17",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q1/03",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "3F9F-1071507237",
+            "ref_no": "247",
+            "date": "2020-01-31",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 23.84,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 23.84
+                }
+            ]
+        },
+        {
+            "txn_id": "9E8D-1182132374",
+            "ref_no": "248",
+            "date": "2020-01-31",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 3500.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1500.0
+                },
+                {
+                    "ref_no": "6237",
+                    "amount": 2000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "39CD-1071529789",
+            "ref_no": "254",
+            "date": "2020-02-03",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 122.68,
+            "applied": [
+                {
+                    "ref_no": "1/03",
+                    "amount": 122.68
+                }
+            ]
+        },
+        {
+            "txn_id": "39E6-1071529878",
+            "ref_no": "259",
+            "date": "2020-02-10",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 56.17,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 56.17
+                }
+            ]
+        },
+        {
+            "txn_id": "3A9D-1071530537",
+            "ref_no": "260",
+            "date": "2020-02-10",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "029",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3AFD-1071530892",
+            "ref_no": "261",
+            "date": "2020-02-10",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 140.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 140.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3FA6-1071507250",
+            "ref_no": "262",
+            "date": "2020-02-10",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 300.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 300.0
+                }
+            ]
+        },
+        {
+            "txn_id": "35FE-1071514013",
+            "ref_no": "266",
+            "date": "2020-02-28",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 3037.0,
+            "applied": [
+                {
+                    "ref_no": "498-01-L",
+                    "amount": 1020.0
+                },
+                {
+                    "ref_no": "6217",
+                    "amount": 2017.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9E96-1182132392",
+            "ref_no": "267",
+            "date": "2020-02-28",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 2000.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 2000.0
+                }
+            ]
+        },
+        {
+            "txn_id": "E92-933786222",
+            "ref_no": "272",
+            "date": "2020-03-01",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 1300.0,
+            "applied": [
+                {
+                    "ref_no": "498-01-L",
+                    "amount": 1300.0
+                }
+            ]
+        },
+        {
+            "txn_id": "39D2-1071529816",
+            "ref_no": "273",
+            "date": "2020-03-03",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 110.89,
+            "applied": [
+                {
+                    "ref_no": "2/03",
+                    "amount": 110.89
+                }
+            ]
+        },
+        {
+            "txn_id": "34E9-1071513173",
+            "ref_no": "274",
+            "date": "2020-03-07",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 634.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 634.0
+                }
+            ]
+        },
+        {
+            "txn_id": "4276-1071523775",
+            "ref_no": "279",
+            "date": "2020-03-12",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 1100.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 1100.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A8F-1071530521",
+            "ref_no": "280",
+            "date": "2020-03-14",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "027",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "39ED-1071529897",
+            "ref_no": "284",
+            "date": "2020-03-17",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 44.94,
+            "applied": [
+                {
+                    "ref_no": "2/03",
+                    "amount": 44.94
+                }
+            ]
+        },
+        {
+            "txn_id": "3E76-1071498801",
+            "ref_no": "285",
+            "date": "2020-03-17",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 295.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 295.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3FD4-1071507358",
+            "ref_no": "286",
+            "date": "2020-03-20",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 5.0,
+            "applied": [
+                {
+                    "ref_no": "03-0123-5",
+                    "amount": 5.0
+                }
+            ]
+        },
+        {
+            "txn_id": "39D7-1071529831",
+            "ref_no": "294",
+            "date": "2020-04-04",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 104.15,
+            "applied": [
+                {
+                    "ref_no": "3/03",
+                    "amount": 104.15
+                }
+            ]
+        },
+        {
+            "txn_id": "3E7B-1071498812",
+            "ref_no": "299",
+            "date": "2020-04-10",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 415.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 415.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3E80-1071498833",
+            "ref_no": "300",
+            "date": "2020-04-10",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q2/03",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "39F4-1071529917",
+            "ref_no": "301",
+            "date": "2020-04-11",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 37.08,
+            "applied": [
+                {
+                    "ref_no": "3/03",
+                    "amount": 37.08
+                }
+            ]
+        },
+        {
+            "txn_id": "3A96-1071530528",
+            "ref_no": "302",
+            "date": "2020-04-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "028",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "39DC-1071529844",
+            "ref_no": "310",
+            "date": "2020-05-02",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 98.68,
+            "applied": [
+                {
+                    "ref_no": "4/03",
+                    "amount": 98.68
+                }
+            ]
+        },
+        {
+            "txn_id": "39FB-1071529929",
+            "ref_no": "315",
+            "date": "2020-05-12",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 77.92,
+            "applied": [
+                {
+                    "ref_no": "4/03",
+                    "amount": 77.92
+                }
+            ]
+        },
+        {
+            "txn_id": "3AA4-1071530561",
+            "ref_no": "316",
+            "date": "2020-05-12",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "030",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3E85-1071498864",
+            "ref_no": "321",
+            "date": "2020-05-23",
+            "vend_name": "Holly Heating and Electric",
+            "vend_list_id": "750000-1071527895",
+            "total_amt": 289.95,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 289.95
+                }
+            ]
+        },
+        {
+            "txn_id": "4075-1071510510",
+            "ref_no": "322",
+            "date": "2020-05-23",
+            "vend_name": "Custom Kitchens of Bayshore",
+            "vend_list_id": "7B0000-1071524812",
+            "total_amt": 3076.32,
+            "applied": [
+                {
+                    "ref_no": "01-03-785",
+                    "amount": 3076.32
+                }
+            ]
+        },
+        {
+            "txn_id": "9E9B-1182132413",
+            "ref_no": "323",
+            "date": "2020-05-31",
+            "vend_name": "Kershaw Computer Services",
+            "vend_list_id": "350000-933272659",
+            "total_amt": 6500.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 6500.0
+                }
+            ]
+        },
+        {
+            "txn_id": "39E1-1071529861",
+            "ref_no": "328",
+            "date": "2020-06-02",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 95.86,
+            "applied": [
+                {
+                    "ref_no": "5/03",
+                    "amount": 95.86
+                }
+            ]
+        },
+        {
+            "txn_id": "3A02-1071529939",
+            "ref_no": "334",
+            "date": "2020-06-09",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 81.79,
+            "applied": [
+                {
+                    "ref_no": "5/03",
+                    "amount": 81.79
+                }
+            ]
+        },
+        {
+            "txn_id": "3AB3-1071530698",
+            "ref_no": "335",
+            "date": "2020-06-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "031",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3A09-1071529982",
+            "ref_no": "101",
+            "date": "2019-01-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "014",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3E5D-1071498699",
+            "ref_no": "110",
+            "date": "2019-01-21",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q1/02",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "9E3D-1182131998",
+            "ref_no": "112",
+            "date": "2019-01-31",
+            "vend_name": "Bayshore Water",
+            "vend_list_id": "2C0000-933272658",
+            "total_amt": 205.0,
+            "applied": [
+                {
+                    "ref_no": "908472",
+                    "amount": 205.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9E42-1182131999",
+            "ref_no": "113",
+            "date": "2019-01-31",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 532.0,
+            "applied": [
+                {
+                    "ref_no": "8374892",
+                    "amount": 532.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9E47-1182131999",
+            "ref_no": "114",
+            "date": "2019-01-31",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 623.0,
+            "applied": [
+                {
+                    "ref_no": "37498",
+                    "amount": 623.0
+                }
+            ]
+        },
+        {
+            "txn_id": "9E4C-1182131999",
+            "ref_no": "115",
+            "date": "2019-01-31",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 13759.0,
+            "applied": [
+                {
+                    "ref_no": "3847498",
+                    "amount": 8695.0
+                },
+                {
+                    "ref_no": "930357",
+                    "amount": 5064.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A10-1071529997",
+            "ref_no": "120",
+            "date": "2019-02-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "015",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "9E63-1182132109",
+            "ref_no": "124",
+            "date": "2019-02-28",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 2050.0,
+            "applied": [
+                {
+                    "ref_no": "382940",
+                    "amount": 2050.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A17-1071530007",
+            "ref_no": "131",
+            "date": "2019-03-11",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "016",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "9E72-1182132247",
+            "ref_no": "135",
+            "date": "2019-03-31",
+            "vend_name": "Custom Kitchens of Bayshore",
+            "vend_list_id": "7B0000-1071524812",
+            "total_amt": 435.0,
+            "applied": [
+                {
+                    "ref_no": "380482",
+                    "amount": 435.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3A1E-1071530019",
+            "ref_no": "143",
+            "date": "2019-04-12",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "017",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "4271-1071523732",
+            "ref_no": "144",
+            "date": "2019-04-17",
+            "vend_name": "Kershaw Computer Services",
+            "vend_list_id": "350000-933272659",
+            "total_amt": 714.0,
+            "applied": [
+                {
+                    "ref_no": "",
+                    "amount": 714.0
+                }
+            ]
+        },
+        {
+            "txn_id": "3E62-1071498719",
+            "ref_no": "145",
+            "date": "2019-04-19",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 0.0,
+            "applied": []
+        },
+        {
+            "txn_id": "3E98-1071499056",
+            "ref_no": "146",
+            "date": "2019-04-19",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "applied": [
+                {
+                    "ref_no": "Q2/02",
+                    "amount": 712.56
+                }
+            ]
+        },
+        {
+            "txn_id": "3A25-1071530029",
+            "ref_no": "154",
+            "date": "2019-05-13",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "018",
+                    "amount": 532.97
+                }
+            ]
+        },
+        {
+            "txn_id": "3A2C-1071530042",
+            "ref_no": "165",
+            "date": "2019-06-10",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "applied": [
+                {
+                    "ref_no": "019",
+                    "amount": 532.97
+                }
+            ]
+        }
+    ]
+}

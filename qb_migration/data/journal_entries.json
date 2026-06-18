@@ -1,0 +1,2712 @@
+{
+    "journal_entries": [
+        {
+            "txn_id": "66A3-1197759957",
+            "txn_number": "1326",
+            "txn_date": "2020-06-30",
+            "ref_number": "1110",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66E0-1197760242",
+            "txn_number": "1338",
+            "txn_date": "2020-06-30",
+            "ref_number": "1111",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66A6-1197759966",
+            "txn_number": "1327",
+            "txn_date": "2020-07-31",
+            "ref_number": "1112",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66E5-1197760247",
+            "txn_number": "1339",
+            "txn_date": "2020-07-31",
+            "ref_number": "1113",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66A9-1197759973",
+            "txn_number": "1328",
+            "txn_date": "2020-08-31",
+            "ref_number": "1114",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66EA-1197760255",
+            "txn_number": "1340",
+            "txn_date": "2020-08-31",
+            "ref_number": "1115",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66AC-1197759980",
+            "txn_number": "1329",
+            "txn_date": "2020-09-30",
+            "ref_number": "1116",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66AF-1197759987",
+            "txn_number": "1330",
+            "txn_date": "2020-09-30",
+            "ref_number": "1117",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66EF-1197760261",
+            "txn_number": "1341",
+            "txn_date": "2020-09-30",
+            "ref_number": "1118",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66B2-1197759991",
+            "txn_number": "1331",
+            "txn_date": "2020-10-31",
+            "ref_number": "1119",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66F4-1197760266",
+            "txn_number": "1342",
+            "txn_date": "2020-10-31",
+            "ref_number": "1120",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66B5-1197759997",
+            "txn_number": "1332",
+            "txn_date": "2020-11-30",
+            "ref_number": "1121",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66F9-1197760272",
+            "txn_number": "1343",
+            "txn_date": "2020-11-30",
+            "ref_number": "1122",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 175.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 32.06,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 250.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 457.06,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37F9-1071515549",
+            "txn_number": "667",
+            "txn_date": "2019-07-01",
+            "ref_number": "1007",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5359-1197761657",
+            "txn_number": "1102",
+            "txn_date": "2019-07-31",
+            "ref_number": "1008",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37FE-1071515549",
+            "txn_number": "668",
+            "txn_date": "2019-08-01",
+            "ref_number": "1009",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "6685-1197759880",
+            "txn_number": "1316",
+            "txn_date": "2019-08-31",
+            "ref_number": "1010",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "3803-1071515549",
+            "txn_number": "669",
+            "txn_date": "2019-09-01",
+            "ref_number": "1011",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "6688-1197759893",
+            "txn_number": "1317",
+            "txn_date": "2019-09-30",
+            "ref_number": "1012",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "3808-1071515549",
+            "txn_number": "670",
+            "txn_date": "2019-10-01",
+            "ref_number": "1013",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "668B-1197759901",
+            "txn_number": "1318",
+            "txn_date": "2019-10-31",
+            "ref_number": "1014",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "380D-1071515549",
+            "txn_number": "671",
+            "txn_date": "2019-11-01",
+            "ref_number": "1015",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "668E-1197759909",
+            "txn_number": "1319",
+            "txn_date": "2019-11-30",
+            "ref_number": "1016",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "3812-1071515549",
+            "txn_number": "672",
+            "txn_date": "2019-12-01",
+            "ref_number": "1017",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "CE83-1323972739",
+            "txn_number": "1776",
+            "txn_date": "2019-12-31",
+            "ref_number": "FAM2010",
+            "memo": "Record 2010 Depreciation",
+            "is_adj": true,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Depreciation Expense",
+                    "account_id": "250000-933270542",
+                    "amount": 44435.91,
+                    "memo": "Record 2010 Depreciation",
+                    "entity": "",
+                    "entity_id": "",
+                    "class": ""
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Accumulated Depreciation",
+                    "account_id": "620000-1197756666",
+                    "amount": 44435.91,
+                    "memo": "Record 2010 Depreciation",
+                    "entity": "",
+                    "entity_id": "",
+                    "class": ""
+                }
+            ]
+        },
+        {
+            "txn_id": "6691-1197759914",
+            "txn_number": "1320",
+            "txn_date": "2019-12-31",
+            "ref_number": "1018",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "6694-1197759927",
+            "txn_number": "1321",
+            "txn_date": "2020-01-31",
+            "ref_number": "1100",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66C7-1197760210",
+            "txn_number": "1333",
+            "txn_date": "2020-01-31",
+            "ref_number": "1101",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "6697-1197759936",
+            "txn_number": "1322",
+            "txn_date": "2020-02-28",
+            "ref_number": "1102",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66CC-1197760219",
+            "txn_number": "1334",
+            "txn_date": "2020-02-28",
+            "ref_number": "1103",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "669A-1197759940",
+            "txn_number": "1323",
+            "txn_date": "2020-03-31",
+            "ref_number": "1104",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66D1-1197760225",
+            "txn_number": "1335",
+            "txn_date": "2020-03-31",
+            "ref_number": "1105",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "669D-1197759945",
+            "txn_number": "1324",
+            "txn_date": "2020-04-30",
+            "ref_number": "1106",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66D6-1197760234",
+            "txn_number": "1336",
+            "txn_date": "2020-04-30",
+            "ref_number": "1107",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66A0-1197759950",
+            "txn_number": "1325",
+            "txn_date": "2020-05-31",
+            "ref_number": "1108",
+            "memo": "July allocation of prepaid rider policy",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 148.83,
+                    "memo": "July allocation of prepaid rider policy",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "66DB-1197760238",
+            "txn_number": "1337",
+            "txn_date": "2020-05-31",
+            "ref_number": "1109",
+            "memo": "Recurring Journal to Amortize Insurance Expense",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "Recurring Journal to Amortize Insurance Expense",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E40-1197715323",
+            "txn_number": "1307",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 13",
+            "memo": "Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 25000.0,
+                    "memo": "Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 25000.0,
+                    "memo": "Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E43-1197715357",
+            "txn_number": "1308",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 14",
+            "memo": "Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 60000.0,
+                    "memo": "Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Note Payable - Bank of Anycity",
+                    "account_id": "8000008F-1197954502",
+                    "amount": 60000.0,
+                    "memo": "Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E46-1197715490",
+            "txn_number": "1309",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 15",
+            "memo": "Opening Balance Adjustment - Net of Sales Tax on Open Invoices as of Start Date",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 1603.0,
+                    "memo": "Opening Balance Adjustment - Net of Sales Tax on Open Invoices as of Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Sales Tax Payable",
+                    "account_id": "100000-933270541",
+                    "amount": 1603.0,
+                    "memo": "Opening Balance Adjustment - Net of Sales Tax on Open Invoices as of Start Date",
+                    "entity": "State Board of Equalization",
+                    "entity_id": "110000-933272656",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E73-1197721756",
+            "txn_number": "1314",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 18",
+            "memo": "To record accumulated depreciation as of QuickBooks start date",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 40203.88,
+                    "memo": "To record accumulated depreciation as of QuickBooks start date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Accumulated Depreciation",
+                    "account_id": "620000-1197756666",
+                    "amount": 40203.88,
+                    "memo": "To record accumulated depreciation as of QuickBooks start date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "A494-1182159722",
+            "txn_number": "1771",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 20",
+            "memo": "To clear OBE - to complete setup",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 18470.43,
+                    "memo": "To clear OBE - to complete setup",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Retained Earnings",
+                    "account_id": "160000-933270541",
+                    "amount": 18470.43,
+                    "memo": "To clear OBE - to complete setup",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C18-1197711471",
+            "txn_number": "1265",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 7",
+            "memo": "Opening Balance - Bank Balance - Checking Account",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Checking",
+                    "account_id": "20000-933270541",
+                    "amount": 27874.62,
+                    "memo": "Opening Balance - Bank Balance - Checking Account",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Savings",
+                    "account_id": "30000-933270541",
+                    "amount": 15600.0,
+                    "memo": "Opening Balance - Bank Balance - Savings Account",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 43474.62,
+                    "memo": "Opening Balance - Bank Balance - Checking Account",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C20-1197711855",
+            "txn_number": "1267",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 8",
+            "memo": "Opening Balance Entry - Loan to Kati Reynolds",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Employee Advances",
+                    "account_id": "50000-933270541",
+                    "amount": 450.0,
+                    "memo": "Opening Balance Entry - Loan to Kati Reynolds",
+                    "entity": "Miller, Dan",
+                    "entity_id": "800000AA-1197711777",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Employee Advances",
+                    "account_id": "50000-933270541",
+                    "amount": 320.0,
+                    "memo": "Opening Balance Entry - Loan to Jim Moen",
+                    "entity": "Mason, Elizabeth",
+                    "entity_id": "800000AB-1197711791",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 770.0,
+                    "memo": "Opening Balance Entry - Loans to Employees",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "A48E-1182159710",
+            "txn_number": "1770",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 19",
+            "memo": "Loan for Vehicle Purchase",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Vehicles",
+                    "account_id": "90000-933270541",
+                    "amount": 78936.91,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Loan - Vehicles (Van)",
+                    "account_id": "120000-933270541",
+                    "amount": 21692.0,
+                    "memo": "Loan for Vehicle Purchase",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "credit",
+                    "account": "Loan - Vehicles (Utility Truck)",
+                    "account_id": "80000075-1197719780",
+                    "amount": 19936.91,
+                    "memo": "Loan for Vehicle Purchase",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Loan - Vehicles (Pickup Truck)",
+                    "account_id": "80000076-1197719828",
+                    "amount": 22641.0,
+                    "memo": "Loan for Vehicle Purchase",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 14667.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "CE7D-1323971971",
+            "txn_number": "1774",
+            "txn_date": "2018-12-31",
+            "ref_number": "FAM2009",
+            "memo": "Record 2009 Depreciation",
+            "is_adj": true,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Depreciation Expense",
+                    "account_id": "250000-933270542",
+                    "amount": 23519.1,
+                    "memo": "Record 2009 Depreciation",
+                    "entity": "",
+                    "entity_id": "",
+                    "class": ""
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Accumulated Depreciation",
+                    "account_id": "620000-1197756666",
+                    "amount": 23519.1,
+                    "memo": "Record 2009 Depreciation",
+                    "entity": "",
+                    "entity_id": "",
+                    "class": ""
+                }
+            ]
+        },
+        {
+            "txn_id": "CE80-1323972480",
+            "txn_number": "1775",
+            "txn_date": "2018-12-31",
+            "ref_number": "FAM2009",
+            "memo": "Record 2009 Depreciation",
+            "is_adj": true,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Depreciation Expense",
+                    "account_id": "250000-933270542",
+                    "amount": 2185.71,
+                    "memo": "Record 2009 Depreciation",
+                    "entity": "",
+                    "entity_id": "",
+                    "class": ""
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Accumulated Depreciation",
+                    "account_id": "620000-1197756666",
+                    "amount": 2185.71,
+                    "memo": "Record 2009 Depreciation",
+                    "entity": "",
+                    "entity_id": "",
+                    "class": ""
+                }
+            ]
+        },
+        {
+            "txn_id": "5C24-1197711941",
+            "txn_number": "1268",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 9",
+            "memo": "Opening Balance - Prepaid Insurance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 4050.0,
+                    "memo": "Opening Balance - Prepaid Insurance",
+                    "entity": "Sergeant Insurance",
+                    "entity_id": "120000-933272657",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 4050.0,
+                    "memo": "Opening Balance - Prepaid Insurance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E3D-1197715279",
+            "txn_number": "1306",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 12",
+            "memo": "Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Petty Cash",
+                    "account_id": "550001-1071509830",
+                    "amount": 500.0,
+                    "memo": "Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 500.0,
+                    "memo": "Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E69-1197717858",
+            "txn_number": "1313",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 17",
+            "memo": "To Set Opening Credit Card Balances - As Shown on the Credit Card Statement",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 21883.89,
+                    "memo": "To Set Opening Credit Card Balances - As Shown on the Credit Card Statement",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "QuickBooks Credit Card",
+                    "account_id": "570000-1071509253",
+                    "amount": 12362.89,
+                    "memo": "To Set Opening Credit Card Balances - As Shown on the Credit Card Statement",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "credit",
+                    "account": "CalOil Credit Card",
+                    "account_id": "8000007E-1197732180",
+                    "amount": 6253.0,
+                    "memo": "To Set Opening Credit Card Balances - As Shown on the Credit Card Statement",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "CalOil Credit Card",
+                    "account_id": "8000007E-1197732180",
+                    "amount": 3268.0,
+                    "memo": "To Set Opening Credit Card Balances - As Shown on the Credit Card Statement",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E3A-1197715200",
+            "txn_number": "1305",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 11",
+            "memo": "Account Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Construction Equipment",
+                    "account_id": "590000-1071511920",
+                    "amount": 15300.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 15300.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5019-1197774305",
+            "txn_number": "1095",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 1",
+            "memo": "Account Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 14343.11,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Loan - Construction Equipment",
+                    "account_id": "5B0000-1197774305",
+                    "amount": 14343.11,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5387-1197755560",
+            "txn_number": "1116",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 3",
+            "memo": "Server - Purchased",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Furniture and Equipment",
+                    "account_id": "5F0000-1197755449",
+                    "amount": 20726.0,
+                    "memo": "Server - Purchased",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 20726.0,
+                    "memo": "Opening Balance - Furniture and Computers",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "537D-1197753544",
+            "txn_number": "1114",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 2",
+            "memo": "Opening Balance Entry - Land",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Land",
+                    "account_id": "610000-1197756496",
+                    "amount": 90000.0,
+                    "memo": "Opening Balance Entry - Land",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Buildings and Improvements",
+                    "account_id": "600000-1197756365",
+                    "amount": 325000.0,
+                    "memo": "Opening Balance Entry - Building",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 415000.0,
+                    "memo": "Opening Balance - Land and Building",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C7A-1197712931",
+            "txn_number": "1296",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 10",
+            "memo": "Account Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Security Deposits",
+                    "account_id": "80000063-1197709076",
+                    "amount": 1720.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 1720.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C0C-1197709715",
+            "txn_number": "1261",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 4",
+            "memo": "Account Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 500.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Capital Stock",
+                    "account_id": "80000066-1197709715",
+                    "amount": 500.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C15-1197711277",
+            "txn_number": "1264",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 6",
+            "memo": "Account Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 296283.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Mortgage - Office Building",
+                    "account_id": "80000067-1197709946",
+                    "amount": 296283.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C12-1197710591",
+            "txn_number": "1263",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 5",
+            "memo": "Account Opening Balance",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 21000.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Loan - Furniture/Office Equip",
+                    "account_id": "80000068-1197710590",
+                    "amount": 21000.0,
+                    "memo": "Account Opening Balance",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "5E60-1197717742",
+            "txn_number": "1312",
+            "txn_date": "2018-12-31",
+            "ref_number": "Setup 16",
+            "memo": "To Set Opening PR Liabilities as of QB Start Date",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Opening Bal Equity",
+                    "account_id": "10000-933270541",
+                    "amount": 5326.56,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:Federal Withholding",
+                    "account_id": "8000006E-1197716149",
+                    "amount": 1377.0,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:FICA Payable",
+                    "account_id": "8000006F-1197716183",
+                    "amount": 2118.82,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:FUTA Payable",
+                    "account_id": "8000006C-1197716105",
+                    "amount": 100.0,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:State Withholding",
+                    "account_id": "80000071-1197716353",
+                    "amount": 308.34,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:State Disability Payable",
+                    "account_id": "80000072-1197716383",
+                    "amount": 98.09,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 7,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:SUTA Payable",
+                    "account_id": "80000073-1197716416",
+                    "amount": 110.0,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 8,
+                    "line_type": "credit",
+                    "account": "Payroll Liabilities:Worker's Compensation",
+                    "account_id": "8000006A-1197716008",
+                    "amount": 1214.31,
+                    "memo": "To Set Opening PR Liabilities as of QB Start Date",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37A1-1071515211",
+            "txn_number": "650",
+            "txn_date": "2019-01-01",
+            "ref_number": "1001",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37A6-1071515211",
+            "txn_number": "651",
+            "txn_date": "2019-02-01",
+            "ref_number": "1002",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37E5-1071515548",
+            "txn_number": "663",
+            "txn_date": "2019-03-01",
+            "ref_number": "1003",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37EA-1071515548",
+            "txn_number": "664",
+            "txn_date": "2019-04-01",
+            "ref_number": "1004",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37EF-1071515548",
+            "txn_number": "665",
+            "txn_date": "2019-05-01",
+            "ref_number": "1005",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        },
+        {
+            "txn_id": "37F4-1071515549",
+            "txn_number": "666",
+            "txn_date": "2019-06-01",
+            "ref_number": "1006",
+            "memo": "Monthly Asset Adjust",
+            "is_adj": false,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "debit",
+                    "account": "Insurance:Work Comp",
+                    "account_id": "2C0000-933270542",
+                    "amount": 275.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "debit",
+                    "account": "Insurance:Disability Insurance",
+                    "account_id": "2A0000-933270542",
+                    "amount": 50.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "debit",
+                    "account": "Insurance:Liability Insurance",
+                    "account_id": "2B0000-933270542",
+                    "amount": 350.0,
+                    "memo": "Monthly Asset Adjust",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "credit",
+                    "account": "Pre-paid Insurance",
+                    "account_id": "370001-1071514466",
+                    "amount": 675.0,
+                    "memo": "",
+                    "entity": "Overhead",
+                    "entity_id": "800000B0-1197755238",
+                    "class": "Overhead"
+                }
+            ]
+        }
+    ]
+}
