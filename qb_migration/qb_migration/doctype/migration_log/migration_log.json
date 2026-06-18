@@ -1,0 +1,20 @@
+{
+  "doctype": "DocType",
+  "name": "Migration Log",
+  "module": "Qb Migration",
+  "custom": 1,
+  "fields": [
+    {"fieldname": "source_id", "fieldtype": "Data", "label": "QB Source ID", "reqd": 1},
+    {"fieldname": "source_type", "fieldtype": "Data", "label": "QB Entity Type", "reqd": 1},
+    {"fieldname": "target_doctype", "fieldtype": "Data", "label": "ERPNext DocType"},
+    {"fieldname": "target_name", "fieldtype": "Data", "label": "ERPNext Name"},
+    {"fieldname": "status", "fieldtype": "Select", "options": "Success\nFailed\nSkipped"},
+    {"fieldname": "error_msg", "fieldtype": "Text", "label": "Error"},
+    {"fieldname": "imported_at", "fieldtype": "Datetime", "label": "Imported At"}
+  ],
+  "autoname": "hash",
+  "track_changes": 0,
+  "permissions": [
+    {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1}
+  ]
+}
