@@ -1,4 +1,5 @@
 import frappe
+from frappe.utils import flt
 
 from ..base_importer import BaseImporter
 
@@ -137,44 +138,105 @@ class BillPaymentImporter(BaseImporter):
             )
         return None
 
+    def _build_references(self, record, payment_amount):
+        """
+        Build Payment Entry references from QB applied list.
+
+        For each applied invoice:
+          - resolve the ERPNext Purchase Invoice
+          - fetch its current outstanding_amount
+          - cap the allocated amount to min(applied_amount, outstanding)
+          - skip invoices that are already fully paid
+
+        Returns (references, effective_payment_amount) where
+        effective_payment_amount is the sum of all allocated amounts
+        (may differ from QB total when invoices have partial outstanding).
+        """
+        applied_items = record.get("applied") or []
+
+        # If QB provides a split applied list, use it; otherwise treat the
+        # whole payment as applying to the single bill_no.
+        if applied_items:
+            candidates = [
+                {"ref_no": item.get("ref_no"), "amount": flt(item.get("amount", 0))}
+                for item in applied_items
+            ]
+        else:
+            bill_no = record.get("bill_no") or record.get("ref_no")
+            candidates = [{"ref_no": bill_no, "amount": flt(payment_amount)}]
+
+        references = []
+        total_allocated = 0.0
+
+        for candidate in candidates:
+            ref_no = candidate["ref_no"]
+            applied_amount = candidate["amount"]
+
+            invoice = self.resolve_purchase_invoice(
+                ref_no,
+                record.get("vend_name") or record.get("vendor"),
+                applied_amount or payment_amount,
+            )
+            if not invoice:
+                continue
+
+            outstanding = flt(
+                frappe.db.get_value("Purchase Invoice", invoice, "outstanding_amount") or 0
+            )
+
+            if outstanding <= 0:
+                # Invoice already fully paid — skip this line
+                continue
+
+            # Never allocate more than what the invoice can absorb
+            allocated = min(applied_amount if applied_amount > 0 else outstanding, outstanding)
+            if allocated <= 0:
+                continue
+
+            references.append({
+                "reference_doctype": "Purchase Invoice",
+                "reference_name": invoice,
+                "allocated_amount": allocated,
+            })
+            total_allocated += allocated
+
+        return references, total_allocated
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         payment_account = self._resolve_payment_account(
             record.get("account") or record.get("payment_account") or record.get("bank_account")
         )
-        bill_no = None
-        if record.get("applied"):
-            bill_no = record.get("applied")[0].get("ref_no")
-        if not bill_no:
-            bill_no = record.get("bill_no") or record.get("ref_no")
 
-        payment_amount = record.get("total_amt", record.get("amount", 0)) or 0
+        payment_amount = flt(record.get("total_amt", record.get("amount", 0)) or 0)
         if not payment_amount and record.get("applied"):
-            payment_amount = sum(item.get("amount", 0) or 0 for item in record.get("applied", []))
-
-        paid_to_invoice = self.resolve_purchase_invoice(
-            bill_no,
-            record.get("vend_name") or record.get("vendor"),
-            payment_amount,
-        )
-
-        if paid_to_invoice:
-            outstanding_amount = frappe.db.get_value(
-                "Purchase Invoice",
-                paid_to_invoice,
-                "outstanding_amount",
-            )
-            if outstanding_amount is not None and float(outstanding_amount) == 0:
-                return {
-                    "_skip": True,
-                    "_skip_reason": "ALREADY_PAID",
-                    "ref_no": record.get("ref_no", ""),
-                }
+            payment_amount = sum(flt(item.get("amount", 0)) for item in record.get("applied", []))
 
         if not payment_amount:
             return {
                 "_skip": True,
                 "_skip_reason": "ZERO_AMOUNT",
+                "ref_no": record.get("ref_no", ""),
+            }
+
+        references, effective_amount = self._build_references(record, payment_amount)
+
+        # If every linked invoice was already paid, skip the whole payment.
+        if not references and (record.get("applied") or record.get("bill_no") or record.get("ref_no")):
+            return {
+                "_skip": True,
+                "_skip_reason": "ALREADY_PAID",
+                "ref_no": record.get("ref_no", ""),
+            }
+
+        # Use effective_amount when we have references; fall back to QB total
+        # for unlinked payments (no matching invoice found).
+        final_amount = effective_amount if references else payment_amount
+
+        if not final_amount:
+            return {
+                "_skip": True,
+                "_skip_reason": "ZERO_ALLOCATED",
                 "ref_no": record.get("ref_no", ""),
             }
 
@@ -187,21 +249,14 @@ class BillPaymentImporter(BaseImporter):
                 "ref_no": record.get("ref_no", ""),
             }
 
+        # Prefer supplier from the resolved invoice; fall back to QB record.
         supplier = record.get("vend_name") or record.get("vendor")
-        if paid_to_invoice:
-            invoice_supplier = frappe.db.get_value("Purchase Invoice", paid_to_invoice, "supplier")
+        if references:
+            invoice_supplier = frappe.db.get_value(
+                "Purchase Invoice", references[0]["reference_name"], "supplier"
+            )
             if invoice_supplier:
                 supplier = invoice_supplier
-
-        references = []
-        if paid_to_invoice:
-            references.append(
-                {
-                    "reference_doctype": "Purchase Invoice",
-                    "reference_name": paid_to_invoice,
-                    "allocated_amount": payment_amount,
-                }
-            )
 
         return {
             "doctype": "Payment Entry",
@@ -214,8 +269,8 @@ class BillPaymentImporter(BaseImporter):
             "party_account": payable_account,
             "reference_no": record.get("ref_no", ""),
             "reference_date": self.normalize_date(record.get("date") or record.get("txn_date")),
-            "paid_amount": payment_amount,
-            "received_amount": payment_amount,
+            "paid_amount": final_amount,
+            "received_amount": final_amount,
             "paid_from": payment_account,
             "paid_to": payable_account,
             "references": references,
