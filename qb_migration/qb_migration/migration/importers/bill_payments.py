@@ -23,6 +23,10 @@ class BillPaymentImporter(BaseImporter):
         )
 
     def _resolve_payable_account(self):
+        """
+        Fallback: return the first payable account found.
+        Used only when no invoice references exist to determine the correct account.
+        """
         company = frappe.defaults.get_global_default("company")
         account = frappe.db.get_value(
             "Account",
@@ -240,7 +244,31 @@ class BillPaymentImporter(BaseImporter):
                 "ref_no": record.get("ref_no", ""),
             }
 
-        payable_account = self._resolve_payable_account()
+        # --- Determine the correct party_account from the linked invoices ---
+        if references:
+            # Fetch credit_to for each referenced invoice
+            credit_to_values = frappe.db.get_values(
+                "Purchase Invoice",
+                [ref["reference_name"] for ref in references],
+                "credit_to",
+            )
+            # Extract unique non-empty credit_to accounts
+            unique_credit_to = set([ct[0] for ct in credit_to_values if ct[0]])
+
+            if len(unique_credit_to) > 1:
+                # Multiple different creditor accounts – cannot process in one Payment Entry
+                return {
+                    "_skip": True,
+                    "_skip_reason": "MULTIPLE_PARTY_ACCOUNTS",
+                    "ref_no": record.get("ref_no", ""),
+                }
+
+            payable_account = unique_credit_to.pop() if unique_credit_to else self._resolve_payable_account()
+        else:
+            # No references – fall back to generic payable account (unlinked payment)
+            payable_account = self._resolve_payable_account()
+        # --------------------------------------------------------------------
+
         payment_account = payment_account or self._resolve_payment_account()
         if not payable_account or not payment_account:
             return {
@@ -266,7 +294,7 @@ class BillPaymentImporter(BaseImporter):
             "mode_of_payment": self._resolve_mode_of_payment(record.get("payment_method")),
             "party_type": "Supplier",
             "party": supplier,
-            "party_account": payable_account,
+            "party_account": payable_account,          # now correctly matches the invoices' credit_to
             "reference_no": record.get("ref_no", ""),
             "reference_date": self.normalize_date(record.get("date") or record.get("txn_date")),
             "paid_amount": final_amount,
