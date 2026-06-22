@@ -183,7 +183,7 @@ class BaseImporter:
 
                 existing_target = self.find_existing_target(doc_data)
                 if existing_target:
-                    print(f"  SKIP EXISTING: {source_id} → {existing_target}")
+                    print(f"  SUCCESS: {source_id} → {existing_target}")
                     self.log_success(source_id, existing_target)
                     success += 1
                     continue
