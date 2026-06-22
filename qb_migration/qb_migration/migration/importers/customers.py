@@ -139,6 +139,9 @@ class CustomerImporter(BaseImporter):
             "territory": "All Territories",
         }
 
+        if record.get("currency"):
+            doc["default_currency"] = record["currency"]
+
         if record.get("address"):
             doc["_address"] = record["address"]
 
