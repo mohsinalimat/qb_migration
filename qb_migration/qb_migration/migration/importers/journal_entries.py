@@ -102,7 +102,19 @@ class JournalEntryImporter(BaseImporter):
 
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
+        company_currency = frappe.db.get_value("Company", company, "default_currency")
         accounts = []
+
+        currency = record.get("currency")
+        exchange_rate = record.get("exchange_rate")
+
+        # Determine if multi-currency processing is needed
+        # Logic:
+        # 1. If currency is absent or matches company currency, treat as single-currency (normal).
+        # 2. Otherwise (foreign currency), treat as multi-currency IF exchange rate exists.
+
+        is_foreign_currency = bool(currency and currency != company_currency)
+        is_multi_currency = is_foreign_currency and bool(exchange_rate)
 
         for line in record.get("lines", []):
             acct_name = line.get("account", "")
@@ -112,14 +124,27 @@ class JournalEntryImporter(BaseImporter):
 
             amount = line.get("amount", 0) or 0
             line_type = (line.get("line_type") or "").strip().lower()
+
             debit = credit = 0
+
+            # Determine base amount
             if line_type == "debit":
-                debit = amount
+                debit_val = amount
+                credit_val = 0
             elif line_type == "credit":
-                credit = amount
+                debit_val = 0
+                credit_val = amount
             else:
-                debit = line.get("debit", 0) or 0
-                credit = line.get("credit", 0) or 0
+                debit_val = line.get("debit", 0) or 0
+                credit_val = line.get("credit", 0) or 0
+
+            # If multi-currency, calculate base currency amount
+            if is_multi_currency:
+                debit = debit_val * exchange_rate
+                credit = credit_val * exchange_rate
+            else:
+                debit = debit_val
+                credit = credit_val
 
             party_type = party = None
             account_type = frappe.db.get_value("Account", erpnext_account, "account_type")
@@ -128,8 +153,10 @@ class JournalEntryImporter(BaseImporter):
 
             row_data = {
                 "account": erpnext_account,
-                "debit_in_account_currency": debit,
-                "credit_in_account_currency": credit,
+                "debit": debit,
+                "credit": credit,
+                "debit_in_account_currency": debit_val,
+                "credit_in_account_currency": credit_val,
                 "user_remark": line.get("memo", ""),
             }
             if party_type and party:
@@ -138,7 +165,7 @@ class JournalEntryImporter(BaseImporter):
 
             accounts.append(row_data)
 
-        return {
+        doc = {
             "doctype": "Journal Entry",
             "voucher_type": "Journal Entry",
             "posting_date": self.normalize_date(record.get("txn_date")),
@@ -146,3 +173,10 @@ class JournalEntryImporter(BaseImporter):
             "user_remark": record.get("memo", ""),
             "accounts": accounts,
         }
+
+        if is_multi_currency:
+            doc["multi_currency"] = 1
+            doc["currency"] = currency
+            doc["exchange_rate"] = exchange_rate
+
+        return doc
