@@ -7,7 +7,8 @@ from .importers.customers import CustomerImporter
 from .importers.suppliers import SupplierImporter
 from .importers.purchase_invoices import PurchaseInvoiceImporter
 from .importers.bill_payments import BillPaymentImporter
-from .importers.journal_entries import JournalEntryImporter
+from .importers.deposits import DepositImporter
+from .importers.journal_entries import JournalEntryImporter, ChecksImporter
 
 PIPELINE = [
     ("accounts", AccountImporter),
@@ -17,6 +18,8 @@ PIPELINE = [
     ("suppliers", SupplierImporter),
     ("purchase_invoices", PurchaseInvoiceImporter),
     ("bill_payments", BillPaymentImporter),
+    ("checks", ChecksImporter),
+    ("deposits", DepositImporter),
     ("journal_entries", JournalEntryImporter),
 ]
 

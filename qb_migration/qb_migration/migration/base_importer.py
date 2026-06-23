@@ -55,7 +55,8 @@ class BaseImporter:
         frappe.delete_doc("Migration Log", existing.name, force=True)
         return False
 
-    def log_success(self, source_id: str, target_name: str):
+    def log_success(self, source_id: str, target_name: str, target_doctype: str | None = None):
+        target_doctype = target_doctype or self.target_doctype
         existing = frappe.db.get_value(
             "Migration Log",
             {"source_id": str(source_id), "source_type": self.source_type},
@@ -68,7 +69,7 @@ class BaseImporter:
             "doctype": "Migration Log",
             "source_id": str(source_id),
             "source_type": self.source_type,
-            "target_doctype": self.target_doctype,
+            "target_doctype": target_doctype,
             "target_name": target_name,
             "status": "Success",
             "imported_at": now_datetime(),
@@ -184,7 +185,7 @@ class BaseImporter:
                 existing_target = self.find_existing_target(doc_data)
                 if existing_target:
                     print(f"  SUCCESS: {source_id} → {existing_target}")
-                    self.log_success(source_id, existing_target)
+                    self.log_success(source_id, existing_target, doc_data.get("doctype", self.target_doctype))
                     success += 1
                     continue
 
@@ -205,7 +206,7 @@ class BaseImporter:
                     doc.submit()
 
                 frappe.db.commit()
-                self.log_success(source_id, doc.name)
+                self.log_success(source_id, doc.name, getattr(doc, "doctype", self.target_doctype))
                 success += 1
 
             except Exception as exc:
