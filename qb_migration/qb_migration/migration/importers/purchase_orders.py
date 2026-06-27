@@ -75,7 +75,7 @@ class PurchaseOrderImporter(BaseImporter):
             })
 
         # Determine status based on is_fully_rcvd
-        status = "Completed" if record.get("is_fully_rcvd") else "Open"
+        status = "Completed" if record.get("is_fully_rcvd") else "To Receive"
 
         return {
             "doctype": "Purchase Order",
