@@ -80,6 +80,41 @@ class PaymentsImporter(BaseImporter):
         frappe.db.commit()
         return doc.name
 
+    def _resolve_receivable_account(self, company=None):
+        company = company or frappe.defaults.get_global_default("company")
+        company_currency = frappe.db.get_value("Company", company, "default_currency")
+
+        filters = {
+            "company": company,
+            "account_type": "Receivable",
+            "root_type": "Asset",
+            "is_group": 0,
+        }
+        if company_currency:
+            filters["account_currency"] = company_currency
+
+        account = frappe.db.get_value("Account", filters, ["name", "account_currency"])
+        if account:
+            name, account_currency = account
+            if company_currency and account_currency != company_currency:
+                frappe.db.set_value("Account", name, "account_currency", company_currency)
+                frappe.db.commit()
+            return name
+
+        fallback = frappe.db.get_value(
+            "Account",
+            {"company": company, "account_type": "Receivable", "root_type": "Asset", "is_group": 0},
+            ["name", "account_currency"],
+        )
+        if fallback:
+            name, account_currency = fallback
+            if company_currency and account_currency != company_currency:
+                frappe.db.set_value("Account", name, "account_currency", company_currency)
+                frappe.db.commit()
+            return name
+
+        return None
+
     def resolve_sales_invoice(self, inv_no, customer_name=None, amount=None):
         if inv_no:
             result = frappe.db.get_value("Sales Invoice", {"name": inv_no}, "name")
@@ -117,6 +152,7 @@ class PaymentsImporter(BaseImporter):
 
         references = []
         total_allocated = 0.0
+        resolved_candidates = 0
 
         for candidate in candidates:
             inv_ref = candidate["inv_no"]
@@ -127,6 +163,7 @@ class PaymentsImporter(BaseImporter):
             if not invoice:
                 continue
 
+            resolved_candidates += 1
             outstanding = flt(frappe.db.get_value("Sales Invoice", invoice, "outstanding_amount") or 0)
             if outstanding <= 0:
                 continue
@@ -142,7 +179,7 @@ class PaymentsImporter(BaseImporter):
             })
             total_allocated += allocated
 
-        return references, total_allocated
+        return references, total_allocated, resolved_candidates
 
     def find_existing_target(self, doc_data):
         if doc_data.get("reference_no"):
@@ -168,9 +205,9 @@ class PaymentsImporter(BaseImporter):
         if not payment_amount:
             return {"_skip": True, "_skip_reason": "ZERO_AMOUNT", "ref_no": record.get("ref_no", "")}
 
-        references, effective_amount = self._build_references(record, payment_amount)
+        references, effective_amount, resolved_candidates = self._build_references(record, payment_amount)
 
-        if not references and (record.get("applied") or record.get("ref_no") or record.get("inv_no")):
+        if not references and resolved_candidates and (record.get("applied") or record.get("ref_no") or record.get("inv_no")):
             return {"_skip": True, "_skip_reason": "ALREADY_APPLIED_OR_UNLINKED", "ref_no": record.get("ref_no", "")}
 
         final_amount = effective_amount if references else payment_amount
@@ -192,8 +229,9 @@ class PaymentsImporter(BaseImporter):
         else:
             receivable_account = None
 
+        receivable_account = receivable_account or self._resolve_receivable_account()
         payment_account = payment_account or self._resolve_payment_account()
-        if not payment_account:
+        if not payment_account or not receivable_account:
             return {"_skip": True, "_skip_reason": "NO_VALID_ACCOUNT", "ref_no": record.get("ref_no", "")}
 
         party = self._parse_customer(record.get("cust_name")) or record.get("cust_name")
