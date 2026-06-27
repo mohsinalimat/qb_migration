@@ -1,44 +1,64 @@
 import frappe
 
 from .importers.accounts import AccountImporter
-from .importers.item_groups import ItemGroupImporter
-from .importers.items import ItemImporter
-from .importers.customers import CustomerImporter
-from .importers.customer_types import CustomerTypesImporter
-from .importers.vendors import SupplierImporter
-from .importers.vendor_types import VendorTypesImporter
-from .importers.employees import EmployeeImporter
-from .importers.purchase_invoices import PurchaseInvoiceImporter
-from .importers.purchase_orders import PurchaseOrderImporter
 from .importers.payment_methods import PaymentMethodsImporter
-from .importers.price_levels import PriceLevelsImporter
-from .importers.quantity_discounts import QuantityDiscountImporter
 from .importers.terms import TermsImporter
+from .importers.item_groups import ItemGroupImporter
+from .importers.price_levels import PriceLevelsImporter
+from .importers.customer_types import CustomerTypesImporter
+from .importers.vendor_types import VendorTypesImporter
+from .importers.customers import CustomerImporter
+from .importers.vendors import SupplierImporter
+from .importers.employees import EmployeeImporter
+from .importers.items import ItemImporter
+from .importers.purchase_orders import PurchaseOrderImporter
+from .importers.sales_orders import SalesOrderImporter
+from .importers.estimates import EstimateImporter
+from .importers.bills import PurchaseInvoiceImporter
+from .importers.invoices import SalesInvoiceImporter
+from .importers.sales_receipts import SalesReceiptImporter
+from .importers.credit_memos import CreditMemoImporter
 from .importers.bill_payments import BillPaymentImporter
-from .importers.deposits import DepositImporter
-from .importers.journal_entries import JournalEntryImporter, ChecksImporter
 from .importers.payments import PaymentsImporter
+from .importers.sales_tax_items import SalesTaxItemsImporter
+from .importers.deposits import DepositImporter
+from .importers.cc_charges import CCChargesImporter
+from .importers.journal_entries import JournalEntryImporter, ChecksImporter
+from .importers.vendor_credits import VendorCreditImporter
+from .importers.item_receipts import ItemReceiptImporter
+from .importers.quantity_discounts import QuantityDiscountImporter
+from .importers.other_names import OtherNamesImporter
 
 PIPELINE = [
     ("accounts", AccountImporter),
-    ("item_groups", ItemGroupImporter),
-    ("items", ItemImporter),
-    ("price_levels", PriceLevelsImporter),
-    ("quantity_discounts", QuantityDiscountImporter),
-    ("customer_types", CustomerTypesImporter),
-    ("customers", CustomerImporter),
-    ("vendor_types", VendorTypesImporter),
-    ("vendors", SupplierImporter),
-    ("employees", EmployeeImporter),
-    ("purchase_orders", PurchaseOrderImporter),
-    ("purchase_invoices", PurchaseInvoiceImporter),
     ("payment_methods", PaymentMethodsImporter),
     ("terms", TermsImporter),
+    ("item_groups", ItemGroupImporter),
+    ("price_levels", PriceLevelsImporter),
+    ("customer_types", CustomerTypesImporter),
+    ("vendor_types", VendorTypesImporter),
+    ("customers", CustomerImporter),
+    ("vendors", SupplierImporter),
+    ("employees", EmployeeImporter),
+    ("items", ItemImporter),
+    ("purchase_orders", PurchaseOrderImporter),
+    ("sales_orders", SalesOrderImporter),
+    ("estimates", EstimateImporter),
+    ("bills", PurchaseInvoiceImporter),
+    ("invoices", SalesInvoiceImporter),
+    ("sales_receipts", SalesReceiptImporter),
+    ("credit_memos", CreditMemoImporter),
     ("bill_payments", BillPaymentImporter),
-    ("checks", ChecksImporter),
-    ("deposits", DepositImporter),
-    ("journal_entries", JournalEntryImporter),
     ("payments", PaymentsImporter),
+    ("sales_tax_items", SalesTaxItemsImporter),
+    ("deposits", DepositImporter),
+    ("checks", ChecksImporter),
+    ("cc_charges", CCChargesImporter),
+    ("journal_entries", JournalEntryImporter),
+    ("vendor_credits", VendorCreditImporter),
+    ("item_receipts", ItemReceiptImporter),
+    ("quantity_discounts", QuantityDiscountImporter),
+    ("other_names", OtherNamesImporter),
 ]
 
 
