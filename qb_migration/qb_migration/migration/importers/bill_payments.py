@@ -22,29 +22,36 @@ class BillPaymentImporter(BaseImporter):
             "Account", {"account_name": leaf, "company": company}, "name"
         )
 
-    def _resolve_payable_account(self):
+    def _resolve_payable_account(self, currency=None):
         """
-        Fallback: return the first payable account found.
+        Fallback: return the first payable account found, optionally matching currency.
         Used only when no invoice references exist to determine the correct account.
         """
         company = frappe.defaults.get_global_default("company")
-        account = frappe.db.get_value(
-            "Account",
-            {
-                "account_type": "Payable",
-                "root_type": "Liability",
-                "company": company,
-                "is_group": 0,
-            },
-            "name",
-        )
+        filters = {
+            "account_type": "Payable",
+            "root_type": "Liability",
+            "company": company,
+            "is_group": 0,
+        }
+        if currency:
+            filters["account_currency"] = currency
+            account = frappe.db.get_value("Account", filters, "name")
+            if account:
+                return account
+            filters.pop("account_currency", None)
+
+        account = frappe.db.get_value("Account", filters, "name")
         if account:
             return account
 
-        row = frappe.db.sql(
-            "select name from `tabAccount` where account_type='Payable' and root_type='Liability' and company=%s and is_group=0 limit 1",
-            (company,),
-        )
+        query = "select name from `tabAccount` where account_type='Payable' and root_type='Liability' and company=%s and is_group=0"
+        params = [company]
+        if currency:
+            query += " and account_currency=%s"
+            params.append(currency)
+        query += " limit 1"
+        row = frappe.db.sql(query, tuple(params))
         return row[0][0] if row else None
 
     def _resolve_payment_account(self, qb_account_name=None):
@@ -152,9 +159,11 @@ class BillPaymentImporter(BaseImporter):
           - cap the allocated amount to min(applied_amount, outstanding)
           - skip invoices that are already fully paid
 
-        Returns (references, effective_payment_amount) where
+        Returns (references, effective_payment_amount, resolved_candidates) where
         effective_payment_amount is the sum of all allocated amounts
-        (may differ from QB total when invoices have partial outstanding).
+        (may differ from QB total when invoices have partial outstanding),
+        and resolved_candidates is the number of invoice candidates that were
+        matched to ERPNext Purchase Invoices.
         """
         applied_items = record.get("applied") or []
 
@@ -171,6 +180,7 @@ class BillPaymentImporter(BaseImporter):
 
         references = []
         total_allocated = 0.0
+        resolved_candidates = 0
 
         for candidate in candidates:
             ref_no = candidate["ref_no"]
@@ -184,6 +194,7 @@ class BillPaymentImporter(BaseImporter):
             if not invoice:
                 continue
 
+            resolved_candidates += 1
             outstanding = flt(
                 frappe.db.get_value("Purchase Invoice", invoice, "outstanding_amount") or 0
             )
@@ -204,7 +215,7 @@ class BillPaymentImporter(BaseImporter):
             })
             total_allocated += allocated
 
-        return references, total_allocated
+        return references, total_allocated, resolved_candidates
 
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
@@ -223,10 +234,10 @@ class BillPaymentImporter(BaseImporter):
                 "ref_no": record.get("ref_no", ""),
             }
 
-        references, effective_amount = self._build_references(record, payment_amount)
+        references, effective_amount, resolved_candidates = self._build_references(record, payment_amount)
 
         # If every linked invoice was already paid, skip the whole payment.
-        if not references and (record.get("applied") or record.get("bill_no") or record.get("ref_no")):
+        if not references and resolved_candidates and (record.get("applied") or record.get("bill_no") or record.get("ref_no")):
             return {
                 "_skip": True,
                 "_skip_reason": "ALREADY_PAID",
@@ -263,10 +274,10 @@ class BillPaymentImporter(BaseImporter):
                     "ref_no": record.get("ref_no", ""),
                 }
 
-            payable_account = unique_credit_to.pop() if unique_credit_to else self._resolve_payable_account()
+            payable_account = unique_credit_to.pop() if unique_credit_to else self._resolve_payable_account(record.get("currency"))
         else:
             # No references – fall back to generic payable account (unlinked payment)
-            payable_account = self._resolve_payable_account()
+            payable_account = self._resolve_payable_account(record.get("currency"))
         # --------------------------------------------------------------------
 
         payment_account = payment_account or self._resolve_payment_account()
