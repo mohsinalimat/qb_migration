@@ -131,19 +131,9 @@ class BaseImporter:
             return nowdate()
 
         try:
-            parsed = getdate(date_value)
+            return getdate(date_value)
         except Exception:
             return nowdate()
-
-        fiscal_year = frappe.db.sql(
-            "select name from `tabFiscal Year` where %s between year_start_date and year_end_date and docstatus<2 limit 1",
-            parsed,
-        )
-        if fiscal_year:
-            return parsed
-
-        active_start = frappe.db.get_value("Fiscal Year", {"disabled": 0}, "year_start_date")
-        return active_start or nowdate()
 
     def run(self, dry_run: bool = False):
         records = self.load_data()
@@ -202,6 +192,7 @@ class BaseImporter:
                     "Sales Invoice",
                     "Payment Entry",
                     "Journal Entry",
+                    "Purchase Receipt",
                 ):
                     doc.submit()
 
