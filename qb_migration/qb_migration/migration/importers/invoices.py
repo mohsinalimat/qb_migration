@@ -9,6 +9,36 @@ class SalesInvoiceImporter(SalesOrderImporter):
     json_file = "invoices.json"
     json_key = "invoices"
 
+    def _ensure_fractional_uoms(self):
+        """Ensure fractional UOMs exist in the database before processing invoices."""
+        for uom_name in ["Unit", "Piece"]:
+            try:
+                existing = frappe.db.get_value("UOM", {"uom_name": uom_name}, ["name", "must_be_whole_number"], as_dict=True)
+                if existing:
+                    if existing.must_be_whole_number:
+                        # Update to allow fractions
+                        frappe.db.set_value("UOM", existing.name, "must_be_whole_number", 0)
+                        frappe.db.commit()
+                else:
+                    # Create new
+                    uom = frappe.get_doc({
+                        "doctype": "UOM",
+                        "uom_name": uom_name,
+                        "must_be_whole_number": 0,
+                        "enabled": 1,
+                    })
+                    uom.flags.ignore_permissions = True
+                    uom.insert()
+                    frappe.db.commit()
+            except Exception as e:
+                print(f"  WARN: Could not ensure UOM {uom_name}: {e}")
+
+    def run(self, dry_run: bool = False):
+        """Run invoice import with UOM setup."""
+        print(f"\n[{self.source_type}] Preparing fractional UOMs...")
+        self._ensure_fractional_uoms()
+        return super().run(dry_run=dry_run)
+
     def get_source_id(self, record):
         return str(record.get("txn_id") or record.get("inv_no") or record.get("ref_no") or "")
 
@@ -69,23 +99,39 @@ class SalesInvoiceImporter(SalesOrderImporter):
         except (TypeError, ValueError):
             return fallback_uom or "Nos"
 
-        if qty_value.is_integer():
+        # For fractional quantities, use a UOM that allows them
+        if not qty_value.is_integer():
+            # Try Unit first (should exist from initialization)
+            existing = frappe.db.get_value("UOM", {"uom_name": "Unit"}, "name")
+            if existing:
+                return existing
+            
+            # Try Piece as fallback
+            existing = frappe.db.get_value("UOM", {"uom_name": "Piece"}, "name")
+            if existing:
+                return existing
+            
+            # If neither exists, try to create Unit on the fly
+            try:
+                uom = frappe.get_doc({
+                    "doctype": "UOM",
+                    "uom_name": "Unit",
+                    "must_be_whole_number": 0,
+                    "enabled": 1,
+                })
+                uom.flags.ignore_permissions = True
+                uom.insert()
+                frappe.db.commit()
+                return uom.name
+            except Exception:
+                pass
+            
+            # Final fallback: return "Nos" which will cause validation error
+            # but at least will fail clearly
             return fallback_uom or "Nos"
 
-        existing = frappe.db.get_value("UOM", {"uom_name": "Unit"}, "name")
-        if existing:
-            return existing
-
-        uom = frappe.get_doc({
-            "doctype": "UOM",
-            "uom_name": "Unit",
-            "must_be_whole_number": 0,
-            "enabled": 1,
-        })
-        uom.flags.ignore_permissions = True
-        uom.insert()
-        frappe.db.commit()
-        return uom.name
+        # For whole quantities, use the fallback UOM
+        return fallback_uom or "Nos"
 
     def resolve_item(self, qb_item_name):
         if not qb_item_name:
@@ -110,7 +156,7 @@ class SalesInvoiceImporter(SalesOrderImporter):
             "item_name": qb_item_name,
             "description": qb_item_name,
             "item_group": self.get_or_create_item_group(),
-            "stock_uom": "Nos",
+            "stock_uom": "Unit",  # Use Unit to support fractional quantities
             "is_stock_item": 0,
             "is_purchase_item": 1,
             "is_sales_item": 1,
@@ -156,6 +202,33 @@ class SalesInvoiceImporter(SalesOrderImporter):
         )
         return result[0][0] if result else None
 
+    def ensure_item_supports_uom(self, item_code, uom_name):
+        """
+        Ensure the item's stock_uom supports the given UOM.
+        For items receiving fractional quantities, update stock_uom to Unit (best practice).
+        """
+        if not item_code or uom_name not in ("Unit", "Piece"):
+            return
+        
+        try:
+            item = frappe.get_doc("Item", item_code)
+            
+            # If stock_uom is already Unit or Piece, no need to update
+            if item.stock_uom in ("Unit", "Piece"):
+                return
+            
+            # For fractional-quantity items, always use Unit as stock_uom for consistency
+            # This ensures proper ERPNext compliance and inventory tracking
+            if item.stock_uom != "Unit":
+                item.stock_uom = "Unit"
+                item.flags.ignore_permissions = True
+                item.save()
+                frappe.db.commit()
+        except frappe.DoesNotExistError:
+            pass  # Item doesn't exist (may be created later)
+        except Exception as e:
+            print(f"  WARN: Could not update item {item_code} for UOM support: {e}")
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         customer = self.resolve_customer(record.get("cust_name"))
@@ -186,6 +259,15 @@ class SalesInvoiceImporter(SalesOrderImporter):
                 amount_value = 0
 
             uom_value = self.resolve_uom(qty, line.get("unitms") or "Nos")
+            
+            # Ensure item's stock_uom supports fractional quantities if needed
+            if item_code and uom_value in ("Unit", "Piece"):
+                try:
+                    qty_float = float(qty)
+                    if not qty_float.is_integer():
+                        self.ensure_item_supports_uom(item_code, uom_value)
+                except (TypeError, ValueError):
+                    pass
 
             items.append({
                 "idx": idx,
