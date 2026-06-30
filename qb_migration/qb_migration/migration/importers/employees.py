@@ -24,6 +24,9 @@ class EmployeeImporter(BaseImporter):
             "state": record.get("state", ""),
             "pincode": record.get("zip", ""),
             "status": "Active" if record.get("active") else "Left",
+            "gender": record.get("gender") or "Male",
+            "date_of_birth": str(self.normalize_date(record.get("date_of_birth"))),
+            "date_of_joining": str(self.normalize_date(record.get("date_of_joining"))),
         }
 
         return doc
