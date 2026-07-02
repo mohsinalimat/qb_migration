@@ -1,5 +1,7 @@
+import uuid
+
 import frappe
-from frappe.utils import flt
+from frappe.utils import flt, nowdate
 
 from ..base_importer import BaseImporter
 
@@ -241,18 +243,24 @@ class PaymentsImporter(BaseImporter):
             if invoice_customer:
                 party = invoice_customer
 
+        posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
+        reference_no = record.get("ref_no") or record.get("reference_no") or f"QB-PAY-{uuid.uuid4().hex[:8].upper()}"
+        reference_date = self.normalize_date(
+            record.get("reference_date") or record.get("date") or record.get("txn_date") or nowdate()
+        )
+
         # Payment Entry for receipts: party_account is receivable, paid_to is the bank/cash account
         return {
             "doctype": "Payment Entry",
             "payment_type": "Receive",
             "company": company,
-            "posting_date": self.normalize_date(record.get("date") or record.get("txn_date")),
+            "posting_date": posting_date,
             "mode_of_payment": self._resolve_mode_of_payment(record.get("method") or record.get("payment_method")),
             "party_type": "Customer",
             "party": party,
             "party_account": receivable_account,
-            "reference_no": record.get("ref_no", ""),
-            "reference_date": self.normalize_date(record.get("date") or record.get("txn_date")),
+            "reference_no": reference_no,
+            "reference_date": reference_date,
             "paid_amount": final_amount,
             "received_amount": final_amount,
             "paid_from": receivable_account,
