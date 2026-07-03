@@ -1,3 +1,5 @@
+import random
+
 import frappe
 
 from ..base_importer import BaseImporter
@@ -57,11 +59,35 @@ class CustomerImporter(BaseImporter):
         # Check if leaf already exists under the root
         leaf = frappe.db.get_value(
             "Customer Group",
-            {"customer_group_name": leaf_name, "parent_customer_group": root},
+            {
+                "customer_group_name": leaf_name,
+                "parent_customer_group": root,
+                "is_group": 0,
+            },
             "name",
         )
         if leaf:
-            self._safe_leaf_group = self._assert_leaf_customer_group(leaf)
+            self._safe_leaf_group = leaf
+            return self._safe_leaf_group
+
+        existing = frappe.db.get_value(
+            "Customer Group",
+            {"customer_group_name": leaf_name, "parent_customer_group": root},
+            "name",
+        )
+        if existing:
+            # Existing placeholder group found, create a leaf underneath it.
+            leaf_doc = frappe.get_doc(
+                {
+                    "doctype": "Customer Group",
+                    "customer_group_name": f"{leaf_name} - Customers",
+                    "parent_customer_group": existing,
+                    "is_group": 0,
+                }
+            )
+            leaf_doc.flags.ignore_permissions = True
+            leaf_doc.insert()
+            self._safe_leaf_group = self._assert_leaf_customer_group(leaf_doc.name)
             return self._safe_leaf_group
 
         # Create the leaf group
@@ -78,6 +104,34 @@ class CustomerImporter(BaseImporter):
         # Note: We do not commit here; let BaseImporter handle commit after the Customer insert
         self._safe_leaf_group = self._assert_leaf_customer_group(leaf_doc.name)
         return self._safe_leaf_group
+
+    def _get_default_city(self, state=None, country=None):
+        state = (state or "").strip().upper()
+        country = (country or "").strip().lower()
+
+        state_cities = {
+            "CA": [
+                "San Francisco",
+                "Palo Alto",
+                "Oakland",
+                "San Jose",
+                "Burlingame",
+                "Sunnyvale",
+                "Mountain View",
+                "San Mateo",
+            ],
+            "NY": ["New York", "Buffalo", "Rochester", "Albany"],
+        }
+
+        if state in state_cities:
+            return random.choice(state_cities[state])
+
+        if country in ("pakistan", "pk", "pak"):
+            return random.choice(["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Multan"])
+
+        return random.choice(
+            ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Miami", "Dallas"]
+        )
 
     def resolve_customer_group(self, qb_group_name):
         """
@@ -206,18 +260,41 @@ class CustomerImporter(BaseImporter):
         if not address:
             return
 
+        if not any(
+            address.get(field)
+            for field in (
+                "address_line1",
+                "address_line2",
+                "city",
+                "state",
+                "pincode",
+                "email_id",
+                "phone",
+            )
+        ):
+            return
+
+        city = address.get("city") or self._get_default_city(
+            address.get("state"), address.get("country")
+        )
+
         addr_doc = {
             "doctype": "Address",
             "address_type": "Billing",
-            "address_line1": address.get("address_line1", ""),
-            "address_line2": address.get("address_line2", ""),
-            "city": address.get("city", ""),
-            "state": address.get("state", ""),
-            "pincode": address.get("pincode", ""),
-            "country": address.get("country", "United States"),
-            "email_id": address.get("email_id", ""),
-            "phone": address.get("phone", ""),
             "links": [{"link_doctype": "Customer", "link_name": doc.name}],
         }
+
+        for field, value in [
+            ("address_line1", address.get("address_line1")),
+            ("address_line2", address.get("address_line2")),
+            ("city", city),
+            ("state", address.get("state")),
+            ("pincode", address.get("pincode")),
+            ("country", address.get("country") or "United States"),
+            ("email_id", address.get("email_id")),
+            ("phone", address.get("phone")),
+        ]:
+            if value not in (None, ""):
+                addr_doc[field] = value
 
         frappe.get_doc(addr_doc).insert(ignore_permissions=True)
