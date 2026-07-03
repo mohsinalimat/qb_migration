@@ -11,7 +11,7 @@ class BillPaymentImporter(BaseImporter):
     json_key = "bill_payments"
 
     def get_source_id(self, record):
-        return str(record.get("txn_id") or record.get("ref_number") or "")
+        return str(record.get("txn_id") or record.get("ref_no") or "")
 
     def _resolve_account(self, qb_account_name):
         if not qb_account_name:
@@ -175,8 +175,8 @@ class BillPaymentImporter(BaseImporter):
                 for item in applied_items
             ]
         else:
-            bill_no = record.get("bill_no") or record.get("ref_no")
-            candidates = [{"ref_no": bill_no, "amount": flt(payment_amount)}]
+            ref_no = record.get("ref_no")
+            candidates = [{"ref_no": ref_no, "amount": flt(payment_amount)}]
 
         references = []
         total_allocated = 0.0
@@ -188,7 +188,7 @@ class BillPaymentImporter(BaseImporter):
 
             invoice = self.resolve_purchase_invoice(
                 ref_no,
-                record.get("vend_name") or record.get("vendor"),
+                record.get("vend_name"),
                 applied_amount or payment_amount,
             )
             if not invoice:
@@ -219,9 +219,7 @@ class BillPaymentImporter(BaseImporter):
 
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
-        payment_account = self._resolve_payment_account(
-            record.get("account") or record.get("payment_account") or record.get("bank_account")
-        )
+        payment_account = self._resolve_payment_account()
 
         payment_amount = flt(record.get("total_amt", record.get("amount", 0)) or 0)
         if not payment_amount and record.get("applied"):
@@ -289,7 +287,7 @@ class BillPaymentImporter(BaseImporter):
             }
 
         # Prefer supplier from the resolved invoice; fall back to QB record.
-        supplier = record.get("vend_name") or record.get("vendor")
+        supplier = record.get("vend_name")
         if references:
             invoice_supplier = frappe.db.get_value(
                 "Purchase Invoice", references[0]["reference_name"], "supplier"
@@ -302,7 +300,7 @@ class BillPaymentImporter(BaseImporter):
             "payment_type": "Pay",
             "company": company,
             "posting_date": self.normalize_date(record.get("date") or record.get("txn_date")),
-            "mode_of_payment": self._resolve_mode_of_payment(record.get("payment_method")),
+            "mode_of_payment": self._resolve_mode_of_payment(None),
             "party_type": "Supplier",
             "party": supplier,
             "party_account": payable_account,          # now correctly matches the invoices' credit_to
