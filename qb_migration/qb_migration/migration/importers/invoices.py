@@ -202,6 +202,44 @@ class SalesInvoiceImporter(SalesOrderImporter):
         )
         return result[0][0] if result else None
 
+    def _resolve_item_tax_template(self, tax_code):
+        if not tax_code:
+            return None
+
+        existing = frappe.db.get_value("Item Tax Template", {"title": tax_code}, "name")
+        if existing:
+            return existing
+
+        result = frappe.db.sql(
+            "select name from `tabItem Tax Template` where lower(title)=lower(%s) limit 1",
+            tax_code,
+        )
+        return result[0][0] if result else None
+
+    def _resolve_tax_category(self, tax_code):
+        if not tax_code:
+            return None
+
+        existing = frappe.db.get_value("Tax Category", {"name": tax_code}, "name")
+        if existing:
+            return existing
+
+        existing = frappe.db.get_value("Tax Category", {"title": tax_code}, "name")
+        if existing:
+            return existing
+
+        try:
+            doc = frappe.get_doc({
+                "doctype": "Tax Category",
+                "title": str(tax_code),
+            })
+            doc.flags.ignore_permissions = True
+            doc.insert()
+            frappe.db.commit()
+            return doc.name
+        except Exception:
+            return None
+
     def ensure_item_supports_uom(self, item_code, uom_name):
         """
         Ensure the item's stock_uom supports the given UOM.
@@ -269,7 +307,7 @@ class SalesInvoiceImporter(SalesOrderImporter):
                 except (TypeError, ValueError):
                     pass
 
-            items.append({
+            item_row = {
                 "idx": idx,
                 "item_code": item_code,
                 "item_name": line.get("description") or item_name or "",
@@ -279,7 +317,17 @@ class SalesInvoiceImporter(SalesOrderImporter):
                 "amount": amount_value,
                 "description": line.get("description") or "",
                 "income_account": self.resolve_income_account(),
-            })
+            }
+
+            tax_template = self._resolve_item_tax_template(line.get("tax_code"))
+            if tax_template:
+                item_row["item_tax_template"] = tax_template
+            else:
+                tax_category = self._resolve_tax_category(line.get("tax_code"))
+                if tax_category:
+                    item_row["tax_category"] = tax_category
+
+            items.append(item_row)
 
         if not items:
             raise ValueError("No valid item lines found for invoice")
@@ -300,6 +348,14 @@ class SalesInvoiceImporter(SalesOrderImporter):
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
         }
+
+        if record.get("txn_id"):
+            doc["name"] = str(record.get("txn_id"))
+
+        if record.get("inv_no"):
+            si_meta = frappe.get_meta("Sales Invoice")
+            if si_meta.has_field("invoice_number"):
+                doc["invoice_number"] = record.get("inv_no")
 
         if record.get("ship_date"):
             doc["delivery_date"] = self.normalize_date(record.get("ship_date"))
