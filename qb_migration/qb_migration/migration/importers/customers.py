@@ -133,17 +133,59 @@ class CustomerImporter(BaseImporter):
     def map_record(self, record):
         doc = {
             "doctype": "Customer",
-            "customer_name": record["name"],
-            "customer_type": "Company" if record.get("is_company") else "Individual",
+            # QB 'list_id' -> ERPNext customer code
+            **({"name": record.get("list_id")} if record.get("list_id") else {}),
+            # QB 'name' -> ERPNext customer_name
+            "customer_name": record.get("name"),
+            # Determine customer type from presence of 'company'
+            "customer_type": "Company" if record.get("company") else "Individual",
             "customer_group": self.resolve_customer_group(record.get("customer_group")),
             "territory": "All Territories",
         }
 
+        # Direct mappings from QB fields to ERPNext fields
         if record.get("currency"):
-            doc["default_currency"] = record["currency"]
+            doc["default_currency"] = record.get("currency")
 
-        if record.get("address"):
-            doc["_address"] = record["address"]
+        if record.get("terms"):
+            doc["payment_terms_template"] = record.get("terms")
+
+        if record.get("price_level"):
+            doc["default_price_list"] = record.get("price_level")
+
+        if record.get("credit_limit") is not None:
+            doc["credit_limit"] = record.get("credit_limit")
+
+        if record.get("notes"):
+            doc["remarks"] = record.get("notes")
+
+        # Contact/communication fields
+        if record.get("email"):
+            doc["email_id"] = record.get("email")
+
+        if record.get("phone"):
+            doc["phone_no"] = record.get("phone")
+
+        # active -> disabled (inverse)
+        active_flag = record.get("active")
+        if active_flag is not None:
+            doc["disabled"] = 0 if bool(active_flag) else 1
+
+        # Build an Address dict from top-level QB address fields and attach
+        address = {
+            "address_line1": record.get("addr1", ""),
+            "address_line2": record.get("addr2", ""),
+            "city": record.get("city", ""),
+            "state": record.get("state", ""),
+            "pincode": record.get("zip", ""),
+            "country": record.get("country", ""),
+            "email_id": record.get("email", ""),
+            "phone": record.get("phone", ""),
+            "is_primary_address": True,
+        }
+
+        # Attach normalized address to the original source record so post_insert can read it
+        record["_address"] = address
 
         return doc
 
@@ -164,15 +206,18 @@ class CustomerImporter(BaseImporter):
         if not address:
             return
 
-        frappe.get_doc(
-            {
-                "doctype": "Address",
-                "address_type": "Billing",
-                "address_line1": address.get("line1", ""),
-                "city": address.get("city", ""),
-                "state": address.get("state", ""),
-                "pincode": address.get("zip", ""),
-                "country": address.get("country", "United States"),
-                "links": [{"link_doctype": "Customer", "link_name": doc.name}],
-            }
-        ).insert(ignore_permissions=True)
+        addr_doc = {
+            "doctype": "Address",
+            "address_type": "Billing",
+            "address_line1": address.get("address_line1", ""),
+            "address_line2": address.get("address_line2", ""),
+            "city": address.get("city", ""),
+            "state": address.get("state", ""),
+            "pincode": address.get("pincode", ""),
+            "country": address.get("country", "United States"),
+            "email_id": address.get("email_id", ""),
+            "phone": address.get("phone", ""),
+            "links": [{"link_doctype": "Customer", "link_name": doc.name}],
+        }
+
+        frappe.get_doc(addr_doc).insert(ignore_permissions=True)

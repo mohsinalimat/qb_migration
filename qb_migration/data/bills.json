@@ -1,0 +1,5652 @@
+{
+    "bills": [
+        {
+            "txn_id": "38F2-1071514729",
+            "ref_no": "032",
+            "date": "2020-07-03",
+            "due_date": "2021-07-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 483.47,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 49.5,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E57-1071498528",
+            "ref_no": "Q3/03",
+            "date": "2020-07-10",
+            "due_date": "2021-07-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "2773-1071520337",
+            "ref_no": "",
+            "date": "2020-07-17",
+            "due_date": "2021-08-16",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 1440.0,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 50.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Jacuzzi tub",
+                    "amount": 1390.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "3751-1071505871",
+            "ref_no": "7/03",
+            "date": "2020-07-21",
+            "due_date": "2021-08-05",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 119.39,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 119.39,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "3773-1071506687",
+            "ref_no": "7/03",
+            "date": "2020-07-21",
+            "due_date": "2021-08-20",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 84.04,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 58.04,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "273E-1071519049",
+            "ref_no": "39482",
+            "date": "2020-07-29",
+            "due_date": "2021-08-28",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 3915.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "2% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 225.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Refrigerator/Frezzer",
+                    "amount": 1700.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Dishwasher",
+                    "amount": 250.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Trash Compactor",
+                    "amount": 200.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Double Oven",
+                    "amount": 1200.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Microwave",
+                    "amount": 340.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                }
+            ]
+        },
+        {
+            "txn_id": "325C-1071513076",
+            "ref_no": "35698",
+            "date": "2020-07-30",
+            "due_date": "2021-08-29",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 754.5,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Doorknobs Part # DK 3704",
+                    "amount": 405.0,
+                    "qty": 15.0,
+                    "gl_code": "Hardware:Doorknobs Std"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Locking interior doorknobs  Part # DK415",
+                    "amount": 349.5,
+                    "qty": 10.0,
+                    "gl_code": "Hardware:Lk Doorknobs"
+                }
+            ]
+        },
+        {
+            "txn_id": "38F6-1071514729",
+            "ref_no": "033",
+            "date": "2020-08-03",
+            "due_date": "2021-08-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 486.25,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 46.72,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "272F-1071518960",
+            "ref_no": "",
+            "date": "2020-08-05",
+            "due_date": "2021-09-04",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 6279.95,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 120.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "see attached for specs.",
+                    "amount": 4197.45,
+                    "qty": 1.0,
+                    "gl_code": "Cabinets - Custom"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Plumbing fixtures",
+                    "amount": 290.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 975.0,
+                    "qty": 1.0,
+                    "gl_code": "Cabinets - Custom"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Plumbing fixtures",
+                    "amount": 697.5,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "3229-1071511909",
+            "ref_no": "",
+            "date": "2020-08-13",
+            "due_date": "2021-09-12",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 4998.95,
+            "balance": 6705.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 40.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "See attached specifications",
+                    "amount": 135.0,
+                    "qty": 1.0,
+                    "gl_code": "Patio Door"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "See attached specifications",
+                    "amount": 4823.95,
+                    "qty": 5.0,
+                    "gl_code": "Window"
+                }
+            ]
+        },
+        {
+            "txn_id": "322E-1071512015",
+            "ref_no": "",
+            "date": "2020-08-13",
+            "due_date": "2021-09-12",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 675.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 400.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Bathroom tile - see attached for style/color",
+                    "amount": 275.0,
+                    "qty": 0.0,
+                    "gl_code": "Flooring"
+                }
+            ]
+        },
+        {
+            "txn_id": "3232-1071512136",
+            "ref_no": "",
+            "date": "2020-08-13",
+            "due_date": "2021-09-12",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 1570.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "See attached for brands/styles/colors",
+                    "amount": 1200.0,
+                    "qty": 0.0,
+                    "gl_code": "Flooring"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install carpeting",
+                    "amount": 370.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Carpet"
+                }
+            ]
+        },
+        {
+            "txn_id": "3236-1071512329",
+            "ref_no": "95-H43n",
+            "date": "2020-08-13",
+            "due_date": "2021-08-28",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 97.5,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing fixtures",
+                    "amount": 97.5,
+                    "qty": 0.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "328D-1071518430",
+            "ref_no": "",
+            "date": "2020-08-15",
+            "due_date": "2021-09-14",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 4000.0,
+            "balance": 1047.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Roofing",
+                    "amount": 4000.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Roofing"
+                }
+            ]
+        },
+        {
+            "txn_id": "3290-1071518497",
+            "ref_no": "",
+            "date": "2020-08-15",
+            "due_date": "2021-09-14",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 490.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 490.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "3293-1071518702",
+            "ref_no": "",
+            "date": "2020-08-15",
+            "due_date": "2021-08-25",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 525.0,
+            "balance": 1591.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 45.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "See attached item list",
+                    "amount": 480.0,
+                    "qty": 5.0,
+                    "gl_code": "Lighting"
+                }
+            ]
+        },
+        {
+            "txn_id": "3297-1071518772",
+            "ref_no": "",
+            "date": "2020-08-15",
+            "due_date": "2021-08-30",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 380.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 380.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "329A-1071518819",
+            "ref_no": "",
+            "date": "2020-08-15",
+            "due_date": "2021-08-30",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 590.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 590.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Insulating"
+                }
+            ]
+        },
+        {
+            "txn_id": "329D-1071518864",
+            "ref_no": "",
+            "date": "2020-08-15",
+            "due_date": "2021-09-14",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 750.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 750.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "3777-1071506687",
+            "ref_no": "8/03",
+            "date": "2020-08-20",
+            "due_date": "2021-09-19",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 49.43,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 23.43,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "3754-1071505871",
+            "ref_no": "8/03",
+            "date": "2020-08-25",
+            "due_date": "2021-09-09",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 122.68,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 122.68,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "2485-1071506703",
+            "ref_no": "",
+            "date": "2020-09-02",
+            "due_date": "2021-10-02",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 638.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 75.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Cedar - see attached plans",
+                    "amount": 563.0,
+                    "qty": 1.0,
+                    "gl_code": "Cabinets - Custom"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F39-1071505147",
+            "ref_no": "",
+            "date": "2020-09-02",
+            "due_date": "2021-10-02",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 2540.0,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Toilets-#1098-J6",
+                    "amount": 680.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Sinks-#78-J6",
+                    "amount": 660.0,
+                    "qty": 4.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Faucets for sinks-#1097H6",
+                    "amount": 220.0,
+                    "qty": 4.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Whirlpool bathtub with faucet-#198k0",
+                    "amount": 600.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Glass doors for shower",
+                    "amount": 250.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Shower hardware-#6789H",
+                    "amount": 130.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "38FA-1071514729",
+            "ref_no": "034",
+            "date": "2020-09-03",
+            "due_date": "2021-09-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 489.05,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 43.92,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "32A0-1071518916",
+            "ref_no": "",
+            "date": "2020-09-09",
+            "due_date": "2021-10-09",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 597.0,
+            "balance": 600.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 597.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "377B-1071506796",
+            "ref_no": "9/03",
+            "date": "2020-09-22",
+            "due_date": "2021-10-22",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 68.35,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 42.35,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "3784-1071509620",
+            "ref_no": "",
+            "date": "2020-09-22",
+            "due_date": "2021-10-07",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 1325.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 750.0,
+                    "qty": 30.0,
+                    "gl_code": "Subs:Drywall"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Heating & Air Condition Duct Work",
+                    "amount": 175.0,
+                    "qty": 7.0,
+                    "gl_code": "Subs:Duct Work"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 25.0,
+                    "qty": 1.0,
+                    "gl_code": "Subs:Insulating"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "248B-1071507645",
+            "ref_no": "`",
+            "date": "2020-09-25",
+            "due_date": "2021-10-25",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 455.5,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "2% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 75.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Gas Grill - G2392a",
+                    "amount": 380.5,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                }
+            ]
+        },
+        {
+            "txn_id": "25-933273688",
+            "ref_no": "",
+            "date": "2020-09-30",
+            "due_date": "2021-10-15",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 500.0,
+            "balance": 1047.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Opening Balance as of 10/1/2003 start date",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Opening Balance",
+                    "amount": 500.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "401-933285924",
+            "ref_no": "903-01",
+            "date": "2020-10-01",
+            "due_date": "2021-10-31",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 1780.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "2% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Refrigerator w/self-clean freezer",
+                    "amount": 475.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Microwave and double oven combo",
+                    "amount": 385.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Electric rangetop",
+                    "amount": 255.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Dishwasher",
+                    "amount": 375.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Trash compactor",
+                    "amount": 195.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Garbage disposal",
+                    "amount": 95.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                }
+            ]
+        },
+        {
+            "txn_id": "40BB-1071514134",
+            "ref_no": "",
+            "date": "2020-10-01",
+            "due_date": "2021-10-11",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 1100.0,
+            "balance": 1591.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 1100.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "442-933287431",
+            "ref_no": "125",
+            "date": "2020-10-03",
+            "due_date": "2021-10-03",
+            "vend_name": "Hamlin Metal",
+            "vend_list_id": "50000-933272656",
+            "total_amt": 239.0,
+            "balance": 670.0,
+            "is_paid": true,
+            "terms": "Due on receipt",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Metal Work",
+                    "amount": 239.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Metal Wrk"
+                }
+            ]
+        },
+        {
+            "txn_id": "38FE-1071514729",
+            "ref_no": "035",
+            "date": "2020-10-03",
+            "due_date": "2021-10-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 491.86,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 41.11,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "48F-933288246",
+            "ref_no": "1097-031",
+            "date": "2020-10-08",
+            "due_date": "2021-11-07",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 850.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 850.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "492-933288350",
+            "ref_no": "",
+            "date": "2020-10-10",
+            "due_date": "2021-10-10",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 150.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Due on receipt",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 150.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Insulating"
+                }
+            ]
+        },
+        {
+            "txn_id": "495-933288422",
+            "ref_no": "954592",
+            "date": "2020-10-10",
+            "due_date": "2021-11-09",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 2100.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "2% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Gas cooktop\nRG 9-764",
+                    "amount": 450.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "2 Door\nrefrigerator/freezer MZW 760",
+                    "amount": 600.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Double oven\nT20-63",
+                    "amount": 500.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Dishwasher GA 970",
+                    "amount": 400.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Trash Compactor GAT 55",
+                    "amount": 150.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E5A-1071498553",
+            "ref_no": "Q4/03",
+            "date": "2020-10-10",
+            "due_date": "2021-10-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "4B4-933289267",
+            "ref_no": "502-K",
+            "date": "2020-10-15",
+            "due_date": "2021-10-30",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 400.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 400.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "4B7-933290298",
+            "ref_no": "89-095",
+            "date": "2020-10-15",
+            "due_date": "2021-11-14",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 5900.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install carpeting",
+                    "amount": 3200.0,
+                    "qty": 1.0,
+                    "gl_code": "Subs:Carpet"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install Wood Floor",
+                    "amount": 2700.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Carpet"
+                }
+            ]
+        },
+        {
+            "txn_id": "4BD-933290450",
+            "ref_no": "",
+            "date": "2020-10-15",
+            "due_date": "2021-11-14",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 4395.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 600.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 1200.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 1095.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 1500.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                }
+            ]
+        },
+        {
+            "txn_id": "509-933354026",
+            "ref_no": "10K98L",
+            "date": "2020-10-20",
+            "due_date": "2021-10-20",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 250.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Due on receipt",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 250.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "50C-933354105",
+            "ref_no": "",
+            "date": "2020-10-20",
+            "due_date": "2021-11-19",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 13780.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 11250.0,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 1230.0,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Trim"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Interior door - P-187055T",
+                    "amount": 0.0,
+                    "qty": 0.0,
+                    "gl_code": "Wood Door:Interior"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 0.0,
+                    "qty": 0.0,
+                    "gl_code": "Wood Door:Exterior"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Window, single width",
+                    "amount": 500.0,
+                    "qty": 2.0,
+                    "gl_code": "Window"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Window, double width",
+                    "amount": 800.0,
+                    "qty": 2.0,
+                    "gl_code": "Window"
+                }
+            ]
+        },
+        {
+            "txn_id": "587-933355306",
+            "ref_no": "",
+            "date": "2020-10-25",
+            "due_date": "2021-11-24",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 1800.0,
+            "balance": 6705.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 840.0,
+                    "qty": 8.0,
+                    "gl_code": "Wood Door:Exterior"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Interior door - P-187055T",
+                    "amount": 960.0,
+                    "qty": 16.0,
+                    "gl_code": "Wood Door:Interior"
+                }
+            ]
+        },
+        {
+            "txn_id": "59A-933355812",
+            "ref_no": "",
+            "date": "2020-10-27",
+            "due_date": "2021-11-26",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 500.0,
+            "balance": 600.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 360.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 140.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "59E-933355874",
+            "ref_no": "",
+            "date": "2020-10-27",
+            "due_date": "2021-11-26",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 1010.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Interior door - P-187055T",
+                    "amount": 660.0,
+                    "qty": 4.0,
+                    "gl_code": "Wood Door:Interior"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 350.0,
+                    "qty": 1.0,
+                    "gl_code": "Wood Door:Exterior"
+                }
+            ]
+        },
+        {
+            "txn_id": "30F7-1071509338",
+            "ref_no": "",
+            "date": "2020-10-28",
+            "due_date": "2021-11-27",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 450.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 450.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                }
+            ]
+        },
+        {
+            "txn_id": "30FA-1071509388",
+            "ref_no": "",
+            "date": "2020-10-28",
+            "due_date": "2021-11-27",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 400.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 400.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "30FD-1071509443",
+            "ref_no": "",
+            "date": "2020-10-28",
+            "due_date": "2021-11-12",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 180.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 180.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "3100-1071509480",
+            "ref_no": "",
+            "date": "2020-10-28",
+            "due_date": "2021-11-27",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 250.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 250.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "2F80-1071505762",
+            "ref_no": "",
+            "date": "2020-10-30",
+            "due_date": "2021-11-09",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 2017.0,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 120.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Custom cabinets - see attached specifications",
+                    "amount": 1897.0,
+                    "qty": 1.0,
+                    "gl_code": "Cabinets - Custom"
+                }
+            ]
+        },
+        {
+            "txn_id": "2F86-1071505799",
+            "ref_no": "",
+            "date": "2020-10-30",
+            "due_date": "2021-11-29",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 311.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 25.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Tile - See attached for style/color",
+                    "amount": 286.0,
+                    "qty": 1.0,
+                    "gl_code": "Flooring"
+                }
+            ]
+        },
+        {
+            "txn_id": "2F78-1071505657",
+            "ref_no": "",
+            "date": "2020-10-31",
+            "due_date": "2021-11-30",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 200.75,
+            "balance": 6705.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 20.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Window",
+                    "amount": 56.0,
+                    "qty": 1.0,
+                    "gl_code": "Window"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "See attached specifications",
+                    "amount": 124.75,
+                    "qty": 1.0,
+                    "gl_code": "Patio Door"
+                }
+            ]
+        },
+        {
+            "txn_id": "2F8C-1071505860",
+            "ref_no": "73942",
+            "date": "2020-10-31",
+            "due_date": "2021-11-30",
+            "vend_name": "McClain Appliances",
+            "vend_list_id": "D0000-933272656",
+            "total_amt": 3220.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "2% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 155.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Cook top",
+                    "amount": 250.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Refridgerator",
+                    "amount": 850.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Trash compactor",
+                    "amount": 180.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Double oven",
+                    "amount": 425.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Freezer",
+                    "amount": 500.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 7,
+                    "line_type": "item",
+                    "description": "Dishwasher",
+                    "amount": 260.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 8,
+                    "line_type": "item",
+                    "description": "Washer",
+                    "amount": 300.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                },
+                {
+                    "line_no": 9,
+                    "line_type": "item",
+                    "description": "Dryer",
+                    "amount": 300.0,
+                    "qty": 1.0,
+                    "gl_code": "Appliance"
+                }
+            ]
+        },
+        {
+            "txn_id": "7FC-933367511",
+            "ref_no": "",
+            "date": "2020-11-01",
+            "due_date": "2021-11-16",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 440.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 440.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "7FF-933367573",
+            "ref_no": "ROCK-02",
+            "date": "2020-11-01",
+            "due_date": "2021-12-01",
+            "vend_name": "Gallion Masonry",
+            "vend_list_id": "340000-933272659",
+            "total_amt": 1000.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Metal Work",
+                    "amount": 1000.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Metal Wrk"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F33-1071504970",
+            "ref_no": "",
+            "date": "2020-11-01",
+            "due_date": "2021-12-01",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 656.23,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 656.23,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "80B-933367878",
+            "ref_no": "",
+            "date": "2020-11-02",
+            "due_date": "2021-12-02",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 2000.0,
+            "balance": 1047.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Roofing",
+                    "amount": 2000.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Roofing"
+                }
+            ]
+        },
+        {
+            "txn_id": "80E-933367944",
+            "ref_no": "",
+            "date": "2020-11-03",
+            "due_date": "2021-11-18",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 800.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 800.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "3908-1071521119",
+            "ref_no": "036",
+            "date": "2020-11-03",
+            "due_date": "2021-11-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 494.69,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 38.28,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "81B-933369161",
+            "ref_no": "",
+            "date": "2020-11-05",
+            "due_date": "2021-12-05",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 6000.0,
+            "balance": 600.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 5100.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 300.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 600.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "82C-933369398",
+            "ref_no": "",
+            "date": "2020-11-07",
+            "due_date": "2021-11-22",
+            "vend_name": "Hopkins Construction Rentals",
+            "vend_list_id": "F0000-933272656",
+            "total_amt": 300.0,
+            "balance": 700.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Equipment Rental",
+                    "amount": 300.0,
+                    "qty": 0.0,
+                    "gl_code": "Equip Rental"
+                }
+            ]
+        },
+        {
+            "txn_id": "832-933369500",
+            "ref_no": "",
+            "date": "2020-11-10",
+            "due_date": "2021-11-25",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 500.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 500.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Insulating"
+                }
+            ]
+        },
+        {
+            "txn_id": "835-933369577",
+            "ref_no": "187-H9",
+            "date": "2020-11-10",
+            "due_date": "2021-12-10",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 2400.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 1400.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 1000.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F30-1071504867",
+            "ref_no": "",
+            "date": "2020-11-10",
+            "due_date": "2021-12-10",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 101.23,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 101.23,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C8C-1197713617",
+            "ref_no": "",
+            "date": "2020-11-10",
+            "due_date": "2021-12-10",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 1539.0,
+            "balance": 1591.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 225.0,
+                    "qty": 5.0,
+                    "gl_code": "Fluorescent Ceiling Lighting"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 1314.0,
+                    "qty": 18.0,
+                    "gl_code": "Lighting"
+                }
+            ]
+        },
+        {
+            "txn_id": "30F4-1071509273",
+            "ref_no": "",
+            "date": "2020-11-11",
+            "due_date": "2021-12-11",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 150.0,
+            "balance": 600.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 150.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "881-933371709",
+            "ref_no": "",
+            "date": "2020-11-13",
+            "due_date": "2021-12-13",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 5700.0,
+            "balance": 1047.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Roofing",
+                    "amount": 5700.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Roofing"
+                }
+            ]
+        },
+        {
+            "txn_id": "884-933371779",
+            "ref_no": "",
+            "date": "2020-11-14",
+            "due_date": "2021-12-14",
+            "vend_name": "Hamlin Metal",
+            "vend_list_id": "50000-933272656",
+            "total_amt": 950.0,
+            "balance": 670.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Metal Work",
+                    "amount": 550.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Metal Wrk"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Metal Work",
+                    "amount": 400.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Metal Wrk"
+                }
+            ]
+        },
+        {
+            "txn_id": "976-933373192",
+            "ref_no": "",
+            "date": "2020-11-15",
+            "due_date": "2021-12-15",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 810.0,
+            "balance": 6705.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 810.0,
+                    "qty": 6.0,
+                    "gl_code": "Wood Door:Exterior"
+                }
+            ]
+        },
+        {
+            "txn_id": "A16-933373605",
+            "ref_no": "",
+            "date": "2020-11-17",
+            "due_date": "2021-12-17",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 325.0,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 325.0,
+                    "gl_code": "Tools and Machinery"
+                }
+            ]
+        },
+        {
+            "txn_id": "A1C-933373674",
+            "ref_no": "",
+            "date": "2020-11-18",
+            "due_date": "2021-12-18",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 2325.0,
+            "balance": 6705.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Window",
+                    "amount": 500.0,
+                    "qty": 4.0,
+                    "gl_code": "Window"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "French Door",
+                    "amount": 1750.0,
+                    "qty": 1.0,
+                    "gl_code": "Wood Door"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Locking interior doorknobs  Part # DK415",
+                    "amount": 75.0,
+                    "qty": 1.0,
+                    "gl_code": "Hardware:Lk Doorknobs"
+                }
+            ]
+        },
+        {
+            "txn_id": "A2A-933373787",
+            "ref_no": "",
+            "date": "2020-11-20",
+            "due_date": "2021-12-05",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 1000.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 1000.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "A2D-933373874",
+            "ref_no": "",
+            "date": "2020-11-20",
+            "due_date": "2021-12-20",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 5925.0,
+            "balance": 6705.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Window",
+                    "amount": 3960.0,
+                    "qty": 18.0,
+                    "gl_code": "Window"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Interior door - P-187055T",
+                    "amount": 1150.0,
+                    "qty": 10.0,
+                    "gl_code": "Wood Door:Interior"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 600.0,
+                    "qty": 2.0,
+                    "gl_code": "Wood Door:Exterior"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Exterior door - #K-7904",
+                    "amount": 215.0,
+                    "qty": 1.0,
+                    "gl_code": "Wood Door:Exterior"
+                }
+            ]
+        },
+        {
+            "txn_id": "A88-933374301",
+            "ref_no": "12849",
+            "date": "2020-11-20",
+            "due_date": "2021-12-20",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 1960.0,
+            "balance": 215.1,
+            "is_paid": false,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 1100.0,
+                    "qty": 0.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 210.0,
+                    "qty": 0.0,
+                    "gl_code": "Lumber:Trim"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Decking lumber",
+                    "amount": 650.0,
+                    "qty": 0.0,
+                    "gl_code": "Lumber:Decking"
+                }
+            ]
+        },
+        {
+            "txn_id": "B29-933374886",
+            "ref_no": "",
+            "date": "2020-11-24",
+            "due_date": "2021-12-09",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 900.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 900.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Insulating"
+                }
+            ]
+        },
+        {
+            "txn_id": "B2C-933374959",
+            "ref_no": "",
+            "date": "2020-11-24",
+            "due_date": "2021-12-24",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 1200.0,
+            "balance": 1200.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 450.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 750.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "A046-1197950585",
+            "ref_no": "",
+            "date": "2020-11-25",
+            "due_date": "2021-12-25",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 91.94,
+            "balance": 91.94,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "Acct #415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 60.68,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 31.26,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "CA0-933781433",
+            "ref_no": "",
+            "date": "2020-11-28",
+            "due_date": "2021-12-13",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 700.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 700.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "DF4-933785047",
+            "ref_no": "7893",
+            "date": "2020-11-29",
+            "due_date": "2021-12-29",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 1250.0,
+            "balance": 1250.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 1250.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Tile &Counter"
+                }
+            ]
+        },
+        {
+            "txn_id": "D6B-933782438",
+            "ref_no": "",
+            "date": "2020-11-30",
+            "due_date": "2021-12-15",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 1500.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 1500.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "D78-933784069",
+            "ref_no": "",
+            "date": "2020-11-30",
+            "due_date": "2021-12-30",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 500.0,
+            "balance": 750.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 500.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "D75-933784012",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Fay, Maureen Lynn, CPA",
+            "vend_list_id": "330000-933272659",
+            "total_amt": 250.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "Pre-tax work",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Pre-tax work",
+                    "amount": 250.0,
+                    "gl_code": "Professional Fees:Accounting"
+                }
+            ]
+        },
+        {
+            "txn_id": "2432-1071510295",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 80.5,
+            "balance": 215.1,
+            "is_paid": false,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 45.5,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 35.0,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "3FD9-1071507463",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 740.29,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 740.29,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "4008-1071508977",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 805.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 455.0,
+                    "qty": 10.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 350.0,
+                    "qty": 10.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "400C-1071509038",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 553.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 273.0,
+                    "qty": 6.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 280.0,
+                    "qty": 8.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "4082-1071510687",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 1476.23,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 1476.23,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "40B7-1071514063",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 896.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 546.0,
+                    "qty": 12.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 350.0,
+                    "qty": 10.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "40BE-1071514171",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 696.52,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 696.52,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "40C1-1071514252",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 400.0,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 400.0,
+                    "gl_code": "Job Expenses:Equipment Rental"
+                }
+            ]
+        },
+        {
+            "txn_id": "40C4-1071514387",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-16",
+            "vend_name": "Hopkins Construction Rentals",
+            "vend_list_id": "F0000-933272656",
+            "total_amt": 450.0,
+            "balance": 700.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Equipment Rental",
+                    "amount": 450.0,
+                    "qty": 0.0,
+                    "gl_code": "Equip Rental"
+                }
+            ]
+        },
+        {
+            "txn_id": "40C7-1071514478",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 1610.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 910.0,
+                    "qty": 20.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 700.0,
+                    "qty": 20.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "863D-1197708527",
+            "ref_no": "",
+            "date": "2020-12-01",
+            "due_date": "2021-12-31",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 210.0,
+            "balance": 4479.2,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 210.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "243A-1071510389",
+            "ref_no": "",
+            "date": "2020-12-02",
+            "due_date": "2022-01-01",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 50.0,
+            "balance": 6705.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Window",
+                    "amount": 50.0,
+                    "qty": 2.0,
+                    "gl_code": "Window"
+                }
+            ]
+        },
+        {
+            "txn_id": "84B1-1197704963",
+            "ref_no": "",
+            "date": "2020-12-02",
+            "due_date": "2022-01-01",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 52.0,
+            "balance": 1591.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 52.0,
+                    "qty": 1.0,
+                    "gl_code": "Lighting"
+                }
+            ]
+        },
+        {
+            "txn_id": "390C-1071521152",
+            "ref_no": "038",
+            "date": "2020-12-03",
+            "due_date": "2021-12-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 500.39,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 32.58,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "368C-1071520730",
+            "ref_no": "",
+            "date": "2020-12-04",
+            "due_date": "2022-01-03",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 2400.0,
+            "balance": 6705.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Interior door - P-187055T",
+                    "amount": 2400.0,
+                    "qty": 40.0,
+                    "gl_code": "Wood Door:Interior"
+                }
+            ]
+        },
+        {
+            "txn_id": "DF7-933785097",
+            "ref_no": "",
+            "date": "2020-12-05",
+            "due_date": "2021-12-20",
+            "vend_name": "Hopkins Construction Rentals",
+            "vend_list_id": "F0000-933272656",
+            "total_amt": 550.0,
+            "balance": 700.0,
+            "is_paid": false,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Equipment Rental",
+                    "amount": 550.0,
+                    "qty": 0.0,
+                    "gl_code": "Equip Rental"
+                }
+            ]
+        },
+        {
+            "txn_id": "84C5-1197705405",
+            "ref_no": "",
+            "date": "2020-12-06",
+            "due_date": "2022-01-05",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 115.0,
+            "balance": 215.1,
+            "is_paid": false,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Lumber",
+                    "amount": 115.0,
+                    "qty": 0.0,
+                    "gl_code": "Lumber:Rough"
+                }
+            ]
+        },
+        {
+            "txn_id": "2593-1071524481",
+            "ref_no": "",
+            "date": "2020-12-08",
+            "due_date": "2021-12-23",
+            "vend_name": "Hopkins Construction Rentals",
+            "vend_list_id": "F0000-933272656",
+            "total_amt": 150.0,
+            "balance": 700.0,
+            "is_paid": false,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Equipment Rental",
+                    "amount": 150.0,
+                    "qty": 0.0,
+                    "gl_code": "Equip Rental"
+                }
+            ]
+        },
+        {
+            "txn_id": "8C22-1197736279",
+            "ref_no": "",
+            "date": "2020-12-10",
+            "due_date": "2022-01-09",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 475.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 380.0,
+                    "qty": 0.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 95.0,
+                    "qty": 0.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "F16-933787303",
+            "ref_no": "",
+            "date": "2020-12-11",
+            "due_date": "2021-12-26",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 1200.0,
+            "balance": 1330.0,
+            "is_paid": false,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 1200.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "258C-1071523824",
+            "ref_no": "",
+            "date": "2020-12-11",
+            "due_date": "2022-01-10",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 130.0,
+            "balance": 6705.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Window",
+                    "amount": 50.0,
+                    "qty": 2.0,
+                    "gl_code": "Window"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Window",
+                    "amount": 80.0,
+                    "qty": 2.0,
+                    "gl_code": "Window"
+                }
+            ]
+        },
+        {
+            "txn_id": "2599-1071525446",
+            "ref_no": "",
+            "date": "2020-12-11",
+            "due_date": "2021-12-21",
+            "vend_name": "Express Delivery Service",
+            "vend_list_id": "320000-933272659",
+            "total_amt": 70.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "rush pick up of windows",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "rush pick up of windows",
+                    "amount": 70.0,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                }
+            ]
+        },
+        {
+            "txn_id": "26A8-1071524519",
+            "ref_no": "",
+            "date": "2020-12-11",
+            "due_date": "2021-12-21",
+            "vend_name": "Daigle Lighting",
+            "vend_list_id": "640000-1071525538",
+            "total_amt": 640.92,
+            "balance": 1591.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 69.6,
+                    "gl_code": "Job Expenses:Freight & Delivery"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "See Attached for Specs",
+                    "amount": 571.32,
+                    "qty": 9.0,
+                    "gl_code": "Fluorescent Ceiling Lighting"
+                }
+            ]
+        },
+        {
+            "txn_id": "26C2-1071499617",
+            "ref_no": "",
+            "date": "2020-12-11",
+            "due_date": "2022-01-10",
+            "vend_name": "Hamlin Metal",
+            "vend_list_id": "50000-933272656",
+            "total_amt": 670.0,
+            "balance": 670.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Metal Work",
+                    "amount": 670.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Metal Wrk"
+                }
+            ]
+        },
+        {
+            "txn_id": "F31-933787658",
+            "ref_no": "",
+            "date": "2020-12-12",
+            "due_date": "2022-01-11",
+            "vend_name": "Washuta & Son Painting",
+            "vend_list_id": "60000-933272656",
+            "total_amt": 600.0,
+            "balance": 600.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 600.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "F34-933787718",
+            "ref_no": "",
+            "date": "2020-12-12",
+            "due_date": "2022-01-11",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 810.0,
+            "balance": 4479.2,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 810.0,
+                    "gl_code": "Tools and Machinery"
+                }
+            ]
+        },
+        {
+            "txn_id": "2596-1071525246",
+            "ref_no": "",
+            "date": "2020-12-12",
+            "due_date": "2022-01-11",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 250.0,
+            "balance": 750.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 250.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "25A9-1071507354",
+            "ref_no": "",
+            "date": "2020-12-12",
+            "due_date": "2022-01-11",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 1047.0,
+            "balance": 1047.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Roofing",
+                    "amount": 1047.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Roofing"
+                }
+            ]
+        },
+        {
+            "txn_id": "36D7-1071523993",
+            "ref_no": "20001",
+            "date": "2020-12-12",
+            "due_date": "2021-12-27",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 175.0,
+            "balance": 1330.0,
+            "is_paid": false,
+            "terms": "Net 15",
+            "memo": "See Customer Invoice #1093",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Partial paid with Barter",
+                    "amount": 175.0,
+                    "gl_code": "Repairs:Building Repairs"
+                }
+            ]
+        },
+        {
+            "txn_id": "2586-1071523652",
+            "ref_no": "",
+            "date": "2020-12-15",
+            "due_date": "2021-12-30",
+            "vend_name": "Keswick Insulation",
+            "vend_list_id": "40000-933272656",
+            "total_amt": 670.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 670.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Insulating"
+                }
+            ]
+        },
+        {
+            "txn_id": "373F-1071505419",
+            "ref_no": "12/03",
+            "date": "2020-12-15",
+            "due_date": "2021-12-30",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 122.68,
+            "balance": 122.68,
+            "is_paid": false,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 122.68,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C53-1197712484",
+            "ref_no": "",
+            "date": "2020-12-15",
+            "due_date": "2022-01-14",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "balance": 4050.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 4050.0,
+                    "gl_code": "Pre-paid Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C90-1197713660",
+            "ref_no": "8059",
+            "date": "2020-12-15",
+            "due_date": "2022-01-14",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 585.0,
+            "balance": 585.0,
+            "is_paid": false,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing fixtures",
+                    "amount": 585.0,
+                    "qty": 60.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "8C26-1197736451",
+            "ref_no": "",
+            "date": "2020-12-15",
+            "due_date": "2021-12-30",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 1250.0,
+            "balance": 1250.0,
+            "is_paid": false,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 250.0,
+                    "qty": 10.0,
+                    "gl_code": "Subs:Painting"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 500.0,
+                    "qty": 20.0,
+                    "gl_code": "Subs:Insulating"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 125.0,
+                    "qty": 5.0,
+                    "gl_code": "Subs:Drywall"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "21D21-1608027724",
+            "ref_no": "6238",
+            "date": "2020-12-15",
+            "due_date": "2020-12-25",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 475.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 0.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 475.0,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 0.0,
+                    "qty": 1.0,
+                    "gl_code": "Labor"
+                }
+            ]
+        },
+        {
+            "txn_id": "21D37-1608028046",
+            "ref_no": "",
+            "date": "2020-12-15",
+            "due_date": "2020-12-25",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 7200.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 0.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Cabinet Pulls",
+                    "amount": 7200.0,
+                    "qty": 2400.0,
+                    "gl_code": "Cabinets:Cabinet Pulls"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E4B-1071498429",
+            "ref_no": "Q3/02",
+            "date": "2019-07-10",
+            "due_date": "2020-07-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "2AB2-1071512746",
+            "ref_no": "",
+            "date": "2019-07-15",
+            "due_date": "2020-08-14",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 2080.0,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "see attached specs",
+                    "amount": 2080.0,
+                    "qty": 1.0,
+                    "gl_code": "Cabinets - Custom"
+                }
+            ]
+        },
+        {
+            "txn_id": "2AB7-1071512805",
+            "ref_no": "",
+            "date": "2019-07-15",
+            "due_date": "2020-08-14",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 234.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Rough lumber",
+                    "amount": 137.0,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Rough"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 97.0,
+                    "qty": 1.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "2ABF-1071512893",
+            "ref_no": "",
+            "date": "2019-07-15",
+            "due_date": "2020-07-25",
+            "vend_name": "City of East Bayshore",
+            "vend_list_id": "630000-1071521572",
+            "total_amt": 225.0,
+            "balance": 0.29,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Building permit",
+                    "amount": 225.0,
+                    "qty": 0.0,
+                    "gl_code": "Permit"
+                }
+            ]
+        },
+        {
+            "txn_id": "2AC2-1071512959",
+            "ref_no": "",
+            "date": "2019-07-15",
+            "due_date": "2020-08-14",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 144.75,
+            "balance": 6705.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 144.75,
+                    "qty": 1.0,
+                    "gl_code": "Patio Door"
+                }
+            ]
+        },
+        {
+            "txn_id": "38C6-1071513940",
+            "ref_no": "021",
+            "date": "2019-08-03",
+            "due_date": "2020-08-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 453.92,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 79.05,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "2B68-1071506414",
+            "ref_no": "",
+            "date": "2019-08-15",
+            "due_date": "2020-09-14",
+            "vend_name": "Larson Flooring",
+            "vend_list_id": "10000-933272655",
+            "total_amt": 429.87,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "See attached style and color specs",
+                    "amount": 429.87,
+                    "qty": 1.0,
+                    "gl_code": "Flooring"
+                }
+            ]
+        },
+        {
+            "txn_id": "2B8C-1071507963",
+            "ref_no": "",
+            "date": "2019-08-26",
+            "due_date": "2020-09-25",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 1500.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Drywall"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Electrical"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Plumbing",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Plumbing"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Install tile or counter",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Tile &Counter"
+                }
+            ]
+        },
+        {
+            "txn_id": "38CA-1071513940",
+            "ref_no": "022",
+            "date": "2019-09-03",
+            "due_date": "2020-09-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 456.53,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 76.44,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "244B-1071521755",
+            "ref_no": "",
+            "date": "2019-10-02",
+            "due_date": "2020-10-12",
+            "vend_name": "Perry Windows & Doors",
+            "vend_list_id": "C0000-933272656",
+            "total_amt": 1287.0,
+            "balance": 6705.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Window - Basic Picture",
+                    "amount": 912.0,
+                    "qty": 2.0,
+                    "gl_code": "Window"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Window - Standard Bedroom",
+                    "amount": 375.0,
+                    "qty": 3.0,
+                    "gl_code": "Window"
+                }
+            ]
+        },
+        {
+            "txn_id": "38CE-1071513940",
+            "ref_no": "023",
+            "date": "2019-10-03",
+            "due_date": "2020-10-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 459.16,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 73.81,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E4E-1071498468",
+            "ref_no": "Q4/02",
+            "date": "2019-10-10",
+            "due_date": "2020-10-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "38D2-1071513940",
+            "ref_no": "024",
+            "date": "2019-11-03",
+            "due_date": "2020-11-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 461.8,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 71.17,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "38D6-1071513940",
+            "ref_no": "025",
+            "date": "2019-12-03",
+            "due_date": "2020-12-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 464.45,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 68.52,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C29-1197712211",
+            "ref_no": "837842",
+            "date": "2019-12-10",
+            "due_date": "2021-01-09",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 4050.0,
+                    "gl_code": "Pre-paid Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "5B88-1197761007",
+            "ref_no": "",
+            "date": "2020-01-02",
+            "due_date": "2021-01-12",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 1500.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 1500.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "38DA-1071513940",
+            "ref_no": "026",
+            "date": "2020-01-03",
+            "due_date": "2021-01-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 467.12,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 65.85,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F41-1071505666",
+            "ref_no": "",
+            "date": "2020-01-04",
+            "due_date": "2021-02-03",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 23.84,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing fixtures",
+                    "amount": 19.95,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Plumbing fixtures",
+                    "amount": 3.89,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E51-1071498494",
+            "ref_no": "Q1/03",
+            "date": "2020-01-10",
+            "due_date": "2021-01-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F5B-1071506289",
+            "ref_no": "",
+            "date": "2020-01-16",
+            "due_date": "2021-02-15",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 300.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 300.0,
+                    "qty": 12.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "3781-1071508600",
+            "ref_no": "",
+            "date": "2020-01-17",
+            "due_date": "2021-02-16",
+            "vend_name": "Timberloft Lumber",
+            "vend_list_id": "E0000-933272656",
+            "total_amt": 140.0,
+            "balance": 215.1,
+            "is_paid": true,
+            "terms": "1% 10 Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Trim lumber",
+                    "amount": 140.0,
+                    "qty": 4.0,
+                    "gl_code": "Lumber:Trim"
+                }
+            ]
+        },
+        {
+            "txn_id": "8C1B-1197735463",
+            "ref_no": "",
+            "date": "2020-01-20",
+            "due_date": "2021-01-30",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 2000.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "",
+                    "amount": 2000.0,
+                    "qty": 20.0,
+                    "gl_code": "Lumber:Rough"
+                }
+            ]
+        },
+        {
+            "txn_id": "A041-1197950418",
+            "ref_no": "",
+            "date": "2020-01-20",
+            "due_date": "2021-02-19",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 56.17,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "Dial Tone and Long Distance",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Converted to Actual Billing from Flat Rate Bundle in 2006",
+                    "amount": 56.17,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "373C-1071505345",
+            "ref_no": "1/03",
+            "date": "2020-01-21",
+            "due_date": "2021-02-05",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 122.68,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 122.68,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "5B8D-1197761018",
+            "ref_no": "",
+            "date": "2020-01-31",
+            "due_date": "2021-02-10",
+            "vend_name": "A Cheung Limited",
+            "vend_list_id": "A60000-1197760912",
+            "total_amt": 2000.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Electrical Materials",
+                    "amount": 2000.0,
+                    "qty": 1.0,
+                    "gl_code": "Electrical Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "2E55-1071522546",
+            "ref_no": "",
+            "date": "2020-02-01",
+            "due_date": "2021-03-02",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 1938.0,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "Freight",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Freight",
+                    "amount": 45.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Toilets-#1096-J11",
+                    "amount": 240.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Sinks-#78-J6",
+                    "amount": 330.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Whirlpool bathtub with faucet-#198k0",
+                    "amount": 600.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Glass doors for shower",
+                    "amount": 125.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "See attached for dimensions",
+                    "amount": 598.0,
+                    "qty": 0.0,
+                    "gl_code": "Cabinets - Custom"
+                }
+            ]
+        },
+        {
+            "txn_id": "7D3-933364386",
+            "ref_no": "498-01-L",
+            "date": "2020-02-05",
+            "due_date": "2021-03-06",
+            "vend_name": "Thomas Kitchen & Bath",
+            "vend_list_id": "A0000-933272656",
+            "total_amt": 2320.0,
+            "balance": 585.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Toilets-#1098-J6",
+                    "amount": 680.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Sinks-#78-J6",
+                    "amount": 495.0,
+                    "qty": 3.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Faucets for sinks-#1097H6",
+                    "amount": 165.0,
+                    "qty": 3.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Whirlpool bathtub with faucet-#198k0",
+                    "amount": 600.0,
+                    "qty": 1.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Glass doors for shower",
+                    "amount": 250.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Shower hardware-#6789H",
+                    "amount": 130.0,
+                    "qty": 2.0,
+                    "gl_code": "Plumb Fixtrs"
+                }
+            ]
+        },
+        {
+            "txn_id": "375F-1071506687",
+            "ref_no": "2/03",
+            "date": "2020-02-20",
+            "due_date": "2021-03-21",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 44.94,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 18.94,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "2E52-1071522204",
+            "ref_no": "",
+            "date": "2020-02-21",
+            "due_date": "2021-03-22",
+            "vend_name": "Wheeler's Tile Etc.",
+            "vend_list_id": "90000-933272656",
+            "total_amt": 634.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "See attached for styles and colors",
+                    "amount": 634.0,
+                    "qty": 0.0,
+                    "gl_code": "Flooring"
+                }
+            ]
+        },
+        {
+            "txn_id": "3742-1071505871",
+            "ref_no": "2/03",
+            "date": "2020-02-24",
+            "due_date": "2021-03-10",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 110.89,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 110.89,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F2D-1071504813",
+            "ref_no": "20934",
+            "date": "2020-03-01",
+            "due_date": "2021-03-31",
+            "vend_name": "East Bayshore Tool & Supply",
+            "vend_list_id": "7C0000-1071526124",
+            "total_amt": 790.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 790.0,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "38DE-1071513940",
+            "ref_no": "027",
+            "date": "2020-03-07",
+            "due_date": "2021-03-22",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 469.81,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 63.16,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3787-1071509911",
+            "ref_no": "",
+            "date": "2020-03-14",
+            "due_date": "2021-03-29",
+            "vend_name": "Lew Plumbing",
+            "vend_list_id": "70000-933272656",
+            "total_amt": 295.0,
+            "balance": 1330.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Plumbing - Labor & Materials\nUtility Sink, Washer/Dryer fixtures",
+                    "amount": 295.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Plumbing"
+                }
+            ]
+        },
+        {
+            "txn_id": "3B22-1071532116",
+            "ref_no": "03-0123-5",
+            "date": "2020-03-15",
+            "due_date": "2021-04-14",
+            "vend_name": "Sloan Roofing",
+            "vend_list_id": "80000-933272656",
+            "total_amt": 855.0,
+            "balance": 1047.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Roofing",
+                    "amount": 855.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Roofing"
+                }
+            ]
+        },
+        {
+            "txn_id": "40DB-1071514903",
+            "ref_no": "",
+            "date": "2020-03-15",
+            "due_date": "2021-03-30",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 0.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "VOID: Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Transmission repair - Truck",
+                    "amount": 0.0,
+                    "gl_code": "Automobile:Repairs and Maintenance"
+                }
+            ]
+        },
+        {
+            "txn_id": "2589-1071523719",
+            "ref_no": "",
+            "date": "2020-03-18",
+            "due_date": "2021-04-17",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 415.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall - Tape, Texture, Finish",
+                    "amount": 415.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "3763-1071506687",
+            "ref_no": "3/03",
+            "date": "2020-03-20",
+            "due_date": "2021-04-19",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 37.08,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 11.08,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "3745-1071505871",
+            "ref_no": "3/03",
+            "date": "2020-03-24",
+            "due_date": "2021-04-08",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 104.15,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 104.15,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "3C69-1071514427",
+            "ref_no": "",
+            "date": "2020-03-28",
+            "due_date": "2021-05-27",
+            "vend_name": "Holly Heating and Electric",
+            "vend_list_id": "750000-1071527895",
+            "total_amt": 289.95,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 60",
+            "memo": "Install Washer/Dryer Outlet",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Install Washer/Dryer Outlet",
+                    "amount": 145.0,
+                    "gl_code": "Job Expenses:Subcontractors"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Install double Wall Switch",
+                    "amount": 55.0,
+                    "gl_code": "Job Expenses:Subcontractors"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Electrical work - overhead florescent lighting",
+                    "amount": 89.95,
+                    "qty": 1.0,
+                    "gl_code": "Subs:Electrical"
+                }
+            ]
+        },
+        {
+            "txn_id": "38E2-1071513940",
+            "ref_no": "028",
+            "date": "2020-04-03",
+            "due_date": "2021-04-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 472.51,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 60.46,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "38E6-1071513940",
+            "ref_no": "029",
+            "date": "2020-04-03",
+            "due_date": "2021-04-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 475.23,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 57.74,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E54-1071498513",
+            "ref_no": "Q2/03",
+            "date": "2020-04-10",
+            "due_date": "2021-04-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "3748-1071505871",
+            "ref_no": "4/03",
+            "date": "2020-04-21",
+            "due_date": "2021-05-06",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 98.68,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 98.68,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "3767-1071506687",
+            "ref_no": "4/03",
+            "date": "2020-04-21",
+            "due_date": "2021-05-21",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 77.92,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 51.92,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "3CCF-1071525267",
+            "ref_no": "01-03-785",
+            "date": "2020-04-28",
+            "due_date": "2021-06-27",
+            "vend_name": "Custom Kitchens of Bayshore",
+            "vend_list_id": "7B0000-1071524812",
+            "total_amt": 3076.32,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 60",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Cabinet Pulls",
+                    "amount": 76.32,
+                    "qty": 48.0,
+                    "gl_code": "Cabinets:Cabinet Pulls"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Light pine kitchen cabinet wall unit \n#CLD- 1235-p",
+                    "amount": 3000.0,
+                    "qty": 2.0,
+                    "gl_code": "Cabinets:Light Pine"
+                }
+            ]
+        },
+        {
+            "txn_id": "5374-1197756700",
+            "ref_no": "",
+            "date": "2020-05-01",
+            "due_date": "2021-05-31",
+            "vend_name": "Kershaw Computer Services",
+            "vend_list_id": "350000-933272659",
+            "total_amt": 6500.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Server",
+                    "amount": 6500.0,
+                    "qty": 0.0,
+                    "gl_code": "Server - 13"
+                }
+            ]
+        },
+        {
+            "txn_id": "38EA-1071513940",
+            "ref_no": "030",
+            "date": "2020-05-03",
+            "due_date": "2021-05-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 477.96,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 55.01,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "376B-1071506687",
+            "ref_no": "5/03",
+            "date": "2020-05-20",
+            "due_date": "2021-06-19",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 81.79,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 55.79,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "4066-1071510337",
+            "ref_no": "",
+            "date": "2020-05-20",
+            "due_date": "2021-07-19",
+            "vend_name": "Custom Kitchens of Bayshore",
+            "vend_list_id": "7B0000-1071524812",
+            "total_amt": 3076.32,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 60",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Cabinet Pulls",
+                    "amount": 76.32,
+                    "qty": 48.0,
+                    "gl_code": "Cabinets:Cabinet Pulls"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Light pine kitchen cabinet wall unit \n#CLD- 1235-p",
+                    "amount": 3000.0,
+                    "qty": 2.0,
+                    "gl_code": "Cabinets:Light Pine"
+                }
+            ]
+        },
+        {
+            "txn_id": "374B-1071505871",
+            "ref_no": "5/03",
+            "date": "2020-05-23",
+            "due_date": "2021-06-07",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 95.86,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 95.86,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "38EE-1071514729",
+            "ref_no": "031",
+            "date": "2020-06-03",
+            "due_date": "2021-06-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 480.71,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 52.26,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "96C6-1181227003",
+            "ref_no": "",
+            "date": "2020-06-07",
+            "due_date": "2021-06-17",
+            "vend_name": "Zeng Building Supplies",
+            "vend_list_id": "800000BD-1181226959",
+            "total_amt": 11807.8,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "complete Interior door",
+                    "amount": 0.0,
+                    "qty": 10.0,
+                    "gl_code": "Interior Door kit"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 11807.8,
+                    "qty": 20.0,
+                    "gl_code": "Wood Door:Exterior"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F9C-1071507206",
+            "ref_no": "",
+            "date": "2020-06-13",
+            "due_date": "2021-07-13",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 1214.89,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "Restock hardware supplies",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Restock hardware supplies",
+                    "amount": 1214.89,
+                    "gl_code": "Tools and Machinery"
+                }
+            ]
+        },
+        {
+            "txn_id": "3F36-1071505009",
+            "ref_no": "",
+            "date": "2020-06-15",
+            "due_date": "2021-07-15",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 1109.15,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 1109.15,
+                    "gl_code": "Job Expenses:Job Materials"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C3E-1197712385",
+            "ref_no": "",
+            "date": "2020-06-16",
+            "due_date": "2021-07-16",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 4050.0,
+                    "gl_code": "Pre-paid Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "376F-1071506687",
+            "ref_no": "6/03",
+            "date": "2020-06-20",
+            "due_date": "2021-07-20",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 76.55,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "415-555-9876-8053",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Local Access & Service",
+                    "amount": 26.0,
+                    "gl_code": "Utilities:Telephone"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "Long Distance",
+                    "amount": 50.55,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "374E-1071505871",
+            "ref_no": "6/03",
+            "date": "2020-06-23",
+            "due_date": "2021-07-08",
+            "vend_name": "Cal Gas & Electric",
+            "vend_list_id": "2D0000-933272659",
+            "total_amt": 112.75,
+            "balance": 122.68,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Acct #560-82645-99C",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 112.75,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "396D-1071528167",
+            "ref_no": "03-12345",
+            "date": "2020-06-23",
+            "due_date": "2021-08-22",
+            "vend_name": "Holly Heating and Electric",
+            "vend_list_id": "750000-1071527895",
+            "total_amt": 145.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 60",
+            "memo": "Install Duct work",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "Install Duct work",
+                    "amount": 145.0,
+                    "gl_code": "Job Expenses:Subcontractors"
+                }
+            ]
+        },
+        {
+            "txn_id": "3960-1071527473",
+            "ref_no": "03-12345",
+            "date": "2020-06-26",
+            "due_date": "2021-07-26",
+            "vend_name": "Middlefield Drywall",
+            "vend_list_id": "20000-933272656",
+            "total_amt": 200.0,
+            "balance": 1200.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 200.0,
+                    "qty": 0.0,
+                    "gl_code": "Subs:Drywall"
+                }
+            ]
+        },
+        {
+            "txn_id": "6C3F-1197695656",
+            "ref_no": "",
+            "date": "2020-06-30",
+            "due_date": "2021-07-15",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 1000.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Labor for Baker Family Room Job",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install carpeting",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Carpet"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 625.0,
+                    "qty": 25.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "38F2-1071514729",
+            "ref_no": "032",
+            "date": "2020-07-03",
+            "due_date": "2021-07-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 483.47,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 49.5,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3691-1071520776",
+            "ref_no": "3847498",
+            "date": "2018-12-02",
+            "due_date": "2020-01-01",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 13695.0,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Light pine kitchen cabinet wall unit \n#CLD- 1235-p",
+                    "amount": 7500.0,
+                    "qty": 5.0,
+                    "gl_code": "Cabinets:Light Pine"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Doorknobs Part # DK 3704",
+                    "amount": 2700.0,
+                    "qty": 100.0,
+                    "gl_code": "Hardware:Doorknobs Std"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Locking interior doorknobs  Part # DK415",
+                    "amount": 3495.0,
+                    "qty": 100.0,
+                    "gl_code": "Hardware:Lk Doorknobs"
+                }
+            ]
+        },
+        {
+            "txn_id": "5CAB-1197713763",
+            "ref_no": "8374892",
+            "date": "2018-12-15",
+            "due_date": "2020-01-14",
+            "vend_name": "C.U. Electric",
+            "vend_list_id": "30000-933272656",
+            "total_amt": 532.0,
+            "balance": 750.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 532.0,
+                    "gl_code": "Utilities:Gas and Electric"
+                }
+            ]
+        },
+        {
+            "txn_id": "5C83-1197713503",
+            "ref_no": "930357",
+            "date": "2018-12-20",
+            "due_date": "2020-01-19",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "total_amt": 5064.0,
+            "balance": 4479.2,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Cabinet Pulls",
+                    "amount": 900.0,
+                    "qty": 300.0,
+                    "gl_code": "Cabinets:Cabinet Pulls"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Light pine kitchen cabinet wall unit \n#CLD- 1235-p",
+                    "amount": 1500.0,
+                    "qty": 1.0,
+                    "gl_code": "Cabinets:Light Pine"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "standard interior brass hinge",
+                    "amount": 750.0,
+                    "qty": 250.0,
+                    "gl_code": "Hardware:Brass hinges"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Doorknobs Part # DK 3704",
+                    "amount": 540.0,
+                    "qty": 20.0,
+                    "gl_code": "Hardware:Doorknobs Std"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Locking interior doorknobs  Part # DK415",
+                    "amount": 699.0,
+                    "qty": 20.0,
+                    "gl_code": "Hardware:Lk Doorknobs"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 315.0,
+                    "qty": 3.0,
+                    "gl_code": "Wood Door:Exterior"
+                },
+                {
+                    "line_no": 7,
+                    "line_type": "item",
+                    "description": "Interior door - P-187055T",
+                    "amount": 360.0,
+                    "qty": 6.0,
+                    "gl_code": "Wood Door:Interior"
+                }
+            ]
+        },
+        {
+            "txn_id": "5CAE-1197713803",
+            "ref_no": "37498",
+            "date": "2018-12-23",
+            "due_date": "2020-01-22",
+            "vend_name": "Cal Telephone",
+            "vend_list_id": "2E0000-933272659",
+            "total_amt": 623.0,
+            "balance": 91.94,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 623.0,
+                    "gl_code": "Utilities:Telephone"
+                }
+            ]
+        },
+        {
+            "txn_id": "5CB1-1197713940",
+            "ref_no": "908472",
+            "date": "2018-12-28",
+            "due_date": "2020-01-27",
+            "vend_name": "Bayshore Water",
+            "vend_list_id": "2C0000-933272658",
+            "total_amt": 205.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 205.0,
+                    "gl_code": "Utilities:Water"
+                }
+            ]
+        },
+        {
+            "txn_id": "69F1-1197780158",
+            "ref_no": "380482",
+            "date": "2019-01-01",
+            "due_date": "2020-03-02",
+            "vend_name": "Custom Kitchens of Bayshore",
+            "vend_list_id": "7B0000-1071524812",
+            "total_amt": 435.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 60",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "standard interior door frame",
+                    "amount": 120.0,
+                    "qty": 10.0,
+                    "gl_code": "Door Frame"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Exterior door - #P-10981",
+                    "amount": 315.0,
+                    "qty": 3.0,
+                    "gl_code": "Wood Door:Exterior"
+                }
+            ]
+        },
+        {
+            "txn_id": "38AA-1071513625",
+            "ref_no": "014",
+            "date": "2019-01-03",
+            "due_date": "2020-01-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 436.07,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 96.9,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E42-1071498278",
+            "ref_no": "Q1/02",
+            "date": "2019-01-10",
+            "due_date": "2020-01-25",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "69D9-1197779895",
+            "ref_no": "382940",
+            "date": "2019-01-31",
+            "due_date": "2020-02-15",
+            "vend_name": "Vu Contracting",
+            "vend_list_id": "800000B4-1197779815",
+            "total_amt": 2050.0,
+            "balance": 1250.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "For Vetter Basement Remodel",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "description": "Install carpeting",
+                    "amount": 175.0,
+                    "qty": 7.0,
+                    "gl_code": "Subs:Carpet"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "description": "Install drywall",
+                    "amount": 625.0,
+                    "qty": 25.0,
+                    "gl_code": "Subs:Drywall"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "description": "Heating & Air Conditioning Duct Work",
+                    "amount": 375.0,
+                    "qty": 15.0,
+                    "gl_code": "Subs:Duct Work"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "description": "Electrical work",
+                    "amount": 250.0,
+                    "qty": 10.0,
+                    "gl_code": "Subs:Electrical"
+                },
+                {
+                    "line_no": 5,
+                    "line_type": "item",
+                    "description": "Install insulation",
+                    "amount": 125.0,
+                    "qty": 5.0,
+                    "gl_code": "Subs:Insulating"
+                },
+                {
+                    "line_no": 6,
+                    "line_type": "item",
+                    "description": "Painting",
+                    "amount": 500.0,
+                    "qty": 20.0,
+                    "gl_code": "Subs:Painting"
+                }
+            ]
+        },
+        {
+            "txn_id": "38AE-1071513939",
+            "ref_no": "015",
+            "date": "2019-02-03",
+            "due_date": "2020-02-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 438.57,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 94.4,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "40E6-1071515353",
+            "ref_no": "",
+            "date": "2019-03-01",
+            "due_date": "2020-03-31",
+            "vend_name": "Kershaw Computer Services",
+            "vend_list_id": "350000-933272659",
+            "total_amt": 714.0,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 714.0,
+                    "gl_code": "Repairs:Computer Repairs"
+                }
+            ]
+        },
+        {
+            "txn_id": "38B2-1071513940",
+            "ref_no": "016",
+            "date": "2019-03-03",
+            "due_date": "2020-03-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 441.09,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 91.88,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "38B6-1071513940",
+            "ref_no": "017",
+            "date": "2019-04-03",
+            "due_date": "2020-04-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 443.63,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 89.34,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "3E45-1071498361",
+            "ref_no": "Q2/02",
+            "date": "2019-04-10",
+            "due_date": "2020-04-20",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 712.56,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "",
+            "memo": "Quarterly Premium - Auto",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 712.56,
+                    "gl_code": "Automobile:Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "38BA-1071513940",
+            "ref_no": "018",
+            "date": "2019-05-03",
+            "due_date": "2020-05-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 446.18,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 86.79,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "38BE-1071513940",
+            "ref_no": "019",
+            "date": "2019-06-03",
+            "due_date": "2020-06-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 448.75,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 84.22,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        },
+        {
+            "txn_id": "37DD-1071515211",
+            "ref_no": "",
+            "date": "2019-06-16",
+            "due_date": "2020-07-16",
+            "vend_name": "Sergeant Insurance",
+            "vend_list_id": "120000-933272657",
+            "total_amt": 4050.0,
+            "balance": 4050.0,
+            "is_paid": true,
+            "terms": "Net 30",
+            "memo": "Semi-Annual Premium",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 4050.0,
+                    "gl_code": "Pre-paid Insurance"
+                }
+            ]
+        },
+        {
+            "txn_id": "38C2-1071513940",
+            "ref_no": "020",
+            "date": "2019-07-03",
+            "due_date": "2020-07-18",
+            "vend_name": "East Bayshore Auto Mall",
+            "vend_list_id": "720000-1071512482",
+            "total_amt": 532.97,
+            "balance": 0.0,
+            "is_paid": true,
+            "terms": "Net 15",
+            "memo": "Monthly Truck Payment",
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 451.33,
+                    "gl_code": "Loan - Vehicles (Van)"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "expense",
+                    "description": "",
+                    "amount": 81.64,
+                    "gl_code": "Interest Expense:Loan Interest"
+                }
+            ]
+        }
+    ]
+}

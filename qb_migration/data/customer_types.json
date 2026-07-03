@@ -1,0 +1,16 @@
+{
+    "customer_types": [
+        {
+            "list_id": "10000-933272658",
+            "name": "Commercial",
+            "parent": "",
+            "active": true
+        },
+        {
+            "list_id": "20000-933272658",
+            "name": "Residential",
+            "parent": "",
+            "active": true
+        }
+    ]
+}

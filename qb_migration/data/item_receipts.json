@@ -1,0 +1,82 @@
+{
+    "item_receipts": [
+        {
+            "txn_id": "E1D-933785668",
+            "ref_no": "",
+            "date": "2020-12-05",
+            "vend_name": "Patton Hardware Supplies",
+            "vend_list_id": "B0000-933272656",
+            "po_num": "",
+            "memo": "Received items (bill to follow)",
+            "sales_tax_code": "",
+            "is_tax_included": false,
+            "total_amt": 3459.2,
+            "lines": [
+                {
+                    "line_no": 1,
+                    "line_type": "item",
+                    "txn_line_id": "E1F-933785668",
+                    "item": "Cabinets:Cabinet Pulls",
+                    "item_list_id": "100000-933272656",
+                    "description": "Cabinet Pulls",
+                    "qty": 50.0,
+                    "unitms": "",
+                    "amount": 87.5,
+                    "class_name": "New Construction",
+                    "class_list_id": "10000-933272658",
+                    "tax_code": "",
+                    "sales_rep": "",
+                    "raw_xml": "<ItemLineRet>\n<TxnLineID>E1F-933785668</TxnLineID>\n<ItemRef>\n<ListID>100000-933272656</ListID>\n<FullName>Cabinets:Cabinet Pulls</FullName>\n</ItemRef>\n<Desc>Cabinet Pulls</Desc>\n<Quantity>50</Quantity>\n<Cost>1.75</Cost>\n<Amount>87.50</Amount>\n<CustomerRef>\n<ListID>7D0000-1071526869</ListID>\n<FullName>Keenan, Bridget:Storage Shed</FullName>\n</CustomerRef>\n<ClassRef>\n<ListID>10000-933272658</ListID>\n<FullName>New Construction</FullName>\n</ClassRef>\n<BillableStatus>NotBillable</BillableStatus>\n</ItemLineRet>"
+                },
+                {
+                    "line_no": 2,
+                    "line_type": "item",
+                    "txn_line_id": "E20-933785668",
+                    "item": "Cabinets:Light Pine",
+                    "item_list_id": "110000-933272656",
+                    "description": "Light pine kitchen cabinet wall unit \n#CLD- 1235-p",
+                    "qty": 2.0,
+                    "unitms": "",
+                    "amount": 3000.0,
+                    "class_name": "New Construction",
+                    "class_list_id": "10000-933272658",
+                    "tax_code": "",
+                    "sales_rep": "",
+                    "raw_xml": "<ItemLineRet>\n<TxnLineID>E20-933785668</TxnLineID>\n<ItemRef>\n<ListID>110000-933272656</ListID>\n<FullName>Cabinets:Light Pine</FullName>\n</ItemRef>\n<Desc>Light pine kitchen cabinet wall unit \n#CLD- 1235-p</Desc>\n<Quantity>2</Quantity>\n<Cost>1500.00</Cost>\n<Amount>3000.00</Amount>\n<CustomerRef>\n<ListID>7D0000-1071526869</ListID>\n<FullName>Keenan, Bridget:Storage Shed</FullName>\n</CustomerRef>\n<ClassRef>\n<ListID>10000-933272658</ListID>\n<FullName>New Construction</FullName>\n</ClassRef>\n<BillableStatus>NotBillable</BillableStatus>\n</ItemLineRet>"
+                },
+                {
+                    "line_no": 3,
+                    "line_type": "item",
+                    "txn_line_id": "E21-933785668",
+                    "item": "Hardware:Doorknobs Std",
+                    "item_list_id": "130000-933272656",
+                    "description": "Doorknobs Part # DK 3704",
+                    "qty": 6.0,
+                    "unitms": "",
+                    "amount": 162.0,
+                    "class_name": "New Construction",
+                    "class_list_id": "10000-933272658",
+                    "tax_code": "",
+                    "sales_rep": "",
+                    "raw_xml": "<ItemLineRet>\n<TxnLineID>E21-933785668</TxnLineID>\n<ItemRef>\n<ListID>130000-933272656</ListID>\n<FullName>Hardware:Doorknobs Std</FullName>\n</ItemRef>\n<Desc>Doorknobs Part # DK 3704</Desc>\n<Quantity>6</Quantity>\n<Cost>27.00</Cost>\n<Amount>162.00</Amount>\n<CustomerRef>\n<ListID>7D0000-1071526869</ListID>\n<FullName>Keenan, Bridget:Storage Shed</FullName>\n</CustomerRef>\n<ClassRef>\n<ListID>10000-933272658</ListID>\n<FullName>New Construction</FullName>\n</ClassRef>\n<BillableStatus>NotBillable</BillableStatus>\n</ItemLineRet>"
+                },
+                {
+                    "line_no": 4,
+                    "line_type": "item",
+                    "txn_line_id": "E22-933785668",
+                    "item": "Hardware:Lk Doorknobs",
+                    "item_list_id": "140000-933272656",
+                    "description": "Locking interior doorknobs  Part # DK415",
+                    "qty": 6.0,
+                    "unitms": "",
+                    "amount": 209.7,
+                    "class_name": "New Construction",
+                    "class_list_id": "10000-933272658",
+                    "tax_code": "",
+                    "sales_rep": "",
+                    "raw_xml": "<ItemLineRet>\n<TxnLineID>E22-933785668</TxnLineID>\n<ItemRef>\n<ListID>140000-933272656</ListID>\n<FullName>Hardware:Lk Doorknobs</FullName>\n</ItemRef>\n<Desc>Locking interior doorknobs  Part # DK415</Desc>\n<Quantity>6</Quantity>\n<Cost>34.95</Cost>\n<Amount>209.70</Amount>\n<CustomerRef>\n<ListID>7D0000-1071526869</ListID>\n<FullName>Keenan, Bridget:Storage Shed</FullName>\n</CustomerRef>\n<ClassRef>\n<ListID>10000-933272658</ListID>\n<FullName>New Construction</FullName>\n</ClassRef>\n<BillableStatus>NotBillable</BillableStatus>\n</ItemLineRet>"
+                }
+            ]
+        }
+    ]
+}

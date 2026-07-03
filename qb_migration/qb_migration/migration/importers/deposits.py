@@ -149,6 +149,71 @@ class DepositImporter(JournalEntryImporter):
 
         return payment_entries
 
+    def _build_cash_back_journal_entry(self, record):
+        cash_back = record.get("cash_back") or {}
+        amount = flt(cash_back.get("amount", 0))
+        if amount <= 0:
+            return None
+
+        company = frappe.defaults.get_global_default("company")
+        bank_account = self._resolve_account(record.get("deposit_to_acct"))
+        if not bank_account:
+            raise ValueError(
+                f"Bank account not found for deposit_to_acct={record.get('deposit_to_acct')}"
+            )
+
+        petty_cash_account = self._resolve_account(cash_back.get("account"))
+        if not petty_cash_account:
+            raise ValueError(
+                f"Petty cash account not found for cash_back={cash_back.get('account')}"
+            )
+
+        posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
+        currency = record.get("currency")
+        exchange_rate = record.get("exchange_rate")
+        base_source_id = record.get("txn_id") or record.get("txn_number") or ""
+        source_id = f"{base_source_id}:cashback" if base_source_id else "cashback"
+
+        doc = {
+            "doctype": "Journal Entry",
+            "voucher_type": "Bank Entry",
+            "company": company,
+            "posting_date": posting_date,
+            "cheque_no": f"{record.get('txn_number') or record.get('txn_id') or ''}-CB",
+            "reference_no": f"{record.get('txn_number') or record.get('txn_id') or ''}-CB",
+            "reference_date": posting_date,
+            "cheque_date": posting_date,
+            "user_remark": f"Cash back for {record.get('memo') or 'deposit'}",
+            "accounts": [
+                {
+                    "account": petty_cash_account,
+                    "debit_in_account_currency": amount,
+                    "credit_in_account_currency": 0,
+                    "debit": amount,
+                    "credit": 0,
+                    "exchange_rate": 1,
+                    "user_remark": cash_back.get("memo") or "Cash back",
+                },
+                {
+                    "account": bank_account,
+                    "debit_in_account_currency": 0,
+                    "credit_in_account_currency": amount,
+                    "debit": 0,
+                    "credit": amount,
+                    "exchange_rate": 1,
+                    "user_remark": cash_back.get("memo") or "Cash back",
+                },
+            ],
+            "_source_id": source_id,
+        }
+
+        if currency and exchange_rate:
+            doc["multi_currency"] = 1
+            doc["currency"] = currency
+            doc["exchange_rate"] = exchange_rate
+
+        return doc
+
     def _build_deposit_journal_entry(self, record):
         deposit_lines = [
             line for line in (record.get("lines") or [])
@@ -240,13 +305,22 @@ class DepositImporter(JournalEntryImporter):
         return doc
 
     def map_record(self, record):
+        docs = []
+
         payment_entries = self._build_payment_entries(record)
         if payment_entries:
-            return payment_entries
+            docs.extend(payment_entries)
 
         deposit_journal = self._build_deposit_journal_entry(record)
         if deposit_journal:
-            return deposit_journal
+            docs.append(deposit_journal)
+
+        cash_back_journal = self._build_cash_back_journal_entry(record)
+        if cash_back_journal:
+            docs.append(cash_back_journal)
+
+        if docs:
+            return docs
 
         if flt(record.get("deposit_total", 0)) <= 0:
             return {"_skip": True, "_skip_reason": "ZERO_AMOUNT", "ref_no": record.get("txn_number")}

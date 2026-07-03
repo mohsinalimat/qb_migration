@@ -1,0 +1,52 @@
+{
+    "employees": [
+        {
+            "list_id": "370000-933272659",
+            "name": "Dan T. Miller",
+            "first_name": "Dan",
+            "last_name": "Miller",
+            "phone": "555-2601",
+            "fax": "",
+            "email": "",
+            "addr1": "195 Spruce Ave, #202",
+            "addr2": "",
+            "city": "Bayshore",
+            "state": "CA",
+            "zip": "94326",
+            "notes": "",
+            "active": true
+        },
+        {
+            "list_id": "380000-933272659",
+            "name": "Elizabeth N. Mason",
+            "first_name": "Elizabeth",
+            "last_name": "Mason",
+            "phone": "457-8965",
+            "fax": "",
+            "email": "",
+            "addr1": "29 Cedar Street",
+            "addr2": "",
+            "city": "Middlefield",
+            "state": "CA",
+            "zip": "93210",
+            "notes": "",
+            "active": true
+        },
+        {
+            "list_id": "390000-933272659",
+            "name": "Gregg O. Schneider",
+            "first_name": "Gregg",
+            "last_name": "Schneider",
+            "phone": "555-3286",
+            "fax": "",
+            "email": "",
+            "addr1": "331 Poplar Rd",
+            "addr2": "",
+            "city": "Bayshore",
+            "state": "CA",
+            "zip": "94326",
+            "notes": "",
+            "active": true
+        }
+    ]
+}
