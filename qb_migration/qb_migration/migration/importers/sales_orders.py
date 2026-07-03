@@ -164,10 +164,10 @@ class SalesOrderImporter(BaseImporter):
         return new_person.name
 
     def find_existing_target(self, doc_data):
-        name = doc_data.get("name")
-        if not name:
-            return None
-        return frappe.db.get_value("Sales Order", {"name": name}, "name")
+        if doc_data.get("name"):
+            return frappe.db.get_value("Sales Order", {"name": doc_data["name"]}, "name")
+
+        return None
 
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
@@ -182,6 +182,7 @@ class SalesOrderImporter(BaseImporter):
                 "rate": line.get("price", 0),
                 "amount": line.get("ext_price", 0),
                 "description": line.get("description", ""),
+                "delivered_qty": line.get("qty_invoiced", 0),
             })
 
         sales_team = []
@@ -202,13 +203,13 @@ class SalesOrderImporter(BaseImporter):
             "shipping_rule": record.get("ship_via") or "",
             "company": company,
             "grand_total": record.get("total_amt", 0),
-            "status": "Completed" if record.get("is_fully_inv") else "Draft",
+            "status": "Closed" if record.get("is_fully_inv") else "Draft",
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
         }
 
-        if record.get("ref_no"):
-            doc["name"] = str(record.get("ref_no"))
+        if record.get("txn_id"):
+            doc["name"] = str(record.get("txn_id"))
 
         if sales_team:
             doc["sales_team"] = sales_team

@@ -129,7 +129,7 @@ class EstimateImporter(BaseImporter):
             "item_name": qb_item_name,
             "description": qb_item_name,
             "item_group": self.get_or_create_item_group(),
-            "stock_uom": "Nos",
+            "stock_uom": "Unit",
             "is_stock_item": 0,
             "is_purchase_item": 1,
             "is_sales_item": 1,
@@ -138,6 +138,117 @@ class EstimateImporter(BaseImporter):
         new_item.insert()
         frappe.db.commit()
         return new_item.item_code, new_item.item_name
+
+    def _resolve_cost_center(self, cc_name):
+        if not cc_name:
+            return None
+
+        company = frappe.defaults.get_global_default("company")
+        leaf = cc_name.split(":")[-1].strip()
+        existing = frappe.db.get_value("Cost Center", {"cost_center_name": leaf, "company": company}, "name")
+        if existing:
+            return existing
+
+        result = frappe.db.sql(
+            "select name from `tabCost Center` where lower(cost_center_name)=lower(%s) and company=%s limit 1",
+            (leaf, company),
+        )
+        return result[0][0] if result else None
+
+    def _resolve_item_tax_template(self, tax_code):
+        if not tax_code:
+            return None
+
+        existing = frappe.db.get_value("Item Tax Template", {"title": tax_code}, "name")
+        if existing:
+            return existing
+
+        result = frappe.db.sql(
+            "select name from `tabItem Tax Template` where lower(title)=lower(%s) limit 1",
+            tax_code,
+        )
+        return result[0][0] if result else None
+
+    def _ensure_uom(self, uom_name):
+        if not uom_name:
+            uom_name = "Nos"
+
+        existing = frappe.db.get_value("UOM", {"uom_name": uom_name}, ["name", "must_be_whole_number"], as_dict=True)
+        if existing:
+            if uom_name in ("Unit", "Piece") and existing.must_be_whole_number:
+                frappe.db.set_value("UOM", existing.name, "must_be_whole_number", 0)
+            return existing.name
+
+        uom = frappe.get_doc({
+            "doctype": "UOM",
+            "uom_name": uom_name,
+            "must_be_whole_number": 0 if uom_name.lower() != "nos" else 1,
+            "enabled": 1,
+        })
+        uom.flags.ignore_permissions = True
+        uom.insert(ignore_permissions=True)
+        frappe.db.commit()
+        return uom.name
+
+    def resolve_uom(self, qty, fallback_uom="Nos"):
+        try:
+            qty_value = float(qty)
+        except (TypeError, ValueError):
+            return fallback_uom or "Nos"
+
+        if not qty_value.is_integer():
+            existing = self._ensure_uom("Unit")
+            if existing:
+                return existing
+
+            existing = self._ensure_uom("Piece")
+            if existing:
+                return existing
+
+            return fallback_uom or "Nos"
+
+        return fallback_uom or "Nos"
+
+    def ensure_item_supports_uom(self, item_code, uom_name):
+        if not item_code or uom_name not in ("Unit", "Piece"):
+            return
+
+        try:
+            item = frappe.get_doc("Item", item_code)
+            if item.stock_uom in ("Unit", "Piece"):
+                return
+
+            if item.stock_uom != "Unit":
+                item.stock_uom = "Unit"
+                item.flags.ignore_permissions = True
+                item.save()
+                frappe.db.commit()
+        except frappe.DoesNotExistError:
+            pass
+        except Exception as e:
+            print(f"  WARN: Could not update item {item_code} for UOM support: {e}")
+
+    def _should_skip_line(self, line):
+        item_name = (line.get("item") or line.get("item_name") or "").strip()
+        description = (line.get("description") or "").strip()
+
+        if not item_name and not description:
+            return True
+
+        if not item_name:
+            normalized = description.upper()
+            if normalized in {"SUBTOTAL", "LABOR", "MATERIALS"}:
+                return True
+            if "SEE ATTACHED" in normalized:
+                return True
+            if "CHANGE ORDER" in normalized:
+                return True
+            if normalized.startswith("NET CHANGE"):
+                return True
+            if normalized.startswith("TOTAL") or normalized.startswith("SUBTOTAL"):
+                return True
+
+        return False
 
     def resolve_sales_partner(self, salesman):
         if not salesman:
@@ -175,6 +286,24 @@ class EstimateImporter(BaseImporter):
 
         return None
 
+    def resolve_taxes_template(self, tax_item):
+        if not tax_item:
+            return None
+
+        template = frappe.db.get_value(
+            "Sales Taxes and Charges Template",
+            {"title": tax_item},
+            "name",
+        )
+        if template:
+            return template
+
+        result = frappe.db.sql(
+            "select name from `tabSales Taxes and Charges Template` where lower(title)=lower(%s) limit 1",
+            tax_item,
+        )
+        return result[0][0] if result else None
+
     def post_insert(self, doc, source_record):
         if getattr(doc, "doctype", None) == "Quotation" and doc.docstatus == 0:
             doc.submit()
@@ -186,35 +315,60 @@ class EstimateImporter(BaseImporter):
 
         items = []
         for idx, line in enumerate(record.get("lines", []), 1):
-            item_name = line.get("item") or line.get("item_name") or ""
-            if not item_name and not line.get("description"):
+            if self._should_skip_line(line):
                 continue
 
+            item_name = line.get("item") or line.get("item_name") or ""
             if item_name:
                 item_code, item_name_value = self.resolve_item(item_name)
             else:
                 item_code, item_name_value = None, None
 
-            qty = line.get("qty") or line.get("quantity") or 1
+            qty = line.get("qty") if line.get("qty") is not None else line.get("quantity", 0)
             try:
-                qty = int(float(qty))
+                qty = float(qty)
             except (TypeError, ValueError):
-                qty = 1
+                qty = 0
+
+            amount = abs(float(line.get("ext_price") or line.get("amount") or 0))
+            if qty <= 0:
+                if amount > 0:
+                    qty = 1
+                else:
+                    continue
 
             item_name_text = item_name_value or line.get("description") or item_name or ""
             if len(item_name_text) > 140:
                 item_name_text = item_name_text[:137] + "..."
 
-            items.append({
+            uom_value = self.resolve_uom(qty, line.get("unitms") or "Nos")
+            if item_code and uom_value in ("Unit", "Piece"):
+                try:
+                    if not float(qty).is_integer():
+                        self.ensure_item_supports_uom(item_code, uom_value)
+                except (TypeError, ValueError):
+                    pass
+
+            item_row = {
                 "idx": idx,
                 "item_code": item_code,
                 "item_name": item_name_text,
                 "qty": qty,
-                "uom": line.get("unitms") or "Nos",
-                "rate": line.get("price") or line.get("rate") or 0,
-                "amount": line.get("ext_price") or line.get("amount") or 0,
+                "uom": uom_value,
+                "rate": abs(float(line.get("price") or line.get("rate") or 0)),
+                "amount": amount,
                 "description": line.get("description") or "",
-            })
+            }
+
+            cost_center = self._resolve_cost_center(line.get("class_name"))
+            if cost_center:
+                item_row["cost_center"] = cost_center
+
+            tax_template = self._resolve_item_tax_template(line.get("tax_code"))
+            if tax_template:
+                item_row["item_tax_template"] = tax_template
+
+            items.append(item_row)
 
         if not items:
             raise ValueError("No valid item lines found for estimate")
@@ -229,7 +383,23 @@ class EstimateImporter(BaseImporter):
             "po_no": record.get("ref_no") or record.get("po_num") or "",
             "customer_note": record.get("memo") or "",
             "items": items,
+            "total": abs(float(record.get("subtotal") or 0)),
+            "total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
+            "grand_total": abs(float(record.get("total_amt") or 0)),
+            "base_total": abs(float(record.get("subtotal") or 0)),
+            "base_total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
+            "base_grand_total": abs(float(record.get("total_amt") or 0)),
         }
+
+        if record.get("txn_id"):
+            doc["name"] = str(record.get("txn_id"))
+
+        tax_template = self.resolve_taxes_template(record.get("tax_item"))
+        if tax_template:
+            doc["taxes_and_charges"] = tax_template
+
+        if record.get("sales_tax_pct") not in (None, ""):
+            doc["taxes_and_charges_rate"] = abs(float(record.get("sales_tax_pct") or 0))
 
         sales_partner = self.resolve_sales_partner(record.get("salesman"))
         if sales_partner:
