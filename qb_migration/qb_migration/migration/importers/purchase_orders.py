@@ -31,13 +31,13 @@ class PurchaseOrderImporter(BaseImporter):
     def resolve_item(self, qb_item_name):
         default_item_code = "_General Expenses"
         if qb_item_name:
-            name = frappe.db.get_value("Item", {"item_code": qb_item_name}, "name")
-            if name:
-                return name
+            exists = frappe.db.get_value("Item", {"item_code": qb_item_name}, "name")
+            if exists:
+                return qb_item_name
 
         existing = frappe.db.get_value("Item", {"item_code": default_item_code}, "name")
         if existing:
-            return existing
+            return default_item_code
 
         item = frappe.get_doc({
             "doctype": "Item",
@@ -63,7 +63,7 @@ class PurchaseOrderImporter(BaseImporter):
         items = []
         for idx, line in enumerate(record.get("lines", []), 1):
             qty = line.get("qty", 1) or 1
-            items.append({
+            items.append({ 
                 "idx": idx,
                 "item_code": self.resolve_item(line.get("item", "")),
                 "qty": qty,
@@ -79,6 +79,7 @@ class PurchaseOrderImporter(BaseImporter):
 
         return {
             "doctype": "Purchase Order",
+            "name": record.get("txn_id"),
             "supplier": supplier,
             "transaction_date": self.normalize_date(record.get("date")),
             "schedule_date": self.normalize_date(record.get("expected_date") or record.get("date")),
@@ -87,4 +88,5 @@ class PurchaseOrderImporter(BaseImporter):
             "status": status,
             "remarks": record.get("memo", ""),
             "items": items,
+            "grand_total": record.get("total_amt", 0),
         }
