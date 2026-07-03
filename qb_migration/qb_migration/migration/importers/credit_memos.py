@@ -80,6 +80,27 @@ class CreditMemoImporter(SalesInvoiceImporter):
         except Exception:
             return None
 
+    def resolve_return_against(self, original_invoice_no):
+        if not original_invoice_no:
+            return None
+
+        invoice_name = frappe.db.get_value("Sales Invoice", {"name": original_invoice_no}, "name")
+        if invoice_name:
+            return invoice_name
+
+        result = frappe.db.sql(
+            "select name from `tabSales Invoice` where lower(ifnull(invoice_number, '')) = lower(%s) limit 1",
+            original_invoice_no,
+        )
+        if result:
+            return result[0][0]
+
+        result = frappe.db.sql(
+            "select name from `tabSales Invoice` where lower(ifnull(customer_reference, '')) = lower(%s) limit 1",
+            original_invoice_no,
+        )
+        return result[0][0] if result else None
+
     def run(self, dry_run: bool = False):
         records = self.load_data()
         total = len(records)
@@ -226,5 +247,14 @@ class CreditMemoImporter(SalesInvoiceImporter):
         tax_category = self._resolve_tax_category(record.get("tax_code"))
         if tax_category:
             doc["tax_category"] = tax_category
+
+        return_against = self.resolve_return_against(
+            record.get("return_against")
+            or record.get("original_invoice_no")
+            or record.get("orig_invoice_no")
+            or record.get("orig_ref_no")
+        )
+        if return_against:
+            doc["return_against"] = return_against
 
         return doc
