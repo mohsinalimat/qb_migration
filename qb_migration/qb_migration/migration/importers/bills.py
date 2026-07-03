@@ -55,6 +55,20 @@ class PurchaseInvoiceImporter(BaseImporter):
         frappe.db.commit()
         return default_item_code
 
+    def resolve_payment_terms_template(self, terms):
+        if not terms:
+            return None
+
+        template = frappe.db.get_value("Payment Terms Template", {"name": terms}, "name")
+        if template:
+            return template
+
+        result = frappe.db.sql(
+            "select name from `tabPayment Terms Template` where lower(name)=lower(%s) limit 1",
+            terms,
+        )
+        return result[0][0] if result else None
+
     def _resolve_account(self, qb_account_name):
         if not qb_account_name:
             return None
@@ -122,30 +136,66 @@ class PurchaseInvoiceImporter(BaseImporter):
         company = frappe.defaults.get_global_default("company")
         supplier_name = record.get("vendor") or record.get("vend_name")
         supplier = self.resolve_supplier(supplier_name)
-        currency = record.get("currency") or "PKR" # Fallback to company currency if missing
+        currency = record.get("currency") or "PKR"  # Fallback to company currency if missing
 
         items = []
         for line in record.get("lines", []):
             qty = line.get("qty", 1) or 1
-            items.append({
+            try:
+                qty = float(qty)
+                qty = int(qty) if qty.is_integer() else qty
+            except (TypeError, ValueError):
+                qty = 1
+
+            rate = line.get("rate")
+            if rate in (None, ""):
+                try:
+                    rate = float(line.get("amount", 0)) / qty if qty else 0
+                except (TypeError, ValueError, ZeroDivisionError):
+                    rate = 0
+
+            item_idx = line.get("line_no")
+            try:
+                item_idx = int(item_idx)
+            except (TypeError, ValueError):
+                item_idx = None
+
+            item_data = {
                 "item_code": self.resolve_item(line.get("item", "")),
                 "qty": qty,
-                "rate": line.get("rate", line.get("amount", 0)),
+                "rate": rate,
                 "amount": line.get("amount", 0),
                 "expense_account": self._resolve_account(line.get("gl_code")),
                 "description": line.get("description", ""),
-            })
+            }
 
-        return {
+            if item_idx is not None:
+                item_data["idx"] = item_idx
+
+            tax_template = line.get("tax_code")
+            if tax_template:
+                item_data["item_tax_template"] = tax_template
+
+            items.append(item_data)
+
+        doc = {
             "doctype": "Purchase Invoice",
             "supplier": supplier,
-            "posting_date": self.normalize_date(record.get("txn_date")),
-            "due_date": self.normalize_date(record.get("due_date") or record.get("txn_date")),
+            "posting_date": self.normalize_date(record.get("date") or record.get("txn_date")),
+            "set_posting_time": 1,
+            "due_date": self.normalize_date(record.get("due_date") or record.get("date") or record.get("txn_date")),
             "bill_no": record.get("ref_no", ""),
             "bill_date": self.normalize_date(record.get("date") or record.get("txn_date")),
             "company": company,
             "currency": currency,
             "credit_to": self.resolve_payable_account(supplier, currency),
             "items": items,
+            "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "is_return": record.get("is_credit", False),
         }
+
+        payment_terms_template = self.resolve_payment_terms_template(record.get("terms"))
+        if payment_terms_template:
+            doc["payment_terms_template"] = payment_terms_template
+
+        return doc
