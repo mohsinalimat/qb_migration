@@ -80,25 +80,40 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
         return self._ensure_uom("Unit")
 
-    def _resolve_mode_of_payment(self, mode):
-        if mode:
-            existing = frappe.db.get_value("Mode of Payment", {"mode_of_payment": mode}, "name")
-            if existing:
-                return existing
-
-        existing = frappe.db.get_value("Mode of Payment", {}, "name")
+    def _resolve_mode_of_payment(self, mode, account=None):
+        mode_name = (mode or "Cash").strip() or "Cash"
+        existing = frappe.db.get_value("Mode of Payment", {"mode_of_payment": mode_name}, "name")
         if existing:
             return existing
 
-        mode_name = mode or "Bank"
-        doc = frappe.get_doc({
+        existing = frappe.db.sql(
+            "select name from `tabMode of Payment` where enabled=1 limit 1",
+            as_dict=False,
+        )
+        if existing:
+            return existing[0][0]
+
+        account = account or self._resolve_cash_bank_account()
+        mop_type = "Cash"
+        if mode_name.lower() in ("check", "bank", "credit card", "cc", "debit card"):
+            mop_type = "Bank"
+        elif mode_name.lower() in ("phone", "online"):
+            mop_type = "Phone"
+
+        mop_doc = frappe.get_doc({
             "doctype": "Mode of Payment",
             "mode_of_payment": mode_name,
+            "type": mop_type,
+            "enabled": 1,
+            "accounts": [{
+                "company": frappe.defaults.get_global_default("company"),
+                "default_account": account,
+            }] if account else [],
         })
-        doc.flags.ignore_permissions = True
-        doc.insert()
+        mop_doc.flags.ignore_permissions = True
+        mop_doc.insert()
         frappe.db.commit()
-        return doc.name
+        return mop_doc.name
 
     def _resolve_receivable_account(self, company=None):
         company = company or frappe.defaults.get_global_default("company")
@@ -195,6 +210,32 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             doc.insert()
             frappe.db.commit()
             return doc.name
+        except Exception:
+            return None
+
+    def resolve_cost_center(self, class_name):
+        if not class_name:
+            return None
+
+        company = frappe.defaults.get_global_default("company")
+        existing = frappe.db.get_value(
+            "Cost Center",
+            {"cost_center_name": class_name, "company": company},
+            "name",
+        )
+        if existing:
+            return existing
+
+        try:
+            cost_center = frappe.get_doc({
+                "doctype": "Cost Center",
+                "cost_center_name": class_name,
+                "company": company,
+            })
+            cost_center.flags.ignore_permissions = True
+            cost_center.insert()
+            frappe.db.commit()
+            return cost_center.name
         except Exception:
             return None
 
@@ -321,6 +362,10 @@ class SalesReceiptImporter(SalesInvoiceImporter):
                 "income_account": self.resolve_income_account(),
             }
 
+            cost_center = self.resolve_cost_center(line.get("class_name"))
+            if cost_center:
+                item_row["cost_center"] = cost_center
+
             tax_template = self._resolve_item_tax_template(line.get("tax_code"))
             if tax_template:
                 item_row["item_tax_template"] = tax_template
@@ -329,6 +374,11 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
         if not items:
             raise ValueError("No valid item lines found for sales receipt")
+
+        total_amt = abs(float(record.get("total_amt") or 0))
+        payment_method = (record.get("payment_method") or "Cash").strip() or "Cash"
+        payment_account = self._resolve_cash_bank_account(record.get("deposit_to_acct"))
+        mode_of_payment = self._resolve_mode_of_payment(payment_method, account=payment_account)
 
         doc = {
             "doctype": "Sales Invoice",
@@ -341,18 +391,31 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
             "set_posting_time": 1,
-            "is_pos": 0,
+            "is_pos": 1,
+            "mode_of_payment": mode_of_payment,
+            "payments": [{
+                "mode_of_payment": mode_of_payment,
+                "amount": total_amt,
+            }],
             "total": abs(float(record.get("subtotal") or 0)),
             "total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
-            "grand_total": abs(float(record.get("total_amt") or 0)),
+            "grand_total": total_amt,
             "base_total": abs(float(record.get("subtotal") or 0)),
             "base_total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
-            "base_grand_total": abs(float(record.get("total_amt") or 0)),
+            "base_grand_total": total_amt,
         }
 
-        account = self._resolve_cash_bank_account(record.get("deposit_to_acct"))
+        account = payment_account
+        si_meta = frappe.get_meta("Sales Invoice")
         if account:
             doc["cash_bank_account"] = account
+            if si_meta.has_field("account_for_payment"):
+                doc["account_for_payment"] = account
+
+        if si_meta.has_field("paid_amount"):
+            doc["paid_amount"] = total_amt
+        if si_meta.has_field("outstanding_amount"):
+            doc["outstanding_amount"] = 0
 
         if record.get("tax_item"):
             template = self.resolve_taxes_template(record.get("tax_item"))
