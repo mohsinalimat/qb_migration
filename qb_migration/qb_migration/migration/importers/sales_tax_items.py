@@ -21,7 +21,7 @@ class SalesTaxItemsImporter(BaseImporter):
     def _resolve_account_head(self, record):
         company = frappe.defaults.get_global_default("company")
         candidates = []
-        for value in [record.get("tax_vendor"), record.get("name"), record.get("description")]:
+        for value in [record.get("name"), record.get("description")]:
             if value:
                 candidates.append(str(value).strip())
 
