@@ -79,6 +79,54 @@ class DepositImporter(JournalEntryImporter):
         frappe.db.commit()
         return doc.name
 
+    def _resolve_payment_reference(self, line, record):
+        return (
+            line.get("check_number")
+            or line.get("payment_txn_line_id")
+            or line.get("txn_id")
+            or line.get("txn_line_id")
+            or record.get("txn_number")
+            or ""
+        )
+
+    def _resolve_payment_type(self, party_type, line):
+        if party_type == "Supplier":
+            return "Pay"
+        return "Receive"
+
+    def _resolve_party_account(self, party_type, currency=None):
+        if party_type == "Supplier":
+            return self._resolve_payable_account(currency)
+        return self._resolve_receivable_account(currency)
+
+    def _resolve_payable_account(self, currency=None):
+        company = frappe.defaults.get_global_default("company")
+        filters = {
+            "account_type": "Payable",
+            "root_type": "Liability",
+            "company": company,
+            "is_group": 0,
+        }
+        if currency:
+            filters["account_currency"] = currency
+            account = frappe.db.get_value("Account", filters, "name")
+            if account:
+                return account
+            filters.pop("account_currency", None)
+
+        account = frappe.db.get_value("Account", filters, "name")
+        if account:
+            return account
+
+        query = "select name from `tabAccount` where account_type='Payable' and root_type='Liability' and company=%s and is_group=0"
+        params = [company]
+        if currency:
+            query += " and account_currency=%s"
+            params.append(currency)
+        query += " limit 1"
+        row = frappe.db.sql(query, tuple(params))
+        return row[0][0] if row else None
+
     def _is_payment_line(self, line):
         txn_type = (line.get("txn_type") or "").strip()
         if txn_type == "ReceivePayment":
@@ -91,6 +139,8 @@ class DepositImporter(JournalEntryImporter):
 
     def _build_payment_entries(self, record):
         company = frappe.defaults.get_global_default("company")
+        company_currency = frappe.db.get_value("Company", company, "default_currency")
+        currency, exchange_rate = self._get_currency_details(record, company_currency)
         bank_account = self._resolve_account(record.get("deposit_to_acct"))
         if not bank_account:
             raise ValueError(
@@ -106,10 +156,13 @@ class DepositImporter(JournalEntryImporter):
             if amount <= 0:
                 continue
 
-            party = self._resolve_customer(line.get("entity"))
+            party_type, party = self._resolve_party(line.get("entity"))
             if not party:
                 party = self._ensure_customer(line.get("entity"))
-            if not party:
+                if party:
+                    party_type = "Customer"
+
+            if not party and line.get("txn_type") != "Deposit":
                 payment_entries.append({
                     "_skip": True,
                     "_skip_reason": "CUSTOMER_NOT_FOUND",
@@ -118,34 +171,52 @@ class DepositImporter(JournalEntryImporter):
                 })
                 continue
 
-            currency = record.get("currency")
-            party_account = self._resolve_receivable_account(currency)
-            if not party_account:
-                party_account = self._resolve_receivable_account()
-            if not party_account:
-                raise ValueError("Could not resolve receivable account for deposit payment")
+            payment_type = self._resolve_payment_type(party_type, line)
+            party_account = self._resolve_party_account(party_type, currency) if party else None
+            if party and not party_account:
+                raise ValueError("Could not resolve party account for deposit payment")
+
+            line_account = self._resolve_account(line.get("account"))
+            paid_from = line_account or party_account
+            if not paid_from:
+                raise ValueError(
+                    f"Could not resolve paid_from account for line account={line.get('account')}"
+                )
 
             payment_method = line.get("payment_method") or record.get("payment_method") or "Bank"
             posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
-            reference_no = line.get("payment_txn_line_id") or line.get("txn_id") or line.get("txn_line_id") or record.get("txn_number") or ""
-
-            payment_entries.append({
+            reference_no = self._resolve_payment_reference(line, record)
+            payment_entry = {
                 "doctype": "Payment Entry",
-                "payment_type": "Receive",
+                "payment_type": payment_type,
                 "company": company,
                 "posting_date": posting_date,
                 "reference_no": reference_no,
                 "reference_date": posting_date,
-                "party_type": "Customer",
-                "party": party,
-                "party_account": party_account,
-                "paid_from": party_account,
+                "paid_from": paid_from,
                 "paid_to": bank_account,
                 "mode_of_payment": self._resolve_mode_of_payment(payment_method),
                 "paid_amount": amount,
                 "received_amount": amount,
+                "remarks": line.get("memo") or record.get("memo") or "",
                 "_source_id": line.get("txn_line_id") or line.get("txn_id") or reference_no,
-            })
+            }
+
+            if party and party_type:
+                payment_entry["party_type"] = party_type
+                payment_entry["party"] = party
+                if party_account:
+                    payment_entry["party_account"] = party_account
+
+            cost_center = self._resolve_cost_center(line.get("class_name"))
+            if cost_center:
+                payment_entry["cost_center"] = cost_center
+
+            if currency and currency != company_currency and exchange_rate:
+                payment_entry["currency"] = currency
+                payment_entry["exchange_rate"] = exchange_rate
+
+            payment_entries.append(payment_entry)
 
         return payment_entries
 
