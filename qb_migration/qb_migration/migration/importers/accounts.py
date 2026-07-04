@@ -33,6 +33,13 @@ QB_ACCOUNT_TYPE_MAP = {
 }
 
 # ====================================================================
+#  QB SPECIAL TYPE → (ERPNext account_type, root_type)
+# ====================================================================
+QB_SPECIAL_TYPE_MAP = {
+    "UndepositedFunds": ("Receivable", "Asset"),
+}
+
+# ====================================================================
 #  DEFAULT PARENT GROUP for each QB account type
 # ====================================================================
 DEFAULT_PARENT_GROUPS = {
@@ -482,6 +489,20 @@ class AccountImporter(BaseImporter):
 
         return False
 
+    def _resolve_account_mapping(self, record, fallback_qb_type=None):
+        if record is None:
+            qb_type = fallback_qb_type or "Expense"
+            return QB_ACCOUNT_TYPE_MAP.get(qb_type, ("Expense Account", "Expense"))
+
+        special_type = (record.get("special_type") or "").strip()
+        if special_type:
+            special_mapping = QB_SPECIAL_TYPE_MAP.get(special_type)
+            if special_mapping:
+                return special_mapping
+
+        qb_type = (record.get("account_type") or "").strip() or "Expense"
+        return QB_ACCOUNT_TYPE_MAP.get(qb_type, ("Expense Account", "Expense"))
+
     # -----------------------------------------------------------------
     #  Find existing target account
     # -----------------------------------------------------------------
@@ -498,10 +519,8 @@ class AccountImporter(BaseImporter):
     # -----------------------------------------------------------------
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
-        qb_type = record.get("account_type", "Expense")
-        acct_type, root_type = QB_ACCOUNT_TYPE_MAP.get(
-            qb_type, ("Expense Account", "Expense")
-        )
+        qb_type = (record.get("account_type") or "").strip() or "Expense"
+        acct_type, root_type = self._resolve_account_mapping(record, fallback_qb_type=qb_type)
 
         name = record.get("name", "").strip()
         qb_parent = record.get("parent", "").strip()
@@ -513,8 +532,11 @@ class AccountImporter(BaseImporter):
         if qb_parent:
             parent_account = self._find_account(qb_parent, company)
             if not parent_account:
-                parent_qb_type = self._get_qb_type_for_account_name(qb_parent, qb_type)
-                _, parent_root_type = QB_ACCOUNT_TYPE_MAP.get(parent_qb_type, ("Expense Account", "Expense"))
+                parent_record = self.records_by_name.get(qb_parent)
+                _, parent_root_type = self._resolve_account_mapping(
+                    parent_record,
+                    fallback_qb_type=qb_type,
+                )
                 parent_account = self._ensure_group_account(
                     qb_parent,
                     parent_root_type,
@@ -604,9 +626,9 @@ class AccountImporter(BaseImporter):
             qb_name = record.get("name", "").strip()
             qb_parent = record.get("parent", "").strip()
             qb_number = record.get("account_number")
-            qb_type = record.get("account_type", "Expense")
+            qb_type = (record.get("account_type") or "").strip() or "Expense"
 
-            _, root_type = QB_ACCOUNT_TYPE_MAP.get(qb_type, ("Expense Account", "Expense"))
+            _, root_type = self._resolve_account_mapping(record, fallback_qb_type=qb_type)
 
             if not qb_name:
                 continue
@@ -646,8 +668,11 @@ class AccountImporter(BaseImporter):
             if qb_parent:
                 expected_parent = self._find_account(qb_parent, company)
                 if not expected_parent:
-                    parent_qb_type = self._get_qb_type_for_account_name(qb_parent, qb_type)
-                    _, parent_root_type = QB_ACCOUNT_TYPE_MAP.get(parent_qb_type, ("Expense Account", "Expense"))
+                    parent_record = self.records_by_name.get(qb_parent)
+                    _, parent_root_type = self._resolve_account_mapping(
+                        parent_record,
+                        fallback_qb_type=qb_type,
+                    )
                     expected_parent = self._ensure_group_account(
                         qb_parent,
                         parent_root_type,
