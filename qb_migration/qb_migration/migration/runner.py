@@ -11,6 +11,7 @@ from .importers.customers import CustomerImporter
 from .importers.vendors import SupplierImporter
 from .importers.employees import EmployeeImporter
 from .importers.items import ItemImporter
+from .importers.inventory_adjustments import InventoryAdjustmentImporter
 from .importers.purchase_orders import PurchaseOrderImporter
 from .importers.sales_orders import SalesOrderImporter
 from .importers.estimates import EstimateImporter
@@ -34,37 +35,38 @@ from .importers.other_names import OtherNamesImporter
 from .fiscal_years import ensure_fiscal_years
 
 PIPELINE = [
-    # ("accounts", AccountImporter),
-    # ("payment_methods", PaymentMethodsImporter),
-    # ("terms", TermsImporter),
-    # # ("item_groups", ItemGroupImporter),
-    # ("items", ItemImporter),
-    # ("price_levels", PriceLevelsImporter),
-    # ("customer_types", CustomerTypesImporter),
-    # ("vendor_types", VendorTypesImporter),
-    # ("customers", CustomerImporter),
-    # ("vendors", SupplierImporter),
-    # ("employees", EmployeeImporter),
-    # ("purchase_orders", PurchaseOrderImporter),
-    # ("sales_orders", SalesOrderImporter),
-    # ("estimates", EstimateImporter),
-    # ("bills", PurchaseInvoiceImporter),
-    # ("invoices", SalesInvoiceImporter),
-    # ("sales_receipts", SalesReceiptImporter),
-    # ("credit_memos", CreditMemoImporter),
-    # ("bill_payments", BillPaymentImporter),
-    # ("payments", PaymentsImporter),
-    # ("sales_tax_items", SalesTaxItemsImporter),
+    ("accounts", AccountImporter),
+    ("payment_methods", PaymentMethodsImporter),
+    ("terms", TermsImporter),
+    # ("item_groups", ItemGroupImporter),
+    ("items", ItemImporter),
+    ("inventory_adjustments", InventoryAdjustmentImporter),
+    ("price_levels", PriceLevelsImporter),
+    ("customer_types", CustomerTypesImporter),
+    ("vendor_types", VendorTypesImporter),
+    ("customers", CustomerImporter),
+    ("vendors", SupplierImporter),
+    ("employees", EmployeeImporter),
+    ("purchase_orders", PurchaseOrderImporter),
+    ("sales_orders", SalesOrderImporter),
+    ("estimates", EstimateImporter),
+    ("bills", PurchaseInvoiceImporter),
+    ("invoices", SalesInvoiceImporter),
+    ("sales_receipts", SalesReceiptImporter),
+    ("credit_memos", CreditMemoImporter),
+    ("bill_payments", BillPaymentImporter),
+    ("payments", PaymentsImporter),
+    ("sales_tax_items", SalesTaxItemsImporter),
     ("sales_tax_codes", SalesTaxCodesImporter),
-    # ("deposits", DepositImporter),
-    # ("transfers", TransfersImporter),
-    # ("checks", ChecksImporter),
-    # ("cc_charges", CCChargesImporter),
-    # ("journal_entries", JournalEntryImporter),
-    # ("vendor_credits", VendorCreditImporter),
-    # ("item_receipts", ItemReceiptImporter),
-    # ("quantity_discounts", QuantityDiscountImporter),
-    # ("other_names", OtherNamesImporter),
+    ("deposits", DepositImporter),
+    ("transfers", TransfersImporter),
+    ("checks", ChecksImporter),
+    ("cc_charges", CCChargesImporter),
+    ("journal_entries", JournalEntryImporter),
+    ("vendor_credits", VendorCreditImporter),
+    ("item_receipts", ItemReceiptImporter),
+    ("quantity_discounts", QuantityDiscountImporter),
+    ("other_names", OtherNamesImporter),
 ]
 
 
