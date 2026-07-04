@@ -692,28 +692,28 @@ journal_entries = {
 # ERPNext: Payment Entry with mode_of_payment="Check"
 # CORRECTED MAPPING (was incorrectly mapped to Journal Entry)
 checks = {
-    'PAYMENT_ENTRY_HEADER':
-    {
-        'txn_id': 'name',                 # QB check ID
-        'ref_no': 'reference_no',         # QB check number → reference_no
-        'date': 'posting_date',
-        'payee': 'party_name',            # Payee (Supplier or Employee)
-        'amount': 'paid_amount',          # Check amount
-        'bank_account': 'paid_to',        # Bank account issuing check
-        'memo': 'remarks',
+    'CHECK_HEADER': {
+        'txn_id': 'source_id / migration key',
+        'ref_no': 'cheque_no / reference_no',
+        'date': 'posting_date / reference_date / cheque_date',
+        'memo': 'user_remark',
+        'bank_account': 'credit account on bank line',
     },
-    'PAYMENT_ENTRY_CONFIGURATION': {
-        'payment_type': '"Pay" (money going out)',
-        'party_type': 'Supplier or Employee (usually Supplier)',
-        'mode_of_payment': '"Check"',
-        'reference_no': 'check_number',
+    'CHECK_ACCOUNT_ROWS': {
+        'lines.account': 'account',
+        'lines.amount': 'debit',
+        'lines.line_type': 'assumed expense debit (not explicitly used)',
+        'lines.memo': 'user_remark',
+        'lines.description': 'user_remark fallback',
+        'lines.class_name': 'cost_center',
+        'lines.entity|customer|customer_name|party': 'party / party_type if account is Receivable/Payable',
     },
-    'PAYMENT_ENTRY_ALLOCATION':
-    {
-        'applied[].ref_no': 'references.reference_name',  # Bill/Invoice being paid
-        'applied[].amount': 'references.allocated_amount',  # Amount applied
-    },
-    'RATIONALE': 'Checks are payment instruments, not general journal entries. ERPNext Payment Entry is the correct doctype.',
+    'REQUIRED_ERPNEXT_FIELDS': {
+        'company': 'Company',
+        'voucher_type': 'Bank Entry',
+        'posting_date': 'Posting Date',
+        'accounts': 'Journal Entry accounts child table',
+    }
 }
 
 

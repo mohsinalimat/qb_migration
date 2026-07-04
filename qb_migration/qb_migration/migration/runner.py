@@ -53,7 +53,7 @@ PIPELINE = [
     # ("credit_memos", CreditMemoImporter),
     # ("bill_payments", BillPaymentImporter),
     # ("payments", PaymentsImporter),
-    ("sales_tax_items", SalesTaxItemsImporter),
+    # ("sales_tax_items", SalesTaxItemsImporter),
     # ("deposits", DepositImporter),
     # ("transfers", TransfersImporter),
     # ("checks", ChecksImporter),
@@ -61,7 +61,7 @@ PIPELINE = [
     # ("journal_entries", JournalEntryImporter),
     # ("vendor_credits", VendorCreditImporter),
     # ("item_receipts", ItemReceiptImporter),
-    # ("quantity_discounts", QuantityDiscountImporter),
+    ("quantity_discounts", QuantityDiscountImporter),
     # ("other_names", OtherNamesImporter),
 ]
 
