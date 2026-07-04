@@ -1,4 +1,7 @@
+from pathlib import Path
+
 import frappe
+from frappe.utils import now_datetime
 
 from .importers.accounts import AccountImporter
 from .importers.payment_methods import PaymentMethodsImporter
@@ -34,11 +37,28 @@ from .importers.quantity_discounts import QuantityDiscountImporter
 from .importers.other_names import OtherNamesImporter
 from .fiscal_years import ensure_fiscal_years
 
+
+def _prepare_detailed_log_file() -> Path:
+    app_dir = Path(__file__).resolve().parents[3]
+    log_dir = app_dir / "logs"
+
+    log_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = now_datetime().strftime("%Y%m%d_%H%M%S")
+    log_path = log_dir / f"qb_migration_failed_skipped_{timestamp}.log"
+    frappe.flags["qb_migration_detailed_log_path"] = str(log_path)
+
+    with log_path.open("w", encoding="utf-8") as handle:
+        handle.write(f"QB Migration detailed failed/skipped log\n")
+        handle.write(f"Started: {now_datetime()}\n")
+        handle.write("=" * 80 + "\n")
+
+    return log_path
+
+
 PIPELINE = [
     ("accounts", AccountImporter),
     ("payment_methods", PaymentMethodsImporter),
     ("terms", TermsImporter),
-    # ("item_groups", ItemGroupImporter),
     ("items", ItemImporter),
     ("inventory_adjustments", InventoryAdjustmentImporter),
     ("price_levels", PriceLevelsImporter),
@@ -78,7 +98,10 @@ def run_migration(stages=None, dry_run=False):
     """
     frappe.flags.in_migrate = True
     frappe.set_user("Administrator")
-    print("\n=== Fiscal Year Preparation ===")
+    log_path = _prepare_detailed_log_file()
+    print(f"\n=== Detailed failed/skipped log ===")
+    print(f"Log file: {log_path}")
+    print("=== Fiscal Year Preparation ===")
     ensure_fiscal_years()
     results = {}
 
@@ -91,6 +114,7 @@ def run_migration(stages=None, dry_run=False):
         results[stage_name] = importer.run(dry_run=dry_run)
 
     print("\n\n=== MIGRATION SUMMARY ===")
+    print(f"Detailed failed/skipped log: {log_path}")
     for stage, result in results.items():
         print(f"  {stage:25s}: ✓ {result['success']:5d}  ✗ {result['failed']:5d}  ↷ {result['skipped']:5d}")
 

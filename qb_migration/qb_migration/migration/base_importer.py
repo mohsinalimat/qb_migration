@@ -75,6 +75,49 @@ class BaseImporter:
             "imported_at": now_datetime(),
         }).insert(ignore_permissions=True)
 
+    def format_detailed_log_entry(
+        self,
+        status: str,
+        source_id: str,
+        reason: str,
+        ref_no: str | None = None,
+        details: dict | None = None,
+    ) -> str:
+        parts = [f"[{status}]", f"stage={self.source_type or 'unknown'}", f"source_id={source_id or 'N/A'}"]
+        if ref_no:
+            parts.append(f"ref_no={ref_no}")
+        if details:
+            parts.append(f"details={json.dumps(details, default=str)}")
+        parts.append(f"reason={reason or 'N/A'}")
+        return " | ".join(parts)
+
+    def get_detailed_log_path(self) -> Path:
+        log_path = frappe.flags.get("qb_migration_detailed_log_path")
+        if log_path:
+            return Path(log_path)
+
+        app_dir = Path(__file__).resolve().parents[3]
+        log_dir = app_dir / "logs"
+
+        log_dir.mkdir(parents=True, exist_ok=True)
+        timestamp = now_datetime().strftime("%Y%m%d_%H%M%S")
+        log_path = log_dir / f"qb_migration_failed_skipped_{timestamp}.log"
+        frappe.flags["qb_migration_detailed_log_path"] = str(log_path)
+        return log_path
+
+    def append_detailed_log(
+        self,
+        status: str,
+        source_id: str,
+        reason: str,
+        ref_no: str | None = None,
+        details: dict | None = None,
+    ) -> str:
+        log_path = self.get_detailed_log_path()
+        with log_path.open("a", encoding="utf-8") as handle:
+            handle.write(self.format_detailed_log_entry(status, source_id, reason, ref_no, details) + "\n")
+        return str(log_path)
+
     def log_failure(self, source_id: str, error: str):
         existing = frappe.db.get_value(
             "Migration Log",
@@ -93,6 +136,7 @@ class BaseImporter:
             "error_msg": str(error)[:2000],
             "imported_at": now_datetime(),
         }).insert(ignore_permissions=True)
+        self.append_detailed_log("Failed", source_id, str(error)[:2000])
 
     def log_skip(self, source_id: str, reason: str, ref_no: str | None = None):
         existing = frappe.db.get_value(
@@ -116,6 +160,7 @@ class BaseImporter:
             "error_msg": skip_msg[:2000],
             "imported_at": now_datetime(),
         }).insert(ignore_permissions=True)
+        self.append_detailed_log("Skipped", source_id, skip_msg[:2000], ref_no=ref_no)
 
     def map_record(self, record: dict) -> dict:
         raise NotImplementedError("Subclasses must implement map_record")
@@ -146,17 +191,35 @@ class BaseImporter:
             source_id = self.get_source_id(record)
             if not source_id:
                 failed += 1
+                self.append_detailed_log(
+                    "Failed",
+                    source_id or f"record_{i + 1}",
+                    "Missing source id",
+                    details={"record_index": i + 1},
+                )
                 print(f"  FAIL: missing source id for record {i+1}")
                 continue
 
             if self.is_imported(source_id):
                 skipped += 1
+                self.append_detailed_log(
+                    "Skipped",
+                    source_id,
+                    "Already imported",
+                    details={"record_index": i + 1},
+                )
                 continue
 
             try:
                 doc_data = self.map_record(record)
                 if doc_data is None:
                     skipped += 1
+                    self.append_detailed_log(
+                        "Skipped",
+                        source_id,
+                        "Mapper returned no document data",
+                        details={"record_index": i + 1},
+                    )
                     continue
 
                 if isinstance(doc_data, dict) and doc_data.get("_skip"):
