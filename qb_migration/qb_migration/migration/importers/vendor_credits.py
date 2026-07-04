@@ -26,6 +26,36 @@ class VendorCreditImporter(PurchaseInvoiceImporter):
         )
         return result[0][0] if result else None
 
+    def _resolve_cost_center(self, cc_name):
+        if not cc_name:
+            return None
+
+        company = frappe.defaults.get_global_default("company")
+        leaf = cc_name.split(":")[-1].strip()
+        name = frappe.db.get_value("Cost Center", {"cost_center_name": leaf, "company": company}, "name")
+        if name:
+            return name
+
+        result = frappe.db.sql(
+            "select name from `tabCost Center` where lower(cost_center_name)=lower(%s) and company=%s limit 1",
+            (leaf, company),
+        )
+        return result[0][0] if result else None
+
+    def _resolve_item_tax_template(self, tax_code):
+        if not tax_code:
+            return None
+
+        existing = frappe.db.get_value("Item Tax Template", {"title": tax_code}, "name")
+        if existing:
+            return existing
+
+        result = frappe.db.sql(
+            "select name from `tabItem Tax Template` where lower(title)=lower(%s) limit 1",
+            tax_code,
+        )
+        return result[0][0] if result else None
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         supplier_name = record.get("vend_name")
@@ -47,14 +77,30 @@ class VendorCreditImporter(PurchaseInvoiceImporter):
             else:
                 rate = 0
 
-            items.append({
+            item_row = {
                 "item_code": self.resolve_item(line.get("item", "")),
                 "qty": qty_signed,
                 "rate": rate,
                 "amount": amount_signed,
                 "expense_account": self._resolve_account(line.get("gl_code")),
                 "description": line.get("description", ""),
-            })
+            }
+
+            line_no = line.get("line_no")
+            try:
+                item_row["idx"] = int(line_no)
+            except (TypeError, ValueError):
+                pass
+
+            cost_center = self._resolve_cost_center(line.get("class_name"))
+            if cost_center:
+                item_row["cost_center"] = cost_center
+
+            tax_template = self._resolve_item_tax_template(line.get("tax_code"))
+            if tax_template:
+                item_row["item_tax_template"] = tax_template
+
+            items.append(item_row)
 
         doc = {
             "doctype": "Purchase Invoice",
@@ -64,7 +110,7 @@ class VendorCreditImporter(PurchaseInvoiceImporter):
             "bill_date": self.normalize_date(record.get("date")),
             "company": company,
             "currency": currency,
-            "debit_to": self.resolve_payable_account(supplier, currency),
+            "credit_to": self.resolve_payable_account(supplier, currency),
             "remarks": record.get("memo") or "",
             "is_return": 1,
             "items": items,
