@@ -9,6 +9,13 @@ class ItemReceiptImporter(BaseImporter):
     json_file = "item_receipts.json"
     json_key = "item_receipts"
 
+    def _has_field(self, doctype, fieldname):
+        try:
+            meta = frappe.get_meta(doctype)
+        except Exception:
+            return False
+        return any(field.fieldname == fieldname for field in meta.fields)
+
     def get_source_id(self, record):
         return str(record.get("txn_id") or record.get("ref_no") or "")
 
@@ -142,6 +149,7 @@ class ItemReceiptImporter(BaseImporter):
             raise ValueError(f"Supplier not found: {record.get('vend_name')}")
 
         warehouse = self._resolve_warehouse()
+        purchase_order = self._resolve_purchase_order(record.get("po_num"))
         items = []
         total_amt = 0.0
 
@@ -177,12 +185,15 @@ class ItemReceiptImporter(BaseImporter):
                 "cost_center": self._resolve_cost_center(line.get("class_name")),
             }
 
+            if purchase_order and self._has_field("Purchase Receipt Item", "purchase_order"):
+                item_row["purchase_order"] = purchase_order
+
             item_tax_template = line.get("tax_code")
-            if item_tax_template:
+            if item_tax_template and self._has_field("Purchase Receipt Item", "item_tax_template"):
                 item_row["item_tax_template"] = item_tax_template
 
             sales_partner = line.get("sales_rep")
-            if sales_partner:
+            if sales_partner and self._has_field("Purchase Receipt Item", "sales_partner"):
                 item_row["sales_partner"] = sales_partner
 
             items.append(item_row)
@@ -196,12 +207,13 @@ class ItemReceiptImporter(BaseImporter):
             "company": company,
             "posting_date": self.normalize_date(record.get("date")),
             "supplier_delivery_note": record.get("txn_id") or record.get("ref_no") or "",
-            "purchase_order": self._resolve_purchase_order(record.get("po_num")),
             "remarks": record.get("memo") or "",
             "tax_category": record.get("sales_tax_code") or "",
-            "included_in_print_rate": 1 if record.get("is_tax_included") else 0,
             "grand_total": total_amt or float(record.get("total_amt") or 0),
             "items": items,
         }
+
+        if self._has_field("Purchase Receipt", "included_in_print_rate"):
+            doc["included_in_print_rate"] = 1 if record.get("is_tax_included") else 0
 
         return doc
