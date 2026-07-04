@@ -280,10 +280,13 @@ class JournalEntryImporter(BaseImporter):
                 # Try common fields for party/entity, falling back to record payee
                 candidate = (
                     line.get("entity")
+                    or line.get("entity_id")
                     or line.get("customer")
                     or line.get("customer_name")
                     or line.get("party")
                     or record.get("payee")
+                    or record.get("entity")
+                    or record.get("entity_id")
                 )
                 # If the account suggests employee advances, prefer/reserve Employee party first
                 acct_name_lower = (erpnext_account or "").lower()
@@ -296,6 +299,14 @@ class JournalEntryImporter(BaseImporter):
                 else:
                     party_type, party = self._resolve_party(candidate)
 
+            cost_center = None
+            for key in ("class", "cost_center", "cost_center_name"):
+                raw_value = line.get(key)
+                if raw_value:
+                    cost_center = self._resolve_cost_center(raw_value)
+                    if cost_center:
+                        break
+
             row_data = {
                 "account": erpnext_account,
                 "debit": base_debit,
@@ -305,18 +316,32 @@ class JournalEntryImporter(BaseImporter):
                 "exchange_rate": row_exchange_rate,
                 "user_remark": line.get("memo", ""),
             }
+            if cost_center:
+                row_data["cost_center"] = cost_center
             if party_type and party:
                 row_data["party_type"] = party_type
                 row_data["party"] = party
 
             accounts.append(row_data)
 
+        remark_parts = []
+        if record.get("memo"):
+            remark_parts.append(str(record.get("memo")))
+        if record.get("txn_number"):
+            remark_parts.append(f"QB Ref: {record.get('txn_number')}")
+        if record.get("ref_no"):
+            remark_parts.append(f"Ref No: {record.get('ref_no')}")
+        if record.get("is_adjustment"):
+            remark_parts.append("Adjustment Entry")
+
+        user_remark = " | ".join([part for part in remark_parts if part])
+
         doc = {
             "doctype": "Journal Entry",
             "voucher_type": "Journal Entry",
-            "posting_date": self.normalize_date(record.get("txn_date")),
+            "posting_date": self.normalize_date(record.get("date") or record.get("txn_date")),
             "company": company,
-            "user_remark": record.get("memo", ""),
+            "user_remark": user_remark or record.get("memo", ""),
             "accounts": accounts,
         }
 
