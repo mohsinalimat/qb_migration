@@ -72,7 +72,13 @@ class ChecksImporter(JournalEntryImporter):
                     or record.get("payee")
                 )
                 acct_name_lower = (account or "").lower()
-                if candidate and ("employee" in acct_name_lower or "advance" in acct_name_lower):
+                if candidate and "employee advances" in acct_name_lower:
+                    emp = self._ensure_employee(candidate)
+                    if emp:
+                        party_type, party = "Employee", emp
+                    else:
+                        party_type, party = None, None
+                elif candidate and ("employee" in acct_name_lower or "advance" in acct_name_lower):
                     emp = self._ensure_employee(candidate)
                     if emp:
                         party_type, party = "Employee", emp
