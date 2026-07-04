@@ -419,15 +419,78 @@ class AccountImporter(BaseImporter):
             return record.get("account_type") or fallback_qb_type
         return fallback_qb_type
 
+    def _find_account_by_parent(self, account_name, company, parent_name=None, account_number=None):
+        """Find an account by name, optionally constrained by parent and account number."""
+        if not account_name:
+            return None
+
+        account_name = account_name.strip()
+        filters = {"account_name": account_name, "company": company}
+
+        if account_number is not None and account_number.strip() != "":
+            filters["account_number"] = account_number.strip()
+
+        accounts = frappe.get_all("Account", filters=filters, fields=["name", "parent_account"])
+        if parent_name:
+            parent_name = parent_name.strip()
+            parent_account_name = self._find_account(parent_name, company)
+            if parent_account_name:
+                accounts = [a for a in accounts if a.get("parent_account") == parent_account_name]
+            else:
+                accounts = [a for a in accounts if a.get("parent_account") == parent_name]
+
+        if accounts:
+            return accounts[0]["name"]
+
+        return None
+
+    def _find_default_employee_advances_account(self, company):
+        """Return the ERPNext default Employee Advances account under Loans and Advances (Assets)."""
+        accounts = frappe.get_all(
+            "Account",
+            filters={"company": company, "account_name": "Employee Advances"},
+            fields=["name", "parent_account"],
+        )
+
+        for account in accounts:
+            parent_account = account.get("parent_account")
+            if not parent_account:
+                continue
+
+            try:
+                parent_doc = frappe.get_doc("Account", parent_account)
+            except Exception:
+                continue
+
+            parent_name = (parent_doc.account_name or "").strip().lower()
+            if "loans and advances" in parent_name and "assets" in parent_name:
+                return account["name"]
+
+        return None
+
+    def _set_default_employee_advances_account_type(self, company):
+        target_name = self._find_default_employee_advances_account(company)
+        if not target_name:
+            return False
+
+        doc = frappe.get_doc("Account", target_name)
+        if doc.account_type != "Current Asset":
+            doc.account_type = "Current Asset"
+            doc.flags.ignore_permissions = True
+            doc.save(ignore_permissions=True)
+            return True
+
+        return False
+
     # -----------------------------------------------------------------
     #  Find existing target account
     # -----------------------------------------------------------------
     def find_existing_target(self, doc_data):
-        return self._find_account(
+        return self._find_account_by_parent(
             doc_data.get("account_name"),
             doc_data.get("company"),
-            account_number=doc_data.get("account_number"),
             parent_name=doc_data.get("_qb_parent"),
+            account_number=doc_data.get("account_number"),
         )
 
     # -----------------------------------------------------------------
@@ -548,11 +611,11 @@ class AccountImporter(BaseImporter):
             if not qb_name:
                 continue
 
-            child_account = self._find_account(
+            child_account = self._find_account_by_parent(
                 qb_name,
                 company,
-                account_number=qb_number,
                 parent_name=qb_parent,
+                account_number=qb_number,
             )
             if not child_account:
                 print(f"  ERROR: Account {qb_name} not found in ERPNext during validation.")
@@ -619,4 +682,5 @@ class AccountImporter(BaseImporter):
                 child_doc.flags.ignore_permissions = True
                 child_doc.save(ignore_permissions=True)
 
+        self._set_default_employee_advances_account_type(company)
         frappe.db.commit()
