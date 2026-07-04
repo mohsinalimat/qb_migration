@@ -4,6 +4,13 @@ from .journal_entries import JournalEntryImporter
 
 
 class CCChargesImporter(JournalEntryImporter):
+    """Map QuickBooks credit-card charges to an ERPNext Journal Entry.
+
+    This follows the recommended Scenario 2 pattern for CC liability tracking:
+    - debit expense account(s) from each line
+    - credit the credit-card liability account
+    - use the QuickBooks transaction date as the posting date
+    """
     source_type = "QB_CC_CHARGE"
     target_doctype = "Journal Entry"
     json_file = "cc_charges.json"
@@ -40,6 +47,41 @@ class CCChargesImporter(JournalEntryImporter):
             "company": company,
             "parent_account": parent_account,
             "root_type": "Expense",
+            "is_group": 0,
+        })
+        doc.flags.ignore_permissions = True
+        doc.insert(ignore_permissions=True)
+        frappe.db.commit()
+        return doc.name
+
+    def _ensure_credit_card_liability_account(self, qb_account_name, company):
+        candidate_name = (qb_account_name or "Credit Card Liability").strip()
+        if not candidate_name:
+            candidate_name = "Credit Card Liability"
+
+        account_name = candidate_name.split(":")[-1].strip() or "Credit Card Liability"
+        existing = frappe.db.get_value("Account", {"company": company, "account_name": account_name}, "name")
+        if existing:
+            return existing
+
+        parent_account = frappe.db.get_value(
+            "Account",
+            {"company": company, "account_name": "Current Liabilities"},
+            "name",
+        )
+        if not parent_account:
+            parent_account = frappe.db.get_value(
+                "Account",
+                {"company": company, "root_type": "Liability", "is_group": 1},
+                "name",
+            )
+
+        doc = frappe.get_doc({
+            "doctype": "Account",
+            "account_name": account_name,
+            "company": company,
+            "parent_account": parent_account,
+            "root_type": "Liability",
             "is_group": 0,
         })
         doc.flags.ignore_permissions = True
@@ -129,6 +171,9 @@ class CCChargesImporter(JournalEntryImporter):
             return {"_skip": True, "_skip_reason": "ZERO_AMOUNT", "ref_no": record.get("txn_id", "")}
 
         credit_account = self._resolve_account(record.get("cc_account"))
+        if not credit_account:
+            credit_account = self._ensure_credit_card_liability_account(record.get("cc_account"), company)
+
         if not credit_account:
             raise ValueError(f"Credit card account not found: {record.get('cc_account')}")
 
