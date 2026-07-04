@@ -21,6 +21,7 @@ from .importers.credit_memos import CreditMemoImporter
 from .importers.bill_payments import BillPaymentImporter
 from .importers.payments import PaymentsImporter
 from .importers.sales_tax_items import SalesTaxItemsImporter
+from .importers.sales_tax_codes import SalesTaxCodesImporter
 from .importers.deposits import DepositImporter
 from .importers.transfers import TransfersImporter
 from .importers.cc_charges import CCChargesImporter
@@ -54,6 +55,7 @@ PIPELINE = [
     # ("bill_payments", BillPaymentImporter),
     # ("payments", PaymentsImporter),
     # ("sales_tax_items", SalesTaxItemsImporter),
+    ("sales_tax_codes", SalesTaxCodesImporter),
     # ("deposits", DepositImporter),
     # ("transfers", TransfersImporter),
     # ("checks", ChecksImporter),
@@ -61,7 +63,7 @@ PIPELINE = [
     # ("journal_entries", JournalEntryImporter),
     # ("vendor_credits", VendorCreditImporter),
     # ("item_receipts", ItemReceiptImporter),
-    ("quantity_discounts", QuantityDiscountImporter),
+    # ("quantity_discounts", QuantityDiscountImporter),
     # ("other_names", OtherNamesImporter),
 ]
 
