@@ -1,7 +1,9 @@
+import json
+
 import frappe
 from frappe.utils import flt
 
-from ..base_importer import BaseImporter
+from ..base_importer import DATA_DIR
 from .journal_entries import JournalEntryImporter
 
 
@@ -10,6 +12,24 @@ class DepositImporter(JournalEntryImporter):
     target_doctype = "Payment Entry"
     json_file = "deposits.json"
     json_key = "deposits"
+    _cash_back_source_ids = None
+
+    @classmethod
+    def _get_deposit_cash_back_source_ids(cls):
+        if cls._cash_back_source_ids is None:
+            cls._cash_back_source_ids = set()
+            path = DATA_DIR / "deposits_cash_back.json"
+            if path.exists():
+                try:
+                    with path.open(encoding="utf-8") as handle:
+                        data = json.load(handle)
+                    for record in data.get("deposits", []) or []:
+                        source_id = str(record.get("txn_id") or record.get("txn_number") or "")
+                        if source_id:
+                            cls._cash_back_source_ids.add(source_id)
+                except Exception:
+                    cls._cash_back_source_ids = set()
+        return cls._cash_back_source_ids
 
     def get_source_id(self, record):
         return str(record.get("txn_id") or record.get("txn_number") or "")
@@ -133,8 +153,43 @@ class DepositImporter(JournalEntryImporter):
             return True
         if txn_type == "Invoice":
             return True
-        if txn_type == "Deposit" and line.get("account") == "Undeposited Funds":
-            return True
+        # Some deposits reference payment lines using txn_type "Deposit".
+        # Treat Deposit lines as payment lines only when they represent an
+        # actual payment (Undeposited Funds or a referenced payment). If the
+        # deposit line posts to a Profit & Loss (Income/Expense) account
+        # (e.g. Interest Income) prefer creating a Journal Entry instead
+        # (so cost center requirements are handled there).
+        if txn_type == "Deposit":
+            # Undeposited funds always indicate a payment line
+            if line.get("account") == "Undeposited Funds":
+                return True
+
+            # If this line references an existing payment txn, consider it a payment
+            if line.get("txn_id") or line.get("txn_line_id") or line.get("payment_txn_line_id"):
+                # Check resolved account type; if it's Profit and Loss, treat as non-payment
+                try:
+                    erp_account = self._resolve_account(line.get("account"))
+                    if erp_account:
+                        acct_type = frappe.db.get_value("Account", erp_account, "account_type")
+                        if acct_type:
+                            acct_type_norm = acct_type.strip().lower()
+                            # Common profit & loss/account types in ERPNext
+                            if acct_type_norm in ("income", "expense", "profit and loss", "income account", "expense account"):
+                                return False
+                        # If account_type is empty, check root_type for Profit and Loss
+                        root_type = frappe.db.get_value("Account", erp_account, "root_type")
+                        if root_type and str(root_type).strip().lower() in ("profit and loss", "income", "expense"):
+                            return False
+                    else:
+                        # If we couldn't resolve the account, fallback to checking
+                        # the raw account name for common P&L keywords (e.g. Interest Income)
+                        raw_acc = (line.get("account") or "").strip().lower()
+                        if any(k in raw_acc for k in ("income", "interest", "expense", "profit")):
+                            return False
+                except Exception:
+                    # If resolution fails, fall back to treating as payment
+                    pass
+                return True
         return False
 
     def _build_payment_entries(self, record):
@@ -220,72 +275,8 @@ class DepositImporter(JournalEntryImporter):
 
         return payment_entries
 
-    def _build_cash_back_journal_entry(self, record):
-        cash_back = record.get("cash_back") or {}
-        amount = flt(cash_back.get("amount", 0))
-        if amount <= 0:
-            return None
-
-        company = frappe.defaults.get_global_default("company")
-        bank_account = self._resolve_account(record.get("deposit_to_acct"))
-        if not bank_account:
-            raise ValueError(
-                f"Bank account not found for deposit_to_acct={record.get('deposit_to_acct')}"
-            )
-
-        petty_cash_account = self._resolve_account(cash_back.get("account"))
-        if not petty_cash_account:
-            raise ValueError(
-                f"Petty cash account not found for cash_back={cash_back.get('account')}"
-            )
-
-        posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
-        currency = record.get("currency")
-        exchange_rate = record.get("exchange_rate")
-        base_source_id = record.get("txn_id") or record.get("txn_number") or ""
-        source_id = f"{base_source_id}:cashback" if base_source_id else "cashback"
-
-        doc = {
-            "doctype": "Journal Entry",
-            "voucher_type": "Bank Entry",
-            "company": company,
-            "posting_date": posting_date,
-            "cheque_no": f"{record.get('txn_number') or record.get('txn_id') or ''}-CB",
-            "reference_no": f"{record.get('txn_number') or record.get('txn_id') or ''}-CB",
-            "reference_date": posting_date,
-            "cheque_date": posting_date,
-            "user_remark": f"Cash back for {record.get('memo') or 'deposit'}",
-            "accounts": [
-                {
-                    "account": petty_cash_account,
-                    "debit_in_account_currency": amount,
-                    "credit_in_account_currency": 0,
-                    "debit": amount,
-                    "credit": 0,
-                    "exchange_rate": 1,
-                    "user_remark": cash_back.get("memo") or "Cash back",
-                },
-                {
-                    "account": bank_account,
-                    "debit_in_account_currency": 0,
-                    "credit_in_account_currency": amount,
-                    "debit": 0,
-                    "credit": amount,
-                    "exchange_rate": 1,
-                    "user_remark": cash_back.get("memo") or "Cash back",
-                },
-            ],
-            "_source_id": source_id,
-        }
-
-        if currency and exchange_rate:
-            doc["multi_currency"] = 1
-            doc["currency"] = currency
-            doc["exchange_rate"] = exchange_rate
-
-        return doc
-
     def _build_deposit_journal_entry(self, record):
+        """Build a Journal Entry for pure deposit transactions without payment lines."""
         deposit_lines = [
             line for line in (record.get("lines") or [])
             if line.get("txn_type") == "Deposit" and flt(line.get("amount", 0)) > 0
@@ -302,8 +293,8 @@ class DepositImporter(JournalEntryImporter):
             )
 
         posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
-        currency = record.get("currency")
-        exchange_rate = record.get("exchange_rate")
+        company_currency = frappe.db.get_value("Company", company, "default_currency")
+        currency, exchange_rate = self._get_currency_details(record, company_currency)
         total_amount = 0.0
         accounts = []
 
@@ -356,13 +347,11 @@ class DepositImporter(JournalEntryImporter):
 
         doc = {
             "doctype": "Journal Entry",
-            "voucher_type": "Bank Entry",
+            "voucher_type": "Journal Entry",
             "company": company,
             "posting_date": posting_date,
-            "cheque_no": record.get("txn_number") or record.get("txn_id") or "",
             "reference_no": record.get("txn_number") or record.get("txn_id") or "",
             "reference_date": posting_date,
-            "cheque_date": posting_date,
             "user_remark": record.get("memo") or "",
             "accounts": accounts,
             "_source_id": record.get("txn_id") or record.get("txn_number") or "",
@@ -376,22 +365,22 @@ class DepositImporter(JournalEntryImporter):
         return doc
 
     def map_record(self, record):
-        docs = []
+        source_id = self.get_source_id(record)
+        if source_id and source_id in self._get_deposit_cash_back_source_ids():
+            return {
+                "_skip": True,
+                "_skip_reason": "HANDLED_BY_DEPOSITS_CASH_BACK_IMPORTER",
+                "ref_no": record.get("txn_number"),
+                "_source_id": source_id,
+            }
 
         payment_entries = self._build_payment_entries(record)
         if payment_entries:
-            docs.extend(payment_entries)
+            return payment_entries
 
         deposit_journal = self._build_deposit_journal_entry(record)
         if deposit_journal:
-            docs.append(deposit_journal)
-
-        cash_back_journal = self._build_cash_back_journal_entry(record)
-        if cash_back_journal:
-            docs.append(cash_back_journal)
-
-        if docs:
-            return docs
+            return deposit_journal
 
         if flt(record.get("deposit_total", 0)) <= 0:
             return {"_skip": True, "_skip_reason": "ZERO_AMOUNT", "ref_no": record.get("txn_number")}
