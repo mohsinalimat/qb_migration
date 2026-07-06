@@ -18,6 +18,79 @@ class ChecksImporter(JournalEntryImporter):
     def get_source_id(self, record):
         return str(record.get("txn_id") or "")
 
+    def _ensure_fallback_expense_account(self, line, company):
+        candidate_name = (line.get("item") or line.get("description") or "Check Expense").strip()
+        if not candidate_name:
+            candidate_name = "Check Expense"
+
+        account_name = candidate_name.split(":")[-1].strip() or "Check Expense"
+        existing = frappe.db.get_value("Account", {"company": company, "account_name": account_name}, "name")
+        if existing:
+            return existing
+
+        parent_account = frappe.db.get_value(
+            "Account",
+            {"company": company, "account_name": "Expenses"},
+            "name",
+        )
+        if not parent_account:
+            parent_account = frappe.db.get_value(
+                "Account",
+                {"company": company, "root_type": "Expense", "is_group": 1},
+                "name",
+            )
+
+        doc = frappe.get_doc({
+            "doctype": "Account",
+            "account_name": account_name,
+            "company": company,
+            "parent_account": parent_account,
+            "root_type": "Expense",
+            "is_group": 0,
+        })
+        doc.flags.ignore_permissions = True
+        doc.insert(ignore_permissions=True)
+        frappe.db.commit()
+        return doc.name
+
+    def _resolve_line_account(self, line, record):
+        # Prefer explicit account on the line
+        account_name = line.get("account")
+        if account_name:
+            resolved = self._resolve_account(account_name)
+            if resolved:
+                return resolved
+
+        # If it's an item line, try to use the item's default expense account
+        item_name = line.get("item") or line.get("item_name")
+        if item_name:
+            company = frappe.defaults.get_global_default("company")
+            item_doc = frappe.db.get_value("Item", {"item_code": item_name}, "name")
+            if item_doc:
+                expense_account = frappe.db.get_value(
+                    "Item Default",
+                    {"parent": item_doc, "company": company},
+                    "expense_account",
+                )
+                if expense_account:
+                    return expense_account
+
+                item = frappe.get_doc("Item", item_doc)
+                for default in item.get("item_defaults") or []:
+                    if default.get("company") == company and default.get("expense_account"):
+                        return default.get("expense_account")
+
+        # Fallback to record-level account fields
+        fallback = record.get("account") or record.get("expense_account")
+        if fallback:
+            resolved = self._resolve_account(fallback)
+            if resolved:
+                return resolved
+
+        # As a last resort, create/ensure a generic expense account
+        company = frappe.defaults.get_global_default("company")
+        return self._ensure_fallback_expense_account(line, company)
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
 
@@ -38,7 +111,7 @@ class ChecksImporter(JournalEntryImporter):
         total = 0.0
 
         for line in record.get("lines") or []:
-            account = self._resolve_account(line.get("account"))
+            account = self._resolve_line_account(line, record)
             if not account:
                 continue
 
