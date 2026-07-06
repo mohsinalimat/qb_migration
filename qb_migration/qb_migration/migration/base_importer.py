@@ -202,6 +202,7 @@ class BaseImporter:
 
             if self.is_imported(source_id):
                 skipped += 1
+                print(f"  SKIP [{source_id}]: Already imported")
                 self.append_detailed_log(
                     "Skipped",
                     source_id,
@@ -214,6 +215,7 @@ class BaseImporter:
                 doc_data = self.map_record(record)
                 if doc_data is None:
                     skipped += 1
+                    print(f"  SKIP [{source_id}]: Mapper returned no document data")
                     self.append_detailed_log(
                         "Skipped",
                         source_id,
