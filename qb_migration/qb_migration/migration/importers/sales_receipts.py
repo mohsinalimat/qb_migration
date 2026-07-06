@@ -84,6 +84,17 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         mode_name = (mode or "Cash").strip() or "Cash"
         existing = frappe.db.get_value("Mode of Payment", {"mode_of_payment": mode_name}, "name")
         if existing:
+            if account:
+                mop_doc = frappe.get_doc("Mode of Payment", existing)
+                has_account = any(row.default_account for row in mop_doc.accounts)
+                if not has_account:
+                    mop_doc.append("accounts", {
+                        "company": frappe.defaults.get_global_default("company"),
+                        "default_account": account,
+                    })
+                    mop_doc.flags.ignore_permissions = True
+                    mop_doc.save()
+                    frappe.db.commit()
             return existing
 
         existing = frappe.db.sql(
@@ -258,12 +269,14 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
             if self.is_imported(source_id):
                 skipped += 1
+                print(f"  SKIP [{source_id}]: Already imported")
                 continue
 
             try:
                 doc_data = self.map_record(record)
                 if doc_data is None:
                     skipped += 1
+                    print(f"  SKIP [{source_id}]: Mapper returned no document data")
                     continue
 
                 if isinstance(doc_data, dict) and doc_data.get("_skip"):
@@ -304,6 +317,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
                 frappe.db.commit()
                 self.log_success(source_id, doc.name, getattr(doc, "doctype", self.target_doctype))
+                print(f"  SUCCESS: {source_id} → {doc.name}")
                 success += 1
 
             except Exception as exc:
@@ -376,9 +390,20 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             raise ValueError("No valid item lines found for sales receipt")
 
         total_amt = abs(float(record.get("total_amt") or 0))
-        payment_method = (record.get("payment_method") or "Cash").strip() or "Cash"
+        payment_method = (record.get("payment_method") or "").strip()
         payment_account = self._resolve_cash_bank_account(record.get("deposit_to_acct"))
-        mode_of_payment = self._resolve_mode_of_payment(payment_method, account=payment_account)
+
+        mode_of_payment = None
+        payments = []
+        if payment_method or payment_account:
+            if not payment_method:
+                payment_method = "Cash"
+            mode_of_payment = self._resolve_mode_of_payment(payment_method, account=payment_account)
+            if mode_of_payment:
+                payments = [{
+                    "mode_of_payment": mode_of_payment,
+                    "amount": total_amt,
+                }]
 
         doc = {
             "doctype": "Sales Invoice",
@@ -391,12 +416,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
             "set_posting_time": 1,
-            "is_pos": 1,
-            "mode_of_payment": mode_of_payment,
-            "payments": [{
-                "mode_of_payment": mode_of_payment,
-                "amount": total_amt,
-            }],
+            "is_pos": 1 if mode_of_payment else 0,
             "total": abs(float(record.get("subtotal") or 0)),
             "total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
             "grand_total": total_amt,
@@ -405,12 +425,16 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "base_grand_total": total_amt,
         }
 
-        account = payment_account
         si_meta = frappe.get_meta("Sales Invoice")
-        if account:
-            doc["cash_bank_account"] = account
+
+        if mode_of_payment:
+            doc["mode_of_payment"] = mode_of_payment
+            doc["payments"] = payments
+
+        if payment_account:
+            doc["cash_bank_account"] = payment_account
             if si_meta.has_field("account_for_payment"):
-                doc["account_for_payment"] = account
+                doc["account_for_payment"] = payment_account
 
         if si_meta.has_field("paid_amount"):
             doc["paid_amount"] = total_amt
