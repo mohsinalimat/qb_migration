@@ -170,10 +170,15 @@ class BillPaymentImporter(BaseImporter):
         # If QB provides a split applied list, use it; otherwise treat the
         # whole payment as applying to the single bill_no.
         if applied_items:
-            candidates = [
-                {"ref_no": item.get("ref_no"), "amount": flt(item.get("amount", 0))}
-                for item in applied_items
-            ]
+            candidates = []
+            for item in applied_items:
+                ref_no = (item.get("ref_no") or "").strip()
+                if not ref_no:
+                    # Blank or missing invoice reference should not force
+                    # a weak supplier/amount match that can incorrectly mark
+                    # the payment as already applied.
+                    continue
+                candidates.append({"ref_no": ref_no, "amount": flt(item.get("amount", 0))})
         else:
             ref_no = record.get("ref_no")
             candidates = [{"ref_no": ref_no, "amount": flt(payment_amount)}]
