@@ -38,27 +38,32 @@ class DepositImporter(JournalEntryImporter):
         if not entity_name:
             return None
 
-        candidate = str(entity_name).strip()
-        if frappe.db.exists("Customer", candidate):
-            return candidate
+        qb_customer_name = str(entity_name).strip()
 
-        simple_name = candidate.split(":")[0].strip()
-        if frappe.db.exists("Customer", simple_name):
-            return simple_name
+        # Prefer the exact QuickBooks customer_name when it exists.
+        customer = frappe.db.get_value("Customer", {"customer_name": qb_customer_name}, "name")
+        if customer:
+            return customer
 
-        row = frappe.db.sql(
+        result = frappe.db.sql(
             "select name from `tabCustomer` where lower(customer_name)=lower(%s) limit 1",
-            (candidate,),
+            (qb_customer_name,),
         )
-        if row:
-            return row[0][0]
+        if result:
+            return result[0][0]
 
-        row = frappe.db.sql(
+        # Try the normalized name before the colon (e.g. "Craven, Pam" from "Craven, Pam:Duct Work").
+        normalized_name = qb_customer_name.split(":")[0].strip()
+        customer = frappe.db.get_value("Customer", {"customer_name": normalized_name}, "name")
+        if customer:
+            return customer
+
+        result = frappe.db.sql(
             "select name from `tabCustomer` where lower(customer_name)=lower(%s) limit 1",
-            (simple_name,),
+            (normalized_name,),
         )
-        if row:
-            return row[0][0]
+        if result:
+            return result[0][0]
 
         return None
 
