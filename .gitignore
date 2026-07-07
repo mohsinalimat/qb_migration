@@ -53,3 +53,24 @@ jspm_packages/
 
 # Aider AI Chat
 .aider*
+.claude/settings.local.json
+
+
+# Aider AI Chat
+.aider*
+.claude/settings.local.json
+
+# Claude Code
+.claude/
+.claude-flow/
+.mcp.json
+CLAUDE.md
+
+# Agent framework
+agency-agents/
+
+# Logs
+logs/
+
+# Data
+qb_migration/data/
