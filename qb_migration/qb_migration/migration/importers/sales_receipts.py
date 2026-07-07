@@ -1,7 +1,6 @@
 import traceback
 
 import frappe
-from frappe.utils import flt
 
 from .invoices import SalesInvoiceImporter
 
@@ -253,6 +252,109 @@ class SalesReceiptImporter(SalesInvoiceImporter):
     def post_insert(self, doc, source_record):
         return None
 
+    def _build_payment_entry(self, sales_invoice, record):
+        company = frappe.defaults.get_global_default("company")
+        total_amt = frappe.utils.flt(record.get("total_amt") or 0, 2)
+        if total_amt <= 0:
+            raise ValueError("Sales receipt payment amount is invalid or zero")
+
+        payment_method = (record.get("payment_method") or "").strip()
+        paid_to_account = self._resolve_cash_bank_account(record.get("deposit_to_acct"))
+        invoice_receivable_account = getattr(sales_invoice, "debit_to", None)
+        receivable_account = invoice_receivable_account or self._resolve_receivable_account(company)
+
+        if not receivable_account:
+            raise ValueError("Could not resolve customer receivable account for payment entry")
+        if not paid_to_account:
+            raise ValueError("Could not resolve paid_to account for sales receipt payment")
+
+        mode_of_payment = self._resolve_mode_of_payment(payment_method, account=paid_to_account)
+
+        outstanding_amount = frappe.utils.flt(getattr(sales_invoice, "outstanding_amount", getattr(sales_invoice, "grand_total", 0)), 2)
+
+        if total_amt > outstanding_amount:
+            if total_amt - outstanding_amount <= 0.02:
+                total_amt = outstanding_amount
+            else:
+                raise ValueError(
+                    f"Sales receipt payment amount {total_amt} exceeds invoice outstanding {outstanding_amount}"
+                )
+
+        return {
+            "doctype": "Payment Entry",
+            "payment_type": "Receive",
+            "company": company,
+            "posting_date": self.normalize_date(record.get("date")),
+            "mode_of_payment": mode_of_payment,
+            "party_type": "Customer",
+            "party": sales_invoice.customer,
+            "party_account": receivable_account,
+            "paid_from": receivable_account,
+            "paid_to": paid_to_account,
+            "paid_amount": total_amt,
+            "received_amount": total_amt,
+            "reference_no": record.get("ref_no") or str(record.get("txn_id") or ""),
+            "reference_date": self.normalize_date(record.get("date")),
+            "remarks": record.get("memo") or "",
+            "references": [{
+                "reference_doctype": "Sales Invoice",
+                "reference_name": sales_invoice.name,
+                "total_amount": frappe.utils.flt(getattr(sales_invoice, "grand_total", 0), 2),
+                "allocated_amount": total_amt,
+            }],
+        }
+
+    def _get_or_create_tax_account(self, tax_item):
+        """Get or create a liability account for the given tax item."""
+        company = frappe.defaults.get_global_default("company")
+        # Use a clean account name based on the tax item, or fallback to "Sales Tax"
+        account_name = (tax_item or "Sales Tax").strip()
+        # Search for an existing account with the same name and company
+        existing = frappe.db.get_value(
+            "Account",
+            {"account_name": account_name, "company": company, "is_group": 0},
+            "name"
+        )
+        if existing:
+            return existing
+
+        # Find a suitable parent account (Current Liabilities or any Liability group)
+        parent_account = frappe.db.get_value(
+            "Account",
+            {"account_type": "Payable", "is_group": 1, "company": company},
+            "name"
+        )
+        if not parent_account:
+            parent_account = frappe.db.get_value(
+                "Account",
+                {"root_type": "Liability", "is_group": 1, "company": company},
+                "name"
+            )
+        if not parent_account:
+            # Fallback: create under "Liabilities" if it exists, otherwise use the root
+            parent_account = frappe.db.get_value(
+                "Account",
+                {"root_type": "Liability", "is_group": 1, "company": company},
+                "name"
+            )
+            if not parent_account:
+                raise ValueError("No Liability group account found to create tax account")
+
+        # Create the new account
+        account = frappe.get_doc({
+            "doctype": "Account",
+            "account_name": account_name,
+            "company": company,
+            "parent_account": parent_account,
+            "account_type": "Tax",
+            "root_type": "Liability",
+            "is_group": 0,
+        })
+        account.flags.ignore_permissions = True
+        account.insert()
+        frappe.db.commit()
+        return account.name
+
     def run(self, dry_run: bool = False):
         records = self.load_data()
         total = len(records)
@@ -264,12 +366,24 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             source_id = self.get_source_id(record)
             if not source_id:
                 failed += 1
+                self.append_detailed_log(
+                    "Failed",
+                    f"record_{i + 1}",
+                    "Missing source id",
+                    details={"record_index": i + 1},
+                )
                 print(f"  FAIL: missing source id for record {i+1}")
                 continue
 
             if self.is_imported(source_id):
                 skipped += 1
                 print(f"  SKIP [{source_id}]: Already imported")
+                self.append_detailed_log(
+                    "Skipped",
+                    source_id,
+                    "Already imported",
+                    details={"record_index": i + 1},
+                )
                 continue
 
             try:
@@ -277,6 +391,12 @@ class SalesReceiptImporter(SalesInvoiceImporter):
                 if doc_data is None:
                     skipped += 1
                     print(f"  SKIP [{source_id}]: Mapper returned no document data")
+                    self.append_detailed_log(
+                        "Skipped",
+                        source_id,
+                        "Mapper returned no document data",
+                        details={"record_index": i + 1},
+                    )
                     continue
 
                 if isinstance(doc_data, dict) and doc_data.get("_skip"):
@@ -299,25 +419,50 @@ class SalesReceiptImporter(SalesInvoiceImporter):
                     success += 1
                     continue
 
-                doc = frappe.get_doc(doc_data)
-                doc.flags.ignore_permissions = True
-                doc.flags.ignore_mandatory = False
-                doc.insert()
+                invoice = frappe.get_doc(doc_data)
+                invoice.flags.ignore_permissions = True
+                invoice.flags.ignore_mandatory = False
+                if invoice.name and frappe.db.exists("Sales Invoice", invoice.name):
+                    invoice = frappe.get_doc("Sales Invoice", invoice.name)
+                    if invoice.docstatus == 0:
+                        invoice.flags.ignore_permissions = True
+                        invoice.submit()
+                else:
+                    invoice.insert()
+                    invoice.submit()
+                frappe.db.commit()
 
-                if self.target_doctype in (
-                    "Purchase Invoice",
-                    "Sales Invoice",
-                    "Payment Entry",
-                    "Journal Entry",
-                ):
-                    doc.submit()
+                # Reload invoice after submit to ensure auto-set fields like debit_to and outstanding_amount are available
+                invoice.reload()
+
+                payment_ref = record.get("ref_no") or str(record.get("txn_id") or "")
+                payment_entry = None
+                if payment_ref:
+                    existing_payment = frappe.db.get_value(
+                        "Payment Entry",
+                        {"reference_no": payment_ref, "party": invoice.customer, "company": invoice.company},
+                        "name",
+                    )
+                    if existing_payment:
+                        payment_entry = frappe.get_doc("Payment Entry", existing_payment)
+                        if payment_entry.docstatus == 0:
+                            payment_entry.flags.ignore_permissions = True
+                            payment_entry.submit()
+
+                if not payment_entry:
+                    payment_data = self._build_payment_entry(invoice, record)
+                    payment_entry = frappe.get_doc(payment_data)
+                    payment_entry.flags.ignore_permissions = True
+                    payment_entry.flags.ignore_mandatory = False
+                    payment_entry.insert()
+                    payment_entry.submit()
 
                 if hasattr(self, "post_insert"):
-                    self.post_insert(doc, record)
+                    self.post_insert(invoice, record)
 
                 frappe.db.commit()
-                self.log_success(source_id, doc.name, getattr(doc, "doctype", self.target_doctype))
-                print(f"  SUCCESS: {source_id} → {doc.name}")
+                self.log_success(source_id, payment_entry.name, payment_entry.doctype)
+                print(f"  SUCCESS: {source_id} → Invoice {invoice.name}, Payment Entry {payment_entry.name}")
                 success += 1
 
             except Exception as exc:
@@ -390,20 +535,6 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             raise ValueError("No valid item lines found for sales receipt")
 
         total_amt = abs(float(record.get("total_amt") or 0))
-        payment_method = (record.get("payment_method") or "").strip()
-        payment_account = self._resolve_cash_bank_account(record.get("deposit_to_acct"))
-
-        mode_of_payment = None
-        payments = []
-        if payment_method or payment_account:
-            if not payment_method:
-                payment_method = "Cash"
-            mode_of_payment = self._resolve_mode_of_payment(payment_method, account=payment_account)
-            if mode_of_payment:
-                payments = [{
-                    "mode_of_payment": mode_of_payment,
-                    "amount": total_amt,
-                }]
 
         doc = {
             "doctype": "Sales Invoice",
@@ -416,7 +547,6 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
             "set_posting_time": 1,
-            "is_pos": 1 if mode_of_payment else 0,
             "total": abs(float(record.get("subtotal") or 0)),
             "total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
             "grand_total": total_amt,
@@ -425,32 +555,28 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "base_grand_total": total_amt,
         }
 
-        si_meta = frappe.get_meta("Sales Invoice")
+        # ---- Tax handling ----
+        # Always use a manual tax row if tax is due, to guarantee exact match with QB.
+        sales_tax_total = abs(float(record.get("sales_tax_total") or 0))
+        if sales_tax_total > 0:
+            tax_account = self._get_or_create_tax_account(record.get("tax_item"))
+            tax_row = {
+                "charge_type": "Actual",
+                "account_head": tax_account,
+                "rate": abs(float(record.get("sales_tax_pct") or 0)),
+                "tax_amount": sales_tax_total,
+                "included_in_print_rate": 0,
+                "description": f"Sales Tax ({record.get('tax_item') or 'Default'})"
+            }
+            doc.setdefault("taxes", []).append(tax_row)
+        # If no tax, do not add any tax rows; the template is not needed.
 
-        if mode_of_payment:
-            doc["mode_of_payment"] = mode_of_payment
-            doc["payments"] = payments
-
-        if payment_account:
-            doc["cash_bank_account"] = payment_account
-            if si_meta.has_field("account_for_payment"):
-                doc["account_for_payment"] = payment_account
-
-        if si_meta.has_field("paid_amount"):
-            doc["paid_amount"] = total_amt
-        if si_meta.has_field("outstanding_amount"):
-            doc["outstanding_amount"] = 0
-
-        if record.get("tax_item"):
-            template = self.resolve_taxes_template(record.get("tax_item"))
-            if template:
-                doc["taxes_and_charges"] = template
+        # Optionally store the tax rate for informational purposes
+        if record.get("sales_tax_pct") not in (None, ""):
+            doc["taxes_and_charges_rate"] = abs(float(record.get("sales_tax_pct") or 0))
 
         tax_category = self._resolve_tax_category(record.get("tax_code"))
         if tax_category:
             doc["tax_category"] = tax_category
-
-        if record.get("sales_tax_pct") not in (None, ""):
-            doc["taxes_and_charges_rate"] = abs(float(record.get("sales_tax_pct") or 0))
 
         return doc
