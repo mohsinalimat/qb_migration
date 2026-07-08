@@ -133,6 +133,116 @@ class CustomerImporter(BaseImporter):
             ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Miami", "Dallas"]
         )
 
+    def _get_customer_currency_lookup(self):
+        if getattr(self, "_customer_currency_lookup", None) is None:
+            self._customer_currency_lookup = {}
+            try:
+                records = self.load_data() or []
+            except Exception:
+                return self._customer_currency_lookup
+
+            for record in records:
+                if not isinstance(record, dict):
+                    continue
+
+                customer_name = (record.get("name") or "").strip()
+                currency = (record.get("currency") or "").strip()
+                if customer_name and currency:
+                    self._customer_currency_lookup[customer_name] = currency
+
+        return self._customer_currency_lookup
+
+    def _is_composite_customer_name(self, customer_name):
+        return bool(customer_name and ":" in str(customer_name))
+
+    def _resolve_customer_currency(self, customer_name):
+        if not customer_name:
+            return None
+
+        customer_name = str(customer_name).strip()
+        if not customer_name:
+            return None
+
+        currency = frappe.db.get_value("Customer", {"customer_name": customer_name}, "default_currency")
+        if currency:
+            return currency
+
+        return self._get_customer_currency_lookup().get(customer_name)
+
+    def _infer_default_currency_from_customer_name(self, customer_name):
+        if not self._is_composite_customer_name(customer_name):
+            return None
+
+        parts = [part.strip() for part in str(customer_name).split(":") if part and part.strip()]
+        if len(parts) < 2:
+            return None
+
+        matched_currencies = []
+        for part in parts:
+            currency = self._resolve_customer_currency(part)
+            if currency:
+                matched_currencies.append(currency)
+
+        if not matched_currencies:
+            return None
+
+        unique_currencies = list(dict.fromkeys(matched_currencies))
+        if len(unique_currencies) == 1:
+            return unique_currencies[0]
+
+        return None
+
+    def _apply_composite_default_currency(self, customer_name, customer_name_or_docname=None):
+        if not self._is_composite_customer_name(customer_name):
+            return None
+
+        inferred_currency = self._infer_default_currency_from_customer_name(customer_name)
+        if not inferred_currency:
+            return None
+
+        if customer_name_or_docname:
+            existing_currency = frappe.db.get_value(
+                "Customer", customer_name_or_docname, "default_currency"
+            )
+            if existing_currency == inferred_currency:
+                return inferred_currency
+
+            customer_doc = frappe.get_doc("Customer", customer_name_or_docname)
+            customer_doc.default_currency = inferred_currency
+            customer_doc.flags.ignore_permissions = True
+            customer_doc.save(ignore_permissions=True)
+
+        return inferred_currency
+
+    def _update_existing_composite_customers(self):
+        composite_customers = frappe.db.get_all(
+            "Customer",
+            filters={"customer_name": ["like", "%:%"]},
+            fields=["name", "customer_name", "default_currency"],
+        )
+
+        for customer in composite_customers or []:
+            if customer.get("default_currency"):
+                continue
+
+            inferred_currency = self._infer_default_currency_from_customer_name(
+                customer.get("customer_name")
+            )
+            if not inferred_currency:
+                continue
+
+            customer_doc = frappe.get_doc("Customer", customer.get("name"))
+            customer_doc.default_currency = inferred_currency
+            customer_doc.flags.ignore_permissions = True
+            customer_doc.save(ignore_permissions=True)
+
+    def run(self, dry_run=False):
+        result = super().run(dry_run=dry_run)
+        if not dry_run:
+            self._update_existing_composite_customers()
+            frappe.db.commit()
+        return result
+
     def resolve_customer_group(self, qb_group_name):
         """
         Resolve a Customer Group name to a leaf (non-group) Customer Group.
@@ -200,6 +310,10 @@ class CustomerImporter(BaseImporter):
         # Direct mappings from QB fields to ERPNext fields
         if record.get("currency"):
             doc["default_currency"] = record.get("currency")
+        else:
+            inferred_currency = self._infer_default_currency_from_customer_name(record.get("name"))
+            if inferred_currency:
+                doc["default_currency"] = inferred_currency
 
         if record.get("terms"):
             doc["payment_terms_template"] = record.get("terms")
@@ -253,6 +367,8 @@ class CustomerImporter(BaseImporter):
             return None
 
         existing = frappe.db.get_value("Customer", {"customer_name": customer_name}, "name")
+        if existing and self._is_composite_customer_name(customer_name):
+            self._apply_composite_default_currency(customer_name, existing)
         return existing
 
     def post_insert(self, doc, source_record):
