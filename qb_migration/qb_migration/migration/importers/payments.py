@@ -18,8 +18,9 @@ class PaymentsImporter(BaseImporter):
     def _parse_customer(self, cust_name: str) -> str | None:
         if not cust_name:
             return None
-        # QB customer strings often contain a colon-separated job; take the left part
-        return cust_name.split(":")[0].strip()
+            # Preserve the full QuickBooks customer string (including any
+            # ":Project" or job suffix) so ERPNext `party` matches the JSON.
+            return str(cust_name).strip()
 
     def _resolve_payment_account(self, qb_account_name=None):
         # copy pattern from bill_payments importer: prefer specific account, else Bank/Cash
