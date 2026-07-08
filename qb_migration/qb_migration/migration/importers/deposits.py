@@ -38,33 +38,28 @@ class DepositImporter(JournalEntryImporter):
         if not entity_name:
             return None
 
-        qb_customer_name = str(entity_name).strip()
+        candidate = str(entity_name).strip()
+        if frappe.db.exists("Customer", candidate):
+            return candidate
 
-        # Prefer the exact QuickBooks customer_name when it exists.
-        customer = frappe.db.get_value("Customer", {"customer_name": qb_customer_name}, "name")
-        if customer:
-            return customer
+        simple_name = candidate.split(":")[0].strip()
+        if frappe.db.exists("Customer", simple_name):
+            return simple_name
 
-        result = frappe.db.sql(
+        row = frappe.db.sql(
             "select name from `tabCustomer` where lower(customer_name)=lower(%s) limit 1",
-            (qb_customer_name,),
+            (candidate,),
         )
-        if result:
-            return result[0][0]
+        if row:
+            return row[0][0]
 
-        # Try the normalized name before the colon (e.g. "Craven, Pam" from "Craven, Pam:Duct Work").
-        normalized_name = qb_customer_name.split(":")[0].strip()
-        customer = frappe.db.get_value("Customer", {"customer_name": normalized_name}, "name")
-        if customer:
-            return customer
-
-        result = frappe.db.sql(
+        row = frappe.db.sql(
             "select name from `tabCustomer` where lower(customer_name)=lower(%s) limit 1",
-            (normalized_name,),
+            (simple_name,),
         )
-        if result:
-            return result[0][0]
-
+        if row:
+            return row[0][0]
+            
         return None
 
     def _resolve_receivable_account(self, currency=None):
@@ -201,10 +196,15 @@ class DepositImporter(JournalEntryImporter):
         company = frappe.defaults.get_global_default("company")
         company_currency = frappe.db.get_value("Company", company, "default_currency")
         currency, exchange_rate = self._get_currency_details(record, company_currency)
-        bank_account = self._resolve_account(record.get("deposit_to_acct"))
+        deposit_to = record.get("deposit_to_acct")
+        bank_account = self._resolve_account(deposit_to) if deposit_to else None
+        # If deposit_to_acct is missing or cannot be resolved, default to
+        # 'Undeposited Funds' so amounts go to the undeposited account.
+        if not bank_account:
+            bank_account = self._resolve_account("Undeposited Funds")
         if not bank_account:
             raise ValueError(
-                f"Bank account not found for deposit_to_acct={record.get('deposit_to_acct')}"
+                f"Bank account not found for deposit_to_acct={deposit_to}"
             )
 
         payment_entries = []
@@ -216,11 +216,36 @@ class DepositImporter(JournalEntryImporter):
             if amount <= 0:
                 continue
 
-            party_type, party = self._resolve_party(line.get("entity"))
-            if not party:
-                party = self._ensure_customer(line.get("entity"))
-                if party:
+            entity_raw = line.get("entity")
+            party_type, party = self._resolve_party(entity_raw)
+            # If the party doc doesn't exist, try to create a Customer with the
+            # exact QuickBooks `entity` value as its document name so we
+            # preserve the full value (including any ':Project' suffix).
+            if not party and entity_raw:
+                # Try to create a Customer with `name` == entity_raw. If that
+                # fails (e.g. due to invalid characters), fall back to the
+                # existing _ensure_customer behaviour.
+                try:
+                    if not frappe.db.exists("Customer", entity_raw):
+                        cust = frappe.get_doc({
+                            "doctype": "Customer",
+                            "name": entity_raw,
+                            "customer_name": entity_raw,
+                            "customer_group": "All Customers",
+                            "territory": "All Territories",
+                        })
+                        cust.flags.ignore_permissions = True
+                        cust.insert()
+                        frappe.db.commit()
                     party_type = "Customer"
+                    party = entity_raw
+                except Exception:
+                    # Fallback: create customer using the safer helper which may
+                    # generate a different docname, but preserves the
+                    # customer_name field.
+                    party = self._ensure_customer(entity_raw)
+                    if party:
+                        party_type = "Customer"
 
             if not party and line.get("txn_type") != "Deposit":
                 payment_entries.append({
@@ -236,12 +261,9 @@ class DepositImporter(JournalEntryImporter):
             if party and not party_account:
                 raise ValueError("Could not resolve party account for deposit payment")
 
-            line_account = self._resolve_account(line.get("account"))
-            paid_from = line_account or party_account
-            if not paid_from:
-                raise ValueError(
-                    f"Could not resolve paid_from account for line account={line.get('account')}"
-                )
+            # IMPORTANT: Do NOT use the JSON `account` field to set `paid_from`.
+            # Leave `paid_from` unset so ERPNext can determine it automatically
+            # based on the selected `party` and party accounting configuration.
 
             payment_method = line.get("payment_method") or record.get("payment_method") or "Bank"
             posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
@@ -253,7 +275,6 @@ class DepositImporter(JournalEntryImporter):
                 "posting_date": posting_date,
                 "reference_no": reference_no,
                 "reference_date": posting_date,
-                "paid_from": paid_from,
                 "paid_to": bank_account,
                 "mode_of_payment": self._resolve_mode_of_payment(payment_method),
                 "paid_amount": amount,
@@ -262,9 +283,10 @@ class DepositImporter(JournalEntryImporter):
                 "_source_id": line.get("txn_line_id") or line.get("txn_id") or reference_no,
             }
 
-            if party and party_type:
+            if entity_raw and party_type:
+                # Preserve the raw entity string as the Payment Entry `party`.
                 payment_entry["party_type"] = party_type
-                payment_entry["party"] = party
+                payment_entry["party"] = entity_raw
                 if party_account:
                     payment_entry["party_account"] = party_account
 
@@ -291,10 +313,14 @@ class DepositImporter(JournalEntryImporter):
             return None
 
         company = frappe.defaults.get_global_default("company")
-        bank_account = self._resolve_account(record.get("deposit_to_acct"))
+        deposit_to = record.get("deposit_to_acct")
+        bank_account = self._resolve_account(deposit_to) if deposit_to else None
+        # Default to 'Undeposited Funds' when deposit_to_acct is missing.
+        if not bank_account:
+            bank_account = self._resolve_account("Undeposited Funds")
         if not bank_account:
             raise ValueError(
-                f"Bank account not found for deposit_to_acct={record.get('deposit_to_acct')}"
+                f"Bank account not found for deposit_to_acct={deposit_to}"
             )
 
         posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
@@ -330,7 +356,15 @@ class DepositImporter(JournalEntryImporter):
             if account_type in ("Receivable", "Payable"):
                 candidate = line.get("entity") or record.get("memo")
                 party_type, party = self._resolve_party(candidate)
-                if party_type and party:
+                # Preserve the exact JSON `entity` string when possible so
+                # ERPNext `party` matches the QuickBooks value (including
+                # any ":Project" suffix). If we can't determine a party
+                # type from the raw candidate, fall back to the resolved
+                # party value.
+                if candidate and party_type:
+                    row["party_type"] = party_type
+                    row["party"] = candidate
+                elif party_type and party:
                     row["party_type"] = party_type
                     row["party"] = party
 
