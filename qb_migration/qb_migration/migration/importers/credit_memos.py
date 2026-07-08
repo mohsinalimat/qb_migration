@@ -18,21 +18,24 @@ class CreditMemoImporter(SalesInvoiceImporter):
         if not qb_customer_name:
             raise ValueError("Customer name missing on credit memo record")
 
-        normalized_name = qb_customer_name.split(":")[0].strip()
-        customer = frappe.db.get_value("Customer", {"customer_name": normalized_name}, "name")
+        qb_customer_name = str(qb_customer_name).strip()
+        if not qb_customer_name:
+            raise ValueError("Customer name missing on credit memo record")
+
+        customer = frappe.db.get_value("Customer", {"customer_name": qb_customer_name}, "name")
         if customer:
             return customer
 
         result = frappe.db.sql(
             "select name from `tabCustomer` where lower(customer_name)=lower(%s) limit 1",
-            normalized_name,
+            qb_customer_name,
         )
         if result:
             return result[0][0]
 
         new_customer = frappe.get_doc({
             "doctype": "Customer",
-            "customer_name": normalized_name,
+            "customer_name": qb_customer_name,
             "customer_type": "Individual",
             "customer_group": self.get_or_create_customer_group(),
             "territory": "All Territories",
