@@ -36,7 +36,7 @@ QB_ACCOUNT_TYPE_MAP = {
 #  QB SPECIAL TYPE → (ERPNext account_type, root_type)
 # ====================================================================
 QB_SPECIAL_TYPE_MAP = {
-    "UndepositedFunds": ("Receivable", "Asset"),
+    "UndepositedFunds": ("Cash", "Asset"),
 }
 
 # ====================================================================
