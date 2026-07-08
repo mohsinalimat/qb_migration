@@ -17,7 +17,11 @@ class SalesReceiptImporter(SalesInvoiceImporter):
     def resolve_customer(self, qb_customer_name):
         if not qb_customer_name:
             raise ValueError("Customer name missing on sales receipt record")
-        
+
+        qb_customer_name = str(qb_customer_name).strip()
+        if not qb_customer_name:
+            raise ValueError("Customer name missing on sales receipt record")
+
         # Prefer the exact QuickBooks customer name when it exists.
         customer = frappe.db.get_value("Customer", {"customer_name": qb_customer_name}, "name")
         if customer:
@@ -44,7 +48,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
         new_customer = frappe.get_doc({
             "doctype": "Customer",
-            "customer_name": normalized_name,
+            "customer_name": qb_customer_name,
             "customer_type": "Individual",
             "customer_group": self.get_or_create_customer_group(),
             "territory": "All Territories",
