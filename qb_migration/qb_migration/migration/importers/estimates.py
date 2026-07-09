@@ -1,6 +1,7 @@
 import frappe
 
 from ..base_importer import BaseImporter
+from .customer_currency import ensure_customer_currency
 
 
 class EstimateImporter(BaseImporter):
@@ -102,6 +103,7 @@ class EstimateImporter(BaseImporter):
             "customer_group": self.get_or_create_customer_group(),
             "territory": "All Territories",
         })
+        ensure_customer_currency(qb_customer_name, new_customer)
         new_customer.flags.ignore_permissions = True
         new_customer.insert()
         frappe.db.commit()

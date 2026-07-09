@@ -3,6 +3,7 @@ import traceback
 import frappe
 
 from .invoices import SalesInvoiceImporter
+from .customer_currency import ensure_customer_currency
 
 
 class SalesReceiptImporter(SalesInvoiceImporter):
@@ -53,6 +54,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "customer_group": self.get_or_create_customer_group(),
             "territory": "All Territories",
         })
+        ensure_customer_currency(qb_customer_name, new_customer)
         new_customer.flags.ignore_permissions = True
         new_customer.insert()
         frappe.db.commit()

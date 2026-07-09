@@ -3,6 +3,7 @@ import random
 import frappe
 
 from ..base_importer import BaseImporter
+from .customer_currency import ensure_customer_currency, get_customer_currency, infer_composite_customer_currency
 
 
 class CustomerImporter(BaseImporter):
@@ -134,63 +135,16 @@ class CustomerImporter(BaseImporter):
         )
 
     def _get_customer_currency_lookup(self):
-        if getattr(self, "_customer_currency_lookup", None) is None:
-            self._customer_currency_lookup = {}
-            try:
-                records = self.load_data() or []
-            except Exception:
-                return self._customer_currency_lookup
-
-            for record in records:
-                if not isinstance(record, dict):
-                    continue
-
-                customer_name = (record.get("name") or "").strip()
-                currency = (record.get("currency") or "").strip()
-                if customer_name and currency:
-                    self._customer_currency_lookup[customer_name] = currency
-
-        return self._customer_currency_lookup
+        return {}
 
     def _is_composite_customer_name(self, customer_name):
         return bool(customer_name and ":" in str(customer_name))
 
     def _resolve_customer_currency(self, customer_name):
-        if not customer_name:
-            return None
-
-        customer_name = str(customer_name).strip()
-        if not customer_name:
-            return None
-
-        currency = frappe.db.get_value("Customer", {"customer_name": customer_name}, "default_currency")
-        if currency:
-            return currency
-
-        return self._get_customer_currency_lookup().get(customer_name)
+        return get_customer_currency(customer_name)
 
     def _infer_default_currency_from_customer_name(self, customer_name):
-        if not self._is_composite_customer_name(customer_name):
-            return None
-
-        parts = [part.strip() for part in str(customer_name).split(":") if part and part.strip()]
-        if len(parts) < 2:
-            return None
-
-        matched_currencies = []
-        for part in parts:
-            currency = self._resolve_customer_currency(part)
-            if currency:
-                matched_currencies.append(currency)
-
-        if not matched_currencies:
-            return None
-
-        unique_currencies = list(dict.fromkeys(matched_currencies))
-        if len(unique_currencies) == 1:
-            return unique_currencies[0]
-
-        return None
+        return infer_composite_customer_currency(customer_name)
 
     def _apply_composite_default_currency(self, customer_name, customer_name_or_docname=None):
         if not self._is_composite_customer_name(customer_name):
@@ -201,16 +155,8 @@ class CustomerImporter(BaseImporter):
             return None
 
         if customer_name_or_docname:
-            existing_currency = frappe.db.get_value(
-                "Customer", customer_name_or_docname, "default_currency"
-            )
-            if existing_currency == inferred_currency:
-                return inferred_currency
-
             customer_doc = frappe.get_doc("Customer", customer_name_or_docname)
-            customer_doc.default_currency = inferred_currency
-            customer_doc.flags.ignore_permissions = True
-            customer_doc.save(ignore_permissions=True)
+            ensure_customer_currency(customer_name, customer_doc, save=True)
 
         return inferred_currency
 
@@ -232,9 +178,7 @@ class CustomerImporter(BaseImporter):
                 continue
 
             customer_doc = frappe.get_doc("Customer", customer.get("name"))
-            customer_doc.default_currency = inferred_currency
-            customer_doc.flags.ignore_permissions = True
-            customer_doc.save(ignore_permissions=True)
+            ensure_customer_currency(customer.get("customer_name"), customer_doc, save=True)
 
     def run(self, dry_run=False):
         result = super().run(dry_run=dry_run)
@@ -372,6 +316,16 @@ class CustomerImporter(BaseImporter):
         return existing
 
     def post_insert(self, doc, source_record):
+        # Ensure composite customers get a default_currency immediately
+        # after insertion so the currency is present on first-run imports.
+        try:
+            cust_name = getattr(doc, "customer_name", None) or getattr(doc, "name", None)
+            if cust_name and self._is_composite_customer_name(cust_name):
+                ensure_customer_currency(cust_name, doc, save=True)
+        except Exception:
+            # Don't fail the whole import for currency inference errors
+            pass
+
         address = source_record.get("_address")
         if not address:
             return
