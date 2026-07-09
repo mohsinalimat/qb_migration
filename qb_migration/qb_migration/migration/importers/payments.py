@@ -250,7 +250,9 @@ class PaymentsImporter(BaseImporter):
             record.get("reference_date") or record.get("date") or record.get("txn_date") or nowdate()
         )
 
-        # Payment Entry for receipts: party_account is receivable, paid_to is the bank/cash account
+        # For Receive-type Payment Entries, leave `paid_from` unset so ERPNext can
+        # resolve it automatically from the selected `party` and the configured
+        # party accounting defaults, while still setting the correct party account.
         return {
             "doctype": "Payment Entry",
             "payment_type": "Receive",
@@ -264,7 +266,6 @@ class PaymentsImporter(BaseImporter):
             "reference_date": reference_date,
             "paid_amount": final_amount,
             "received_amount": final_amount,
-            "paid_from": receivable_account,
             "paid_to": payment_account,
             "references": references,
             "remarks": record.get("memo") or "",
