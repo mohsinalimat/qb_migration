@@ -5,7 +5,7 @@ from ..base_importer import BaseImporter
 
 class SalesTaxItemsImporter(BaseImporter):
     source_type = "QB_SALES_TAX_ITEM"
-    target_doctype = "Sales Taxes and Charges Template"
+    target_doctype = "Item Tax Template"
     json_file = "sales_tax_items.json"
     json_key = "sales_tax_items"
 
@@ -16,7 +16,14 @@ class SalesTaxItemsImporter(BaseImporter):
         title = doc_data.get("title")
         if not title:
             return None
-        return frappe.db.exists("Sales Taxes and Charges Template", {"title": title})
+        return frappe.db.exists("Item Tax Template", {"title": title})
+
+    def _field_exists(self, doctype, fieldname):
+        try:
+            meta = frappe.get_meta(doctype)
+        except Exception:
+            return False
+        return bool(meta.get_field(fieldname))
 
     def _resolve_account_head(self, record):
         company = frappe.defaults.get_global_default("company")
@@ -66,6 +73,7 @@ class SalesTaxItemsImporter(BaseImporter):
             "doctype": "Account",
             "account_name": account_name,
             "company": company,
+            "account_type": "Tax",
             "parent_account": parent_account,
             "root_type": "Liability",
             "is_group": 0,
@@ -87,18 +95,24 @@ class SalesTaxItemsImporter(BaseImporter):
 
         account_head = self._resolve_account_head(record)
         description = str(record.get("description") or title).strip() or title
+        company = frappe.defaults.get_global_default("company")
 
-        return {
-            "doctype": "Sales Taxes and Charges Template",
+        doc_data = {
+            "doctype": "Item Tax Template",
             "title": title,
-            "company": frappe.defaults.get_global_default("company"),
+            "company": company,
             "disabled": 0 if record.get("active") else 1,
             "taxes": [{
-                "doctype": "Sales Taxes and Charges",
-                "charge_type": "On Net Total",
-                "account_head": account_head,
-                "description": description,
-                "rate": tax_rate,
-                "included_in_print_rate": 0,
+                "doctype": "Item Tax Template Detail",
+                "tax_type": account_head,
+                "tax_rate": tax_rate,
             }],
         }
+
+        if self._field_exists("Item Tax Template", "description") and description:
+            doc_data["description"] = description
+
+        if self._field_exists("Item Tax Template", "quickbooks_id"):
+            doc_data["quickbooks_id"] = str(record.get("list_id") or "")
+
+        return doc_data
