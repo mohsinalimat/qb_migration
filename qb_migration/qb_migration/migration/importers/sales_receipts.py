@@ -497,6 +497,17 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         print(f"[{self.source_type}] Done — Success: {success}, Failed: {failed}, Skipped: {skipped}")
         return {"success": success, "failed": failed, "skipped": skipped}
 
+    def _get_line_item_tax_template(self, record, line):
+        line_tax_code = str(line.get("tax_code") or "").strip()
+        if line_tax_code.lower() != "tax":
+            return None
+
+        parent_tax_item = str(record.get("tax_item") or "").strip()
+        if not parent_tax_item:
+            return None
+
+        return self._resolve_item_tax_template(parent_tax_item)
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         customer = self.resolve_customer(record.get("cust_name"))
@@ -543,7 +554,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             if cost_center:
                 item_row["cost_center"] = cost_center
 
-            tax_template = self._resolve_item_tax_template(line.get("tax_code"))
+            tax_template = self._get_line_item_tax_template(record, line)
             if tax_template:
                 item_row["item_tax_template"] = tax_template
 
@@ -574,9 +585,10 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         }
 
         # ---- Tax handling ----
-        # Always use a manual tax row if tax is due, to guarantee exact match with QB.
         sales_tax_total = abs(float(record.get("sales_tax_total") or 0))
-        if sales_tax_total > 0:
+        has_item_level_tax = any(item.get("item_tax_template") for item in items)
+
+        if sales_tax_total > 0 and not has_item_level_tax:
             tax_account = self._get_or_create_tax_account(record.get("tax_item"))
             tax_row = {
                 "charge_type": "Actual",
@@ -587,14 +599,14 @@ class SalesReceiptImporter(SalesInvoiceImporter):
                 "description": f"Sales Tax ({record.get('tax_item') or 'Default'})"
             }
             doc.setdefault("taxes", []).append(tax_row)
-        # If no tax, do not add any tax rows; the template is not needed.
 
         # Optionally store the tax rate for informational purposes
         if record.get("sales_tax_pct") not in (None, ""):
             doc["taxes_and_charges_rate"] = abs(float(record.get("sales_tax_pct") or 0))
 
-        tax_category = self._resolve_tax_category(record.get("tax_code"))
-        if tax_category:
-            doc["tax_category"] = tax_category
+        if not has_item_level_tax:
+            tax_category = self._resolve_tax_category(record.get("tax_code"))
+            if tax_category:
+                doc["tax_category"] = tax_category
 
         return doc
