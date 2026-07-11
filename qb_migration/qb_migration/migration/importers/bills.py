@@ -132,6 +132,102 @@ class PurchaseInvoiceImporter(BaseImporter):
 
         return account
 
+    def _normalize_qty(self, value):
+        qty = value if value not in (None, "") else 1
+        try:
+            qty = float(qty)
+            return int(qty) if qty.is_integer() else qty
+        except (TypeError, ValueError):
+            return 1
+
+    def _normalize_rate(self, line, qty):
+        rate = line.get("rate")
+        if rate not in (None, ""):
+            try:
+                return float(rate)
+            except (TypeError, ValueError):
+                return 0
+
+        try:
+            return float(line.get("amount", 0)) / qty if qty else 0
+        except (TypeError, ValueError, ZeroDivisionError):
+            return 0
+
+    def _resolve_cost_center(self, class_name):
+        if not class_name:
+            return None
+
+        cost_center_name = str(class_name).strip()
+        if not cost_center_name:
+            return None
+
+        return frappe.db.get_value("Cost Center", {"cost_center_name": cost_center_name}, "name")
+
+    def _resolve_project(self, customer_name):
+        if not customer_name:
+            return None
+
+        project_name = str(customer_name).strip()
+        if not project_name:
+            return None
+
+        return frappe.db.get_value("Project", {"project_name": project_name}, "name")
+
+    def _build_item_row(self, line):
+        qty = self._normalize_qty(line.get("qty", 1) or 1)
+        rate = self._normalize_rate(line, qty)
+
+        item_idx = line.get("line_no")
+        try:
+            item_idx = int(item_idx)
+        except (TypeError, ValueError):
+            item_idx = None
+
+        item_data = {
+            "item_code": self.resolve_item(line.get("item", "")),
+            "qty": qty,
+            "rate": rate,
+            "amount": line.get("amount", 0),
+            "expense_account": self._resolve_account(line.get("gl_code") or line.get("account")),
+            "description": line.get("description", ""),
+        }
+
+        if item_idx is not None:
+            item_data["idx"] = item_idx
+
+        tax_template = line.get("tax_code")
+        if tax_template:
+            item_data["item_tax_template"] = tax_template
+
+        cost_center = self._resolve_cost_center(line.get("class"))
+        if cost_center:
+            item_data["cost_center"] = cost_center
+
+        project = self._resolve_project(line.get("customer"))
+        if project:
+            item_data["project"] = project
+
+        return item_data
+
+    def _build_tax_row(self, line):
+        account_head = self._resolve_account(line.get("account") or line.get("gl_code"))
+        if not account_head:
+            return None
+
+        amount = line.get("amount", 0)
+        try:
+            amount = float(amount)
+        except (TypeError, ValueError):
+            amount = 0
+
+        return {
+            "charge_type": "Actual",
+            "account_head": account_head,
+            "tax_amount": amount,
+            "description": line.get("description") or line.get("account") or line.get("gl_code") or "",
+            "included_in_print_rate": 0,
+        }
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         supplier_name = record.get("vendor") or record.get("vend_name")
@@ -139,43 +235,20 @@ class PurchaseInvoiceImporter(BaseImporter):
         currency = record.get("currency") or "PKR"  # Fallback to company currency if missing
 
         items = []
+        taxes = []
+
         for line in record.get("lines", []):
-            qty = line.get("qty", 1) or 1
-            try:
-                qty = float(qty)
-                qty = int(qty) if qty.is_integer() else qty
-            except (TypeError, ValueError):
-                qty = 1
+            if not isinstance(line, dict):
+                continue
 
-            rate = line.get("rate")
-            if rate in (None, ""):
-                try:
-                    rate = float(line.get("amount", 0)) / qty if qty else 0
-                except (TypeError, ValueError, ZeroDivisionError):
-                    rate = 0
+            line_type = str(line.get("line_type") or "").strip().lower()
+            if line_type == "expense":
+                tax_row = self._build_tax_row(line)
+                if tax_row:
+                    taxes.append(tax_row)
+                continue
 
-            item_idx = line.get("line_no")
-            try:
-                item_idx = int(item_idx)
-            except (TypeError, ValueError):
-                item_idx = None
-
-            item_data = {
-                "item_code": self.resolve_item(line.get("item", "")),
-                "qty": qty,
-                "rate": rate,
-                "amount": line.get("amount", 0),
-                "expense_account": self._resolve_account(line.get("gl_code")),
-                "description": line.get("description", ""),
-            }
-
-            if item_idx is not None:
-                item_data["idx"] = item_idx
-
-            tax_template = line.get("tax_code")
-            if tax_template:
-                item_data["item_tax_template"] = tax_template
-
+            item_data = self._build_item_row(line)
             items.append(item_data)
 
         doc = {
@@ -187,12 +260,16 @@ class PurchaseInvoiceImporter(BaseImporter):
             "bill_no": record.get("ref_no", ""),
             "bill_date": self.normalize_date(record.get("date") or record.get("txn_date")),
             "company": company,
+            "update_stock": 1,
             "currency": currency,
             "credit_to": self.resolve_payable_account(supplier, currency),
             "items": items,
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "is_return": record.get("is_credit", False),
         }
+
+        if taxes:
+            doc["taxes"] = taxes
 
         payment_terms_template = self.resolve_payment_terms_template(record.get("terms"))
         if payment_terms_template:

@@ -575,6 +575,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "customer_reference": record.get("ref_no") or record.get("txn_id") or "",
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
+            "update_stock": 1,
             "set_posting_time": 1,
             "total": abs(float(record.get("subtotal") or 0)),
             "total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),

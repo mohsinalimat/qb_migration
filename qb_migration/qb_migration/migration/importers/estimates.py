@@ -171,6 +171,17 @@ class EstimateImporter(BaseImporter):
         )
         return result[0][0] if result else None
 
+    def _get_line_item_tax_template(self, record, line):
+        line_tax_code = str(line.get("tax_code") or "").strip()
+        if line_tax_code.lower() != "tax":
+            return None
+
+        parent_tax_item = str(record.get("tax_item") or "").strip()
+        if not parent_tax_item:
+            return None
+
+        return self._resolve_item_tax_template(parent_tax_item)
+
     def _ensure_uom(self, uom_name):
         if not uom_name:
             uom_name = "Nos"
@@ -366,9 +377,11 @@ class EstimateImporter(BaseImporter):
             if cost_center:
                 item_row["cost_center"] = cost_center
 
-            tax_template = self._resolve_item_tax_template(line.get("tax_code"))
-            if tax_template:
-                item_row["item_tax_template"] = tax_template
+            line_tax_code = str(line.get("tax_code") or "").strip()
+            if line_tax_code.lower() == "tax":
+                tax_template = self._get_line_item_tax_template(record, line)
+                if tax_template:
+                    item_row["item_tax_template"] = tax_template
 
             items.append(item_row)
 

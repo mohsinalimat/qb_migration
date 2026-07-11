@@ -356,6 +356,7 @@ class SalesInvoiceImporter(SalesOrderImporter):
             "posting_date": posting_date,
             "due_date": due_date,
             "set_posting_time": 1,
+            "update_stock": 1,
             "po_no": record.get("po_num") or "",
             "company": company,
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",

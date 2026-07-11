@@ -6,7 +6,6 @@ from frappe.utils import now_datetime
 from .importers.accounts import AccountImporter
 from .importers.payment_methods import PaymentMethodsImporter
 from .importers.terms import TermsImporter
-# from .importers.item_groups import ItemGroupImporter
 from .importers.price_levels import PriceLevelsImporter
 from .importers.customer_types import CustomerTypesImporter
 from .importers.vendor_types import VendorTypesImporter
@@ -105,6 +104,12 @@ def run_migration(stages=None, dry_run=False):
     print(f"Log file: {log_path}")
     print("=== Fiscal Year Preparation ===")
     ensure_fiscal_years()
+    stock_settings = frappe.get_doc("Stock Settings")
+    stock_settings.allow_negative_stock = 1
+    stock_settings.save()
+    accounts_settings = frappe.get_doc("Accounts Settings")
+    accounts_settings.enable_accounting_dimensions = 1
+    accounts_settings.save()
     results = {}
 
     for stage_name, ImporterClass in PIPELINE:

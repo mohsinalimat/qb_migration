@@ -60,7 +60,7 @@ class VendorCreditImporter(PurchaseInvoiceImporter):
         company = frappe.defaults.get_global_default("company")
         supplier_name = record.get("vend_name")
         supplier = self.resolve_supplier(supplier_name)
-        currency = record.get("currency") or "PKR"
+        currency = record.get("currency") or "PKR" 
 
         items = []
         for line in record.get("lines", []):
@@ -110,6 +110,7 @@ class VendorCreditImporter(PurchaseInvoiceImporter):
             "bill_date": self.normalize_date(record.get("date")),
             "company": company,
             "currency": currency,
+            "update_stock": 1,
             "credit_to": self.resolve_payable_account(supplier, currency),
             "remarks": record.get("memo") or "",
             "is_return": 1,

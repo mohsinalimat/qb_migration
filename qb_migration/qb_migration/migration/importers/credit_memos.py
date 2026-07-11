@@ -250,6 +250,7 @@ class CreditMemoImporter(SalesInvoiceImporter):
             "posting_date": self.normalize_date(record.get("date")),
             "due_date": self.normalize_date(record.get("date")),
             "company": company,
+            "update_stock": 1,
             "customer_reference": record.get("ref_no") or record.get("txn_id") or "",
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
