@@ -165,6 +165,23 @@ class SalesOrderImporter(BaseImporter):
         frappe.db.commit()
         return new_person.name
 
+    def resolve_project(self, project_name):
+        if not project_name:
+            return None
+
+        project = frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        if project:
+            return project
+
+        result = frappe.db.sql(
+            "select name from `tabProject` where lower(project_name)=lower(%s) limit 1",
+            project_name,
+        )
+        if result:
+            return result[0][0]
+
+        return None
+
     def find_existing_target(self, doc_data):
         if doc_data.get("name"):
             return frappe.db.get_value("Sales Order", {"name": doc_data["name"]}, "name")
@@ -196,6 +213,8 @@ class SalesOrderImporter(BaseImporter):
                 "commission_rate": 0,
             })
 
+        project = self.resolve_project(record.get("project_name"))
+
         doc = {
             "doctype": "Sales Order",
             "customer": customer,
@@ -209,6 +228,9 @@ class SalesOrderImporter(BaseImporter):
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
         }
+
+        if project:
+            doc["project"] = project
 
         if record.get("txn_id"):
             doc["name"] = str(record.get("txn_id"))
