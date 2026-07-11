@@ -228,6 +228,24 @@ class PurchaseInvoiceImporter(BaseImporter):
             "included_in_print_rate": 0,
         }
 
+    def _build_fallback_item_row(self, line=None):
+        item_data = {
+            "item_code": self.resolve_item(""),
+            "qty": 1,
+            "rate": 0,
+            "amount": 0,
+            "expense_account": self._resolve_account((line or {}).get("gl_code") or (line or {}).get("account")),
+            "description": (line or {}).get("description") or "General expense",
+        }
+
+        if line and line.get("line_no") is not None:
+            try:
+                item_data["idx"] = int(line.get("line_no"))
+            except (TypeError, ValueError):
+                pass
+
+        return item_data
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         supplier_name = record.get("vendor") or record.get("vend_name")
@@ -250,6 +268,13 @@ class PurchaseInvoiceImporter(BaseImporter):
 
             item_data = self._build_item_row(line)
             items.append(item_data)
+
+        if not items:
+            for line in record.get("lines", []):
+                if not isinstance(line, dict):
+                    continue
+                items.append(self._build_fallback_item_row(line))
+                break
 
         doc = {
             "doctype": "Purchase Invoice",
