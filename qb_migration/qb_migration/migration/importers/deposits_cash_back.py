@@ -61,6 +61,9 @@ def build_deposit_cash_back_journal_entry(
             "exchange_rate": 1,
             "user_remark": line.get("memo") or line.get("description") or "",
         }
+        # Preserve any resolved `project` coming from the importer
+        if line.get("project"):
+            row["project"] = line.get("project")
 
         cost_center_name = line.get("cost_center")
         if cost_center_name:
@@ -187,7 +190,21 @@ class DepositCashBackImporter(JournalEntryImporter):
                     resolved_line["party_type"] = party_type
                     resolved_line["party"] = party
 
-            project = record_project or self._resolve_project_from_entity(candidate)
+            project = self._resolve_project(
+                line.get("project_name")
+                or line.get("project")
+                or line.get("job")
+            ) or record_project
+            if not project:
+                project = self._resolve_project_from_entity(
+                    line.get("entity")
+                    or line.get("entity_id")
+                    or line.get("entity_name")
+                    or line.get("customer")
+                    or line.get("customer_name")
+                    or line.get("party")
+                    or record.get("payee")
+                )
             if project:
                 resolved_line["project"] = project
 
