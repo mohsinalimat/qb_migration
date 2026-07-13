@@ -47,6 +47,23 @@ class CreditMemoImporter(SalesInvoiceImporter):
         frappe.db.commit()
         return new_customer.name
 
+    def resolve_project(self, project_name):
+        if not project_name:
+            return None
+
+        project = frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        if project:
+            return project
+
+        result = frappe.db.sql(
+            "select name from `tabProject` where lower(project_name)=lower(%s) limit 1",
+            project_name,
+        )
+        if result:
+            return result[0][0]
+
+        return None
+
     def _resolve_item_tax_template(self, tax_code):
         if not tax_code:
             return None
@@ -243,6 +260,8 @@ class CreditMemoImporter(SalesInvoiceImporter):
         if not items:
             raise ValueError("No valid item lines found for credit memo")
 
+        project = self.resolve_project(record.get("project_name"))
+
         doc = {
             "doctype": "Sales Invoice",
             "name": str(record.get("txn_id") or ""),
@@ -257,6 +276,9 @@ class CreditMemoImporter(SalesInvoiceImporter):
             "is_return": 1,
             "is_pos": 0,
         }
+
+        if project:
+            doc["project"] = project
 
         if record.get("tax_item"):
             template = self.resolve_taxes_template(record.get("tax_item"))

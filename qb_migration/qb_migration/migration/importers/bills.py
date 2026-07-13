@@ -163,15 +163,37 @@ class PurchaseInvoiceImporter(BaseImporter):
 
         return frappe.db.get_value("Cost Center", {"cost_center_name": cost_center_name}, "name")
 
-    def _resolve_project(self, customer_name):
-        if not customer_name:
-            return None
-
-        project_name = str(customer_name).strip()
+    def _resolve_project(self, project_name):
         if not project_name:
             return None
 
-        return frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        project_name = str(project_name).strip()
+        if not project_name:
+            return None
+
+        project = frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        if project:
+            return project
+
+        result = frappe.db.sql(
+            "select name from `tabProject` where lower(project_name)=lower(%s) limit 1",
+            (project_name,),
+        )
+        return result[0][0] if result else None
+
+    def _resolve_project_from_entity(self, entity):
+        if not entity:
+            return None
+
+        entity_value = str(entity).strip()
+        if ":" not in entity_value:
+            return None
+
+        project_name = entity_value.split(":")[-1].strip()
+        if not project_name:
+            return None
+
+        return self._resolve_project(project_name)
 
     def _build_item_row(self, line):
         qty = self._normalize_qty(line.get("qty", 1) or 1)
@@ -204,6 +226,9 @@ class PurchaseInvoiceImporter(BaseImporter):
             item_data["cost_center"] = cost_center
 
         project = self._resolve_project(line.get("customer"))
+        if not project:
+            project = self._resolve_project_from_entity(line.get("customer"))
+
         if project:
             item_data["project"] = project
 

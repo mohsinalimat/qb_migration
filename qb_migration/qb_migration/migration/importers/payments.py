@@ -118,6 +118,23 @@ class PaymentsImporter(BaseImporter):
 
         return None
 
+    def resolve_project(self, project_name):
+        if not project_name:
+            return None
+
+        project = frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        if project:
+            return project
+
+        result = frappe.db.sql(
+            "select name from `tabProject` where lower(project_name)=lower(%s) limit 1",
+            project_name,
+        )
+        if result:
+            return result[0][0]
+
+        return None
+
     def resolve_sales_invoice(self, inv_no, customer_name=None, amount=None):
         if inv_no:
             result = frappe.db.get_value("Sales Invoice", {"name": inv_no}, "name")
@@ -250,10 +267,12 @@ class PaymentsImporter(BaseImporter):
             record.get("reference_date") or record.get("date") or record.get("txn_date") or nowdate()
         )
 
+        project = self.resolve_project(record.get("project_name"))
+
         # For Receive-type Payment Entries, leave `paid_from` unset so ERPNext can
         # resolve it automatically from the selected `party` and the configured
         # party accounting defaults, while still setting the correct party account.
-        return {
+        doc = {
             "doctype": "Payment Entry",
             "payment_type": "Receive",
             "company": company,
@@ -270,3 +289,8 @@ class PaymentsImporter(BaseImporter):
             "references": references,
             "remarks": record.get("memo") or "",
         }
+
+        if project:
+            doc["project"] = project
+
+        return doc

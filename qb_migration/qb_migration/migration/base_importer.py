@@ -32,6 +32,9 @@ class BaseImporter:
             raise ValueError(f"Missing JSON key '{self.json_key}' in {self.json_file}")
         return records
 
+
+
+
     def is_imported(self, source_id: str) -> bool:
         existing = frappe.db.get_value(
             "Migration Log",
@@ -250,7 +253,17 @@ class BaseImporter:
                 doc.insert()
 
                 if hasattr(self, "post_insert"):
-                    self.post_insert(doc, record)
+                    # allow post_insert to raise SkipRecord to indicate a skip
+                    try:
+                        self.post_insert(doc, record)
+                    except SkipRecord as sr:
+                        # rollback any partial DB changes and record skip
+                        frappe.db.rollback()
+                        reason = str(sr) or "SKIPPED"
+                        ref_no = record.get("ref_no") or record.get("ref_number")
+                        self.log_skip(source_id, reason, ref_no)
+                        skipped += 1
+                        continue
 
                 if self.target_doctype in (
                     "Purchase Invoice",
@@ -280,3 +293,12 @@ class BaseImporter:
         frappe.db.commit()
         print(f"[{self.source_type}] Done — Success: {success}, Failed: {failed}, Skipped: {skipped}")
         return {"success": success, "failed": failed, "skipped": skipped}
+
+
+class SkipRecord(Exception):
+    """Raise this from an importer to indicate the current record should be skipped.
+
+    The runner will catch this and record a skipped Migration Log entry instead of
+    treating it as a failure or success.
+    """
+    pass

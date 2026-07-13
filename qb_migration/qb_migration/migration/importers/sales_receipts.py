@@ -565,6 +565,8 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
         total_amt = abs(float(record.get("total_amt") or 0))
 
+        project = self.resolve_project(record.get("project_name"))
+
         doc = {
             "doctype": "Sales Invoice",
             "name": str(record.get("txn_id") or ""),
@@ -584,6 +586,9 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "base_total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
             "base_grand_total": total_amt,
         }
+
+        if project:
+            doc["project"] = project
 
         # ---- Tax handling ----
         sales_tax_total = abs(float(record.get("sales_tax_total") or 0))

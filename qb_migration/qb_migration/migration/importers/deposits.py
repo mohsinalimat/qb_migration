@@ -99,6 +99,38 @@ class DepositImporter(JournalEntryImporter):
         frappe.db.commit()
         return doc.name
 
+    def _resolve_project(self, project_name):
+        if not project_name:
+            return None
+
+        project_name = str(project_name).strip()
+        if not project_name:
+            return None
+
+        project = frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        if project:
+            return project
+
+        result = frappe.db.sql(
+            "select name from `tabProject` where lower(project_name)=lower(%s) limit 1",
+            (project_name,),
+        )
+        return result[0][0] if result else None
+
+    def _resolve_project_from_entity(self, entity):
+        if not entity:
+            return None
+
+        entity_value = str(entity).strip()
+        if ":" not in entity_value:
+            return None
+
+        project_name = entity_value.split(":")[-1].strip()
+        if not project_name:
+            return None
+
+        return self._resolve_project(project_name)
+
     def _resolve_payment_reference(self, line, record):
         return (
             line.get("check_number")
@@ -208,6 +240,7 @@ class DepositImporter(JournalEntryImporter):
             )
 
         payment_entries = []
+        record_project = self._resolve_project(record.get("project_name"))
         for line in (record.get("lines") or []):
             if not self._is_payment_line(line):
                 continue
@@ -218,6 +251,8 @@ class DepositImporter(JournalEntryImporter):
 
             entity_raw = line.get("entity")
             party_type, party = self._resolve_party(entity_raw)
+            project = record_project or self._resolve_project_from_entity(entity_raw)
+
             # If the party doc doesn't exist, try to create a Customer with the
             # exact QuickBooks `entity` value as its document name so we
             # preserve the full value (including any ':Project' suffix).
@@ -283,6 +318,9 @@ class DepositImporter(JournalEntryImporter):
                 "_source_id": line.get("txn_line_id") or line.get("txn_id") or reference_no,
             }
 
+            if project:
+                payment_entry["project"] = project
+
             if entity_raw and party_type:
                 # Preserve the raw entity string as the Payment Entry `party`.
                 payment_entry["party_type"] = party_type
@@ -328,6 +366,7 @@ class DepositImporter(JournalEntryImporter):
         currency, exchange_rate = self._get_currency_details(record, company_currency)
         total_amount = 0.0
         accounts = []
+        project = self._resolve_project(record.get("project_name"))
 
         for line in deposit_lines:
             account = self._resolve_account(line.get("account"))
@@ -367,6 +406,9 @@ class DepositImporter(JournalEntryImporter):
                 elif party_type and party:
                     row["party_type"] = party_type
                     row["party"] = party
+
+            if project:
+                row["project"] = project
 
             accounts.append(row)
             total_amount += amount

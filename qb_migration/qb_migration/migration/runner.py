@@ -15,6 +15,7 @@ from .importers.employees import EmployeeImporter
 from .importers.items import ItemImporter
 from .importers.inventory_adjustments import InventoryAdjustmentImporter
 from .importers.purchase_orders import PurchaseOrderImporter
+from .importers.projects import ProjectImporter
 from .importers.sales_orders import SalesOrderImporter
 from .importers.estimates import EstimateImporter
 from .importers.bills import PurchaseInvoiceImporter
@@ -57,6 +58,7 @@ def _prepare_detailed_log_file() -> Path:
 
 PIPELINE = [
     ("accounts", AccountImporter),
+    ("projects", ProjectImporter),
     ("payment_methods", PaymentMethodsImporter),
     ("terms", TermsImporter),
     ("items", ItemImporter),

@@ -350,6 +350,8 @@ class SalesInvoiceImporter(SalesOrderImporter):
         if due_date < posting_date:
             due_date = posting_date
 
+        project = self.resolve_project(record.get("project_name"))
+
         doc = {
             "doctype": "Sales Invoice",
             "customer": customer,
@@ -362,6 +364,9 @@ class SalesInvoiceImporter(SalesOrderImporter):
             "remarks": record.get("memo") or f"Imported from QuickBooks txn_id {record.get('txn_id')}",
             "items": items,
         }
+
+        if project:
+            doc["project"] = project
 
         if record.get("txn_id"):
             doc["name"] = str(record.get("txn_id"))

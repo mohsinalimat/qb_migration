@@ -105,6 +105,38 @@ class DepositCashBackImporter(JournalEntryImporter):
     def get_source_id(self, record):
         return str(record.get("txn_id") or record.get("txn_number") or "")
 
+    def _resolve_project(self, project_name):
+        if not project_name:
+            return None
+
+        project_name = str(project_name).strip()
+        if not project_name:
+            return None
+
+        project = frappe.db.get_value("Project", {"project_name": project_name}, "name")
+        if project:
+            return project
+
+        result = frappe.db.sql(
+            "select name from `tabProject` where lower(project_name)=lower(%s) limit 1",
+            (project_name,),
+        )
+        return result[0][0] if result else None
+
+    def _resolve_project_from_entity(self, entity):
+        if not entity:
+            return None
+
+        entity_value = str(entity).strip()
+        if ":" not in entity_value:
+            return None
+
+        project_name = entity_value.split(":")[-1].strip()
+        if not project_name:
+            return None
+
+        return self._resolve_project(project_name)
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         if not company:
@@ -130,6 +162,7 @@ class DepositCashBackImporter(JournalEntryImporter):
 
         posting_date = self.normalize_date(record.get("date") or record.get("txn_date"))
         source_id = self.get_source_id(record)
+        record_project = self._resolve_project(record.get("project_name"))
         line_rows = []
 
         for line in record.get("lines") or []:
@@ -147,13 +180,16 @@ class DepositCashBackImporter(JournalEntryImporter):
             }
 
             account_type = frappe.db.get_value("Account", account, "account_type")
-            if account_type in ("Receivable", "Payable"):
-                candidate = line.get("entity") or line.get("entity_id") or line.get("party")
-                if candidate:
-                    party_type, party = self._resolve_party(candidate)
-                    if party_type and party:
-                        resolved_line["party_type"] = party_type
-                        resolved_line["party"] = party
+            candidate = line.get("entity") or line.get("entity_id") or line.get("party")
+            if account_type in ("Receivable", "Payable") and candidate:
+                party_type, party = self._resolve_party(candidate)
+                if party_type and party:
+                    resolved_line["party_type"] = party_type
+                    resolved_line["party"] = party
+
+            project = record_project or self._resolve_project_from_entity(candidate)
+            if project:
+                resolved_line["project"] = project
 
             line_rows.append(resolved_line)
 
