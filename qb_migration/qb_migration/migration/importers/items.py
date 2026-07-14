@@ -1,6 +1,6 @@
 import frappe
-
 from ..base_importer import BaseImporter
+
 
 QB_ITEM_TYPE_MAP = {
     "INV": "Stock Item",
@@ -8,6 +8,16 @@ QB_ITEM_TYPE_MAP = {
     "NON": "Non Stock Item",
     "GRPITEM": "Service Item",
     "OTHCHG": "Service Item",
+    "OCH": "Service Item",
+    "DSC": "Service Item",
+    "GRP": "Service Item",
+    "PAY": "Service Item",
+    "TAX": "Service Item",
+    "TAXGROUP": "Service Item",
+    "SalesTaxGroup": "Service Item",
+    "SUBTOTAL": "Service Item",
+    "OTHER": "Service Item",
+    "inventoryassembly": "Stock Item",
 }
 
 
