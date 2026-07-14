@@ -128,8 +128,12 @@ class ItemImporter(BaseImporter):
         return self._assert_leaf_item_group(self._get_or_create_safe_leaf_group())
 
     def map_record(self, record):
-        item_type = QB_ITEM_TYPE_MAP.get(record.get("item_type", "SVC"), "Service Item")
-        is_stock = item_type == "Stock Item"
+        item_type = QB_ITEM_TYPE_MAP.get(record.get("item_type"), "Service Item")
+
+        if item_type == "Stock Item":
+            is_stock = 1
+        else:
+            is_stock = 0
         company = frappe.defaults.get_global_default("company")
 
         doc = {
@@ -139,7 +143,7 @@ class ItemImporter(BaseImporter):
             "description": record.get("description") or record["item"],
             "item_group": self.resolve_item_group(record.get("item_group")),
             "stock_uom": record.get("stock_uom", "Nos"),
-            "is_stock_item": 1 if is_stock else 0,
+            "is_stock_item": is_stock,
             "is_purchase_item": 1,
             "is_sales_item": 1,
             "valuation_rate": record.get("cost", 0),
