@@ -153,8 +153,31 @@ class ItemReceiptImporter(BaseImporter):
         items = []
         total_amt = 0.0
 
-        for idx, line in enumerate(record.get("lines", []), 1):
+        # Collect dict-like lines
+        lines = [l for l in record.get("lines", []) if isinstance(l, dict)]
+
+        # If there are lines and all have qty == 0, skip the whole transaction
+        if lines:
+            kept_lines = []
+            for l in lines:
+                try:
+                    qty_val = float(l.get("qty") or 0)
+                except (TypeError, ValueError):
+                    qty_val = 0
+
+                if qty_val == 0:
+                    continue
+                kept_lines.append(l)
+
+            if not kept_lines:
+                return {"_skip": True, "_skip_reason": "ALL_LINES_ZERO_QTY", "ref_no": record.get("txn_id", "")}
+        else:
+            # No lines at all
+            return {"_skip": True, "_skip_reason": "NO_ITEMS", "ref_no": record.get("txn_id", "")}
+
+        for idx, line in enumerate(kept_lines, 1):
             item_code = line.get("item") or ""
+            # Resolve item only for lines we will process
             item_name = self.resolve_item(item_code)
             if not item_name:
                 continue
