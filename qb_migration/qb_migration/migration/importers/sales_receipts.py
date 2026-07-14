@@ -291,12 +291,12 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         outstanding_amount = frappe.utils.flt(getattr(sales_invoice, "outstanding_amount", getattr(sales_invoice, "grand_total", 0)), 2)
 
         if total_amt > outstanding_amount:
-            if total_amt - outstanding_amount <= 0.02:
-                total_amt = outstanding_amount
-            else:
-                raise ValueError(
-                    f"Sales receipt payment amount {total_amt} exceeds invoice outstanding {outstanding_amount}"
-                )
+            # If the invoice amount was reduced because zero-quantity lines were skipped,
+            # use the actual outstanding balance instead of failing the import.
+            total_amt = outstanding_amount
+
+        if total_amt <= 0:
+            raise ValueError("Sales receipt payment amount is invalid or zero")
 
         return {
             "doctype": "Payment Entry",
@@ -508,24 +508,51 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
         return self._resolve_item_tax_template(parent_tax_item)
 
+    def _is_zero_qty(self, qty):
+        if qty is None or qty == "":
+            return False
+        try:
+            return float(qty) == 0
+        except (TypeError, ValueError):
+            return False
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         customer = self.resolve_customer(record.get("cust_name"))
 
         items = []
-        for idx, line in enumerate(record.get("lines", []), 1):
+        item_idx = 0
+        skipped_taxable_line = False
+        remaining_taxable_line = False
+        imported_subtotal = 0.0
+
+        for line in record.get("lines", []):
+            if self._is_zero_qty(line.get("qty")):
+                if (line.get("tax_code") or "").strip().lower() == "tax":
+                    skipped_taxable_line = True
+                continue
+
+            if (line.get("tax_code") or "").strip().lower() == "tax":
+                remaining_taxable_line = True
+
             item_name = line.get("item") or line.get("item_list_id") or ""
             if not item_name and not line.get("description"):
                 continue
 
             item_code = self.resolve_item(item_name) if item_name else None
 
-            qty = line.get("qty") or 1
+            qty = line.get("qty")
+            if qty is None or qty == "":
+                qty = 1
+
             try:
                 qty_value = float(qty)
                 qty = int(qty_value) if qty_value.is_integer() else qty_value
             except (TypeError, ValueError):
                 qty = 1
+
+            if qty == 0:
+                continue
 
             try:
                 rate_value = abs(float(line.get("price") or 0))
@@ -537,9 +564,12 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             except (TypeError, ValueError):
                 amount_value = 0
 
+            imported_subtotal += amount_value
+
             uom_value = self.resolve_uom(qty, line.get("unitms") or "Nos")
+            item_idx += 1
             item_row = {
-                "idx": idx,
+                "idx": item_idx,
                 "item_code": item_code,
                 "item_name": line.get("description") or item_name or "",
                 "qty": qty,
@@ -561,12 +591,19 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             items.append(item_row)
 
         if not items:
-            raise ValueError("No valid item lines found for sales receipt")
+            return {
+                "_skip": True,
+                "_skip_reason": "All line items have qty 0.0",
+                "ref_no": record.get("ref_no") or record.get("txn_id") or "",
+            }
 
         total_amt = abs(float(record.get("total_amt") or 0))
 
         project = self.resolve_project(record.get("project_name"))
 
+        # If all taxable QuickBooks lines were skipped, clear invoice-level tax totals
+        # and make the grand total equal the subtotal of imported items.
+        skip_invoice_tax = skipped_taxable_line and not remaining_taxable_line
         doc = {
             "doctype": "Sales Invoice",
             "name": str(record.get("txn_id") or ""),
@@ -579,12 +616,12 @@ class SalesReceiptImporter(SalesInvoiceImporter):
             "items": items,
             "update_stock": 1,
             "set_posting_time": 1,
-            "total": abs(float(record.get("subtotal") or 0)),
-            "total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
-            "grand_total": total_amt,
-            "base_total": abs(float(record.get("subtotal") or 0)),
-            "base_total_taxes_and_charges": abs(float(record.get("sales_tax_total") or 0)),
-            "base_grand_total": total_amt,
+            "total": imported_subtotal,
+            "total_taxes_and_charges": 0 if skip_invoice_tax else abs(float(record.get("sales_tax_total") or 0)),
+            "grand_total": imported_subtotal if skip_invoice_tax else total_amt,
+            "base_total": imported_subtotal,
+            "base_total_taxes_and_charges": 0 if skip_invoice_tax else abs(float(record.get("sales_tax_total") or 0)),
+            "base_grand_total": imported_subtotal if skip_invoice_tax else total_amt,
         }
 
         if project:
@@ -594,7 +631,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         sales_tax_total = abs(float(record.get("sales_tax_total") or 0))
         has_item_level_tax = any(item.get("item_tax_template") for item in items)
 
-        if sales_tax_total > 0 and not has_item_level_tax:
+        if sales_tax_total > 0 and not has_item_level_tax and not skip_invoice_tax:
             tax_account = self._get_or_create_tax_account(record.get("tax_item"))
             tax_row = {
                 "charge_type": "Actual",
@@ -610,7 +647,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         if record.get("sales_tax_pct") not in (None, ""):
             doc["taxes_and_charges_rate"] = abs(float(record.get("sales_tax_pct") or 0))
 
-        if not has_item_level_tax:
+        if not has_item_level_tax and not skip_invoice_tax:
             tax_category = self._resolve_tax_category(record.get("tax_code"))
             if tax_category:
                 doc["tax_category"] = tax_category
