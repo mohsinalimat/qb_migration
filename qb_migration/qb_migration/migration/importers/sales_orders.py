@@ -194,15 +194,28 @@ class SalesOrderImporter(BaseImporter):
 
         items = []
         for idx, line in enumerate(record.get("lines", []), 1):
+            qty = line.get("qty")
+            if qty is None:
+                qty = 1
+            if qty == 0 or qty == 0.0:
+                continue
+
             items.append({
                 "idx": idx,
                 "item_code": self.resolve_item(line.get("item", "")),
-                "qty": line.get("qty", 1) or 1,
+                "qty": qty,
                 "rate": line.get("price", 0),
                 "amount": line.get("ext_price", 0),
                 "description": line.get("description", ""),
                 "delivered_qty": line.get("qty_invoiced", 0),
             })
+
+        if not items:
+            return {
+                "_skip": True,
+                "_skip_reason": "Skipped sales order because all line items have qty 0.0",
+                "ref_no": record.get("ref_no", ""),
+            }
 
         sales_team = []
         sales_person = self.resolve_sales_person(record.get("salesman"))
