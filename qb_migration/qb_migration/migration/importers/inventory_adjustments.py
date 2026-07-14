@@ -6,7 +6,7 @@ from ..base_importer import BaseImporter
 
 class InventoryAdjustmentImporter(BaseImporter):
     source_type = "QB_INVENTORY_ADJUSTMENT"
-    target_doctype = "Stock Entry"
+    target_doctype = "Stock Reconciliation"
     json_file = "inventory_adjustments.json"
     json_key = "inventory_adjustments"
 
@@ -82,11 +82,56 @@ class InventoryAdjustmentImporter(BaseImporter):
         except (TypeError, ValueError):
             return 0.0
 
+    def get_current_stock_qty(self, item_code, warehouse):
+        if not item_code:
+            return 0
+
+        filters = {
+            "item_code": item_code,
+            "is_cancelled": 0,
+        }
+
+        if warehouse:
+            filters["warehouse"] = warehouse
+
+        sle = frappe.get_all(
+            "Stock Ledger Entry",
+            filters=filters,
+            fields=["qty_after_transaction"],
+            order_by="posting_date desc, posting_time desc, creation desc",
+            limit=1,
+        )
+
+        return sle[0].qty_after_transaction if sle else 0
+
+    def _get_latest_sle(self, item_code, warehouse):
+        """Return latest stock ledger entry dict or None"""
+        if not item_code:
+            return None
+
+        filters = {"item_code": item_code, "is_cancelled": 0}
+        if warehouse:
+            filters["warehouse"] = warehouse
+
+        sle = frappe.get_all(
+            "Stock Ledger Entry",
+            filters=filters,
+            fields=["qty_after_transaction", "valuation_rate", "warehouse", "posting_date", "posting_time"],
+            order_by="posting_date desc, posting_time desc, creation desc",
+            limit=1,
+        )
+
+        if not sle:
+            return None
+
+        return sle[0]
+
     def map_record(self, record):
         company = self._get_company()
         if not company:
             return {"_skip": True, "_skip_reason": "MISSING_COMPANY", "ref_no": record.get("ref_no")}
-
+        # Build a Stock Reconciliation document according to mapping:
+        # header: txn_id -> name (left as remarks/external), ref_no -> remarks, date -> posting_date, memo -> remarks
         warehouse = self._resolve_warehouse()
         if not warehouse:
             return {"_skip": True, "_skip_reason": "MISSING_WAREHOUSE", "ref_no": record.get("ref_no")}
@@ -96,10 +141,7 @@ class InventoryAdjustmentImporter(BaseImporter):
             return {"_skip": True, "_skip_reason": "NO_LINES", "ref_no": record.get("ref_no")}
 
         items = []
-        has_negative = False
-        has_positive = False
-
-        for line in lines:
+        for idx, line in enumerate(lines, start=1):
             item_name = line.get("item") or ""
             if not item_name:
                 continue
@@ -112,54 +154,81 @@ class InventoryAdjustmentImporter(BaseImporter):
                     "ref_no": record.get("ref_no"),
                 }
 
-            qty = self._parse_float(line.get("new_quantity"))
-            valuation_rate = self._parse_float(line.get("new_value"))
-            qty_difference = self._parse_float(line.get("quantity_difference"))
-            value_difference = self._parse_float(line.get("value_difference"))
 
-            if qty == 0 and abs(qty_difference) > 0:
-                qty = qty_difference
+            raw_new_qty = line.get("new_quantity")
+            qty_difference = line.get("quantity_difference")
 
-            if qty_difference < 0:
-                has_negative = True
-            elif qty_difference > 0:
-                has_positive = True
+            # Parse provided values
+            raw_new_qty = line.get("new_quantity")
+            qty_difference = line.get("quantity_difference")
 
-            if qty == 0 and valuation_rate == 0:
-                if abs(value_difference) > 0 and abs(qty_difference) > 0:
-                    valuation_rate = abs(value_difference) / abs(qty_difference)
-                elif abs(value_difference) > 0:
-                    valuation_rate = abs(value_difference)
-                elif abs(qty_difference) > 0:
-                    valuation_rate = 0.01
+            new_qty = self._parse_float(raw_new_qty)
+            qty_diff = self._parse_float(qty_difference)
 
-            row = {
-                "doctype": "Stock Entry Detail",
+            # Current stock in ERPNext
+            current_qty = self.get_current_stock_qty(
+                item_code=item_doc,
+                warehouse=warehouse,
+            )
+
+            # Prefer computing from QuantityDifference whenever it exists.
+            if qty_difference is not None and str(qty_difference).strip() != "":
+                qty = current_qty + qty_diff
+            elif raw_new_qty is not None and str(raw_new_qty).strip() != "":
+                qty = new_qty
+            else:
+                qty = current_qty
+
+        # Prefer valuation from QBD if available
+        valuation_rate = self._parse_float(line.get("new_value"))
+
+        # Ensure we have a valuation_rate: prefer provided new_value, else try latest SLE, else item master
+        if not valuation_rate:
+            sle = self._get_latest_sle(item_doc, warehouse)
+            if sle and sle.get("valuation_rate"):
+                valuation_rate = self._parse_float(sle.get("valuation_rate"))
+            else:
+                valuation_rate = self._parse_float(
+                    frappe.db.get_value("Item", item_doc, "valuation_rate")
+                )
+
+            item_row = {
+                "idx": idx,
                 "item_code": item_doc,
-                "qty": abs(qty) or 1,
-                "basic_rate": valuation_rate or 0.0,
-                "allow_zero_valuation_rate": 1,
+                "warehouse": warehouse,
+                "qty": qty,
+                "valuation_rate": valuation_rate,
             }
 
-            row["t_warehouse"] = warehouse
+            # Map variance/expense account if present
+            acct = line.get("account") or line.get("account_list_id")
+            if acct:
+                # try to resolve account name within company
+                diff_account = self._resolve_difference_account()
+                if diff_account:
+                    item_row["difference_account"] = diff_account
 
             if line.get("memo"):
-                row["remarks"] = line.get("memo")
+                item_row["remarks"] = line.get("memo")
 
-            items.append(row)
+            items.append(item_row)
 
         if not items:
             return {"_skip": True, "_skip_reason": "NO_VALID_ITEMS", "ref_no": record.get("ref_no")}
 
-        stock_entry_type = "Material Receipt"
-
         doc = {
-            "doctype": "Stock Entry",
-            "stock_entry_type": stock_entry_type,
+            "doctype": "Stock Reconciliation",
             "company": company,
+            "purpose": "Stock Reconciliation",
             "posting_date": self.normalize_date(record.get("date")),
             "remarks": record.get("memo") or record.get("ref_no") or "",
             "items": items,
+            "difference_account": self._resolve_difference_account(),
         }
+
+        # If QB txn_id is provided, include it as an external reference in remarks
+        txn_id = record.get("txn_id")
+        if txn_id:
+            doc["remarks"] = f"QB_TXN:{txn_id} " + (doc.get("remarks") or "")
 
         return doc
