@@ -140,6 +140,12 @@ class PurchaseInvoiceImporter(BaseImporter):
         except (TypeError, ValueError):
             return 1
 
+    def _qty_is_zero(self, value):
+        try:
+            return float(value) == 0
+        except (TypeError, ValueError):
+            return False
+
     def _normalize_rate(self, line, qty):
         rate = line.get("rate")
         if rate not in (None, ""):
@@ -196,7 +202,10 @@ class PurchaseInvoiceImporter(BaseImporter):
         return self._resolve_project(project_name)
 
     def _build_item_row(self, line):
-        qty = self._normalize_qty(line.get("qty", 1) or 1)
+        qty = self._normalize_qty(line.get("qty", 1))
+        if qty == 0:
+            return None
+
         rate = self._normalize_rate(line, qty)
 
         item_idx = line.get("line_no")
@@ -279,11 +288,16 @@ class PurchaseInvoiceImporter(BaseImporter):
 
         items = []
         taxes = []
+        lines = [line for line in record.get("lines", []) if isinstance(line, dict)]
 
-        for line in record.get("lines", []):
-            if not isinstance(line, dict):
-                continue
+        if lines and all("qty" in line and self._qty_is_zero(line.get("qty")) for line in lines):
+            return {
+                "_skip": True,
+                "_skip_reason": "ALL_LINES_ZERO_QTY",
+                "ref_no": record.get("ref_no", "") or record.get("txn_id", ""),
+            }
 
+        for line in lines:
             line_type = str(line.get("line_type") or "").strip().lower()
             if line_type == "expense":
                 tax_row = self._build_tax_row(line)
@@ -291,13 +305,15 @@ class PurchaseInvoiceImporter(BaseImporter):
                     taxes.append(tax_row)
                 continue
 
+            if self._qty_is_zero(line.get("qty")):
+                continue
+
             item_data = self._build_item_row(line)
-            items.append(item_data)
+            if item_data:
+                items.append(item_data)
 
         if not items:
-            for line in record.get("lines", []):
-                if not isinstance(line, dict):
-                    continue
+            for line in lines:
                 items.append(self._build_fallback_item_row(line))
                 break
 
