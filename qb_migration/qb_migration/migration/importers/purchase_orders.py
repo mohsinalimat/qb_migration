@@ -62,8 +62,13 @@ class PurchaseOrderImporter(BaseImporter):
 
         items = []
         for idx, line in enumerate(record.get("lines", []), 1):
-            qty = line.get("qty", 1) or 1
-            items.append({ 
+            qty = line.get("qty")
+            if qty is None:
+                qty = 1
+            if qty == 0 or qty == 0.0:
+                continue
+
+            items.append({
                 "idx": idx,
                 "item_code": self.resolve_item(line.get("item", "")),
                 "qty": qty,
@@ -73,6 +78,13 @@ class PurchaseOrderImporter(BaseImporter):
                 "schedule_date": self.normalize_date(record.get("expected_date") or record.get("date")),
                 "received_qty": line.get("qty_received", 0),
             })
+
+        if not items:
+            return {
+                "_skip": True,
+                "_skip_reason": "Skipped purchase order because all line items have qty 0.0",
+                "ref_no": record.get("ref_no", ""),
+            }
 
         # Determine status based on is_fully_rcvd
         status = "Completed" if record.get("is_fully_rcvd") else "To Receive"
