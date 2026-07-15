@@ -95,10 +95,11 @@ class PurchaseInvoiceImporter(BaseImporter):
         return rows[0][0] if rows else None
 
     def find_existing_target(self, doc_data):
-        if doc_data.get("bill_no"):
+        bill_no = str(doc_data.get("bill_no") or "").strip()
+        if bill_no:
             return frappe.db.get_value(
                 "Purchase Invoice",
-                {"bill_no": doc_data["bill_no"], "company": doc_data.get("company")},
+                {"bill_no": bill_no, "company": doc_data.get("company")},
                 "name",
             )
         return None
@@ -293,7 +294,7 @@ class PurchaseInvoiceImporter(BaseImporter):
         if lines and all("qty" in line and self._qty_is_zero(line.get("qty")) for line in lines):
             return {
                 "_skip": True,
-                "_skip_reason": "ALL_LINES_ZERO_QTY",
+                "_skip_reason": "Skipped purchase invoice because all line items have qty 0.0",
                 "ref_no": record.get("ref_no", "") or record.get("txn_id", ""),
             }
 
