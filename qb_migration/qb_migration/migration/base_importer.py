@@ -16,6 +16,18 @@ class BaseImporter:
     batch_size: int = 100
     allow_missing_file: bool = False
 
+    def _normalize_source_id(self, source_id: str | None, fallback: str | None = None) -> str:
+        value = str(source_id or "").strip()
+        if value:
+            return value
+
+        if fallback is not None:
+            fallback_value = str(fallback).strip()
+            if fallback_value:
+                return fallback_value
+
+        return ""
+
     def load_data(self):
         path = DATA_DIR / self.json_file
         if not path.exists():
@@ -36,10 +48,11 @@ class BaseImporter:
 
 
     def is_imported(self, source_id: str) -> bool:
+        source_id = self._normalize_source_id(source_id, fallback="unknown")
         existing = frappe.db.get_value(
             "Migration Log",
             {
-                "source_id": str(source_id),
+                "source_id": source_id,
                 "source_type": self.source_type,
                 "status": "Success",
             },
@@ -59,10 +72,11 @@ class BaseImporter:
         return False
 
     def log_success(self, source_id: str, target_name: str, target_doctype: str | None = None):
+        source_id = self._normalize_source_id(source_id, fallback="unknown")
         target_doctype = target_doctype or self.target_doctype
         existing = frappe.db.get_value(
             "Migration Log",
-            {"source_id": str(source_id), "source_type": self.source_type},
+            {"source_id": source_id, "source_type": self.source_type},
             "name",
         )
         if existing:
@@ -70,7 +84,7 @@ class BaseImporter:
 
         frappe.get_doc({
             "doctype": "Migration Log",
-            "source_id": str(source_id),
+            "source_id": source_id,
             "source_type": self.source_type,
             "target_doctype": target_doctype,
             "target_name": target_name,
@@ -122,9 +136,10 @@ class BaseImporter:
         return str(log_path)
 
     def log_failure(self, source_id: str, error: str):
+        source_id = self._normalize_source_id(source_id, fallback="unknown")
         existing = frappe.db.get_value(
             "Migration Log",
-            {"source_id": str(source_id), "source_type": self.source_type},
+            {"source_id": source_id, "source_type": self.source_type},
             "name",
         )
         if existing:
@@ -132,7 +147,7 @@ class BaseImporter:
 
         frappe.get_doc({
             "doctype": "Migration Log",
-            "source_id": str(source_id),
+            "source_id": source_id,
             "source_type": self.source_type,
             "target_doctype": self.target_doctype,
             "status": "Failed",
@@ -142,9 +157,10 @@ class BaseImporter:
         self.append_detailed_log("Failed", source_id, str(error)[:2000])
 
     def log_skip(self, source_id: str, reason: str, ref_no: str | None = None):
+        source_id = self._normalize_source_id(source_id, fallback="unknown")
         existing = frappe.db.get_value(
             "Migration Log",
-            {"source_id": str(source_id), "source_type": self.source_type},
+            {"source_id": source_id, "source_type": self.source_type},
             "name",
         )
         if existing:
@@ -156,7 +172,7 @@ class BaseImporter:
 
         frappe.get_doc({
             "doctype": "Migration Log",
-            "source_id": str(source_id),
+            "source_id": source_id,
             "source_type": self.source_type,
             "target_doctype": self.target_doctype,
             "status": "Skipped",
@@ -172,7 +188,7 @@ class BaseImporter:
         return None
 
     def get_source_id(self, record: dict) -> str:
-        return str(record.get("list_id") or record.get("txn_id") or record.get("name") or record.get("ref_number") or "")
+        return str(record.get("list_id") or record.get("txn_id") or record.get("name") or record.get("ref_number") or "").strip()
 
     def normalize_date(self, date_value):
         if not date_value:
@@ -191,12 +207,12 @@ class BaseImporter:
         print(f"\n[{self.source_type}] Starting: {total} records")
 
         for i, record in enumerate(records):
-            source_id = self.get_source_id(record)
+            source_id = self._normalize_source_id(self.get_source_id(record), fallback=f"record_{i + 1}")
             if not source_id:
                 failed += 1
                 self.append_detailed_log(
                     "Failed",
-                    source_id or f"record_{i + 1}",
+                    f"record_{i + 1}",
                     "Missing source id",
                     details={"record_index": i + 1},
                 )
@@ -240,6 +256,7 @@ class BaseImporter:
                     success += 1
                     continue
 
+                self._current_source_id = source_id
                 existing_target = self.find_existing_target(doc_data)
                 if existing_target:
                     print(f"  SUCCESS: {source_id} → {existing_target}")
