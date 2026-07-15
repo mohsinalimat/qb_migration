@@ -107,15 +107,13 @@ class ItemReceiptImporter(BaseImporter):
         if not company:
             return None
 
-        warehouse = frappe.db.get_value("Warehouse", {"company": company, "is_group": 0}, "name")
-        if warehouse:
-            return warehouse
-
+        # First, try to find "Stores" warehouse
         warehouse_name = "Stores"
         existing = frappe.db.get_value("Warehouse", {"warehouse_name": warehouse_name, "company": company}, "name")
         if existing:
             return existing
 
+        # Then try "Stores - {company_abbr}"
         company_abbr = frappe.db.get_value("Company", company, "abbr")
         if company_abbr:
             alt_name = f"Stores - {company_abbr}"
@@ -123,6 +121,7 @@ class ItemReceiptImporter(BaseImporter):
             if existing:
                 return existing
 
+        # Create new "Stores" warehouse if none exists
         warehouse_doc = frappe.get_doc({
             "doctype": "Warehouse",
             "warehouse_name": warehouse_name,
