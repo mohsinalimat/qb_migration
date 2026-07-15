@@ -62,7 +62,6 @@ PIPELINE = [
     ("payment_methods", PaymentMethodsImporter),
     ("terms", TermsImporter),
     ("items", ItemImporter),
-    ("inventory_adjustments", InventoryAdjustmentImporter),
     ("price_levels", PriceLevelsImporter),
     ("customer_types", CustomerTypesImporter),
     ("vendor_types", VendorTypesImporter),
@@ -83,13 +82,14 @@ PIPELINE = [
     ("deposits", DepositImporter),
     ("deposits_cash_back", DepositCashBackImporter),
     ("transfers", TransfersImporter),
-    ("checks", ChecksImporter),
     ("cc_charges", CCChargesImporter),
+    ("checks", ChecksImporter),
     ("journal_entries", JournalEntryImporter),
     ("vendor_credits", VendorCreditImporter),
     ("item_receipts", ItemReceiptImporter),
     ("quantity_discounts", QuantityDiscountImporter),
     ("other_names", OtherNamesImporter),
+    ("inventory_adjustments", InventoryAdjustmentImporter),
 ]
 
 
