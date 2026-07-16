@@ -3,6 +3,7 @@ import json
 from frappe.utils import flt
 
 from .journal_entries import JournalEntryImporter
+from .purchase_invoices import PurchaseInvoiceImporter as _PurchaseInvoiceImporter
 
 
 class ChecksImporter(JournalEntryImporter):
@@ -17,6 +18,12 @@ class ChecksImporter(JournalEntryImporter):
 
     def get_source_id(self, record):
         return str(record.get("txn_id") or "")
+
+    def should_submit_document(self, doc, record=None):
+        ref_no_raw = (record or {}).get("ref_no") or (record or {}).get("ref_number") or ""
+        if isinstance(ref_no_raw, str) and ref_no_raw.strip().upper() == "DRAFT":
+            return False
+        return True
 
     def _ensure_fallback_expense_account(self, line, company):
         candidate_name = (line.get("item") or line.get("description") or "Check Expense").strip()
@@ -94,6 +101,35 @@ class ChecksImporter(JournalEntryImporter):
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
 
+        # Detect whether this source record should be imported as draft
+        ref_no_raw = record.get("ref_no") or record.get("ref_number") or ""
+        is_draft = isinstance(ref_no_raw, str) and ref_no_raw.strip().upper() == "DRAFT"
+
+        # If any line is an item line, treat this check as a Purchase Invoice
+        # (QuickBooks item-based expenses should become bills in ERPNext).
+        lines = record.get("lines") or []
+        if any((l.get("line_type") or "").lower() == "item" for l in lines):
+            try:
+                # Adapt record keys expected by PurchaseInvoiceImporter
+                pi_rec = {
+                    "vendor": record.get("payee") or record.get("payee_name") or record.get("vendor"),
+                    "txn_date": record.get("date"),
+                    "due_date": record.get("date"),
+                    "ref_no": record.get("ref_no"),
+                    "date": record.get("date"),
+                    "currency": record.get("currency"),
+                    "lines": lines,
+                }
+                pi = _PurchaseInvoiceImporter()
+                pi_doc = pi.map_record(pi_rec)
+                if is_draft:
+                    # Ensure Purchase Invoice imports as draft
+                    pi_doc["docstatus"] = 0
+                return pi_doc
+            except Exception:
+                # If purchase invoice mapping fails, fall back to Journal Entry mapping below
+                pass
+
         # Bank account to credit
         bank_account = self._resolve_account(record.get("bank_account"))
         if not bank_account:
@@ -103,10 +139,9 @@ class ChecksImporter(JournalEntryImporter):
             )
 
         posting_date = self.normalize_date(record.get("date"))
-        cheque_no = (record.get("ref_no") or record.get("ref_number", ""))
-        # Treat obvious non-numeric placeholders as empty (e.g. 'DRAFT')
-        if isinstance(cheque_no, str) and cheque_no.strip().upper() == "DRAFT":
-            cheque_no = ""
+        cheque_no = record.get("ref_no") or record.get("ref_number") or ""
+        if isinstance(cheque_no, str):
+            cheque_no = cheque_no.strip()
         accounts = []
         total = 0.0
 
@@ -195,6 +230,10 @@ class ChecksImporter(JournalEntryImporter):
             "user_remark": record.get("memo") or f"Check to {record.get('payee', '')}",
             "accounts": accounts,
         }
+
+        if is_draft:
+            # Create Journal Entry as draft
+            doc["docstatus"] = 0
 
         return doc
 

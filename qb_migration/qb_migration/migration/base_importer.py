@@ -184,6 +184,9 @@ class BaseImporter:
     def map_record(self, record: dict) -> dict:
         raise NotImplementedError("Subclasses must implement map_record")
 
+    def should_submit_document(self, doc, record: dict | None = None) -> bool:
+        return True
+
     def find_existing_target(self, doc_data: dict) -> str | None:
         return None
 
@@ -290,7 +293,7 @@ class BaseImporter:
                     "Purchase Receipt",
                     "Purchase Order",
                     "Sales Order",
-                ):
+                ) and self.should_submit_document(doc, record):
                     doc.submit()
 
                 frappe.db.commit()
