@@ -264,6 +264,9 @@ class BaseImporter:
                 if existing_target:
                     print(f"  SUCCESS: {source_id} → {existing_target}")
                     self.log_success(source_id, existing_target, doc_data.get("doctype", self.target_doctype))
+                    # Ensure the migration log is persisted so later rollbacks
+                    # (from other failing records) don't remove this success marker.
+                    frappe.db.commit()
                     success += 1
                     continue
 
@@ -298,6 +301,9 @@ class BaseImporter:
 
                 frappe.db.commit()
                 self.log_success(source_id, doc.name, getattr(doc, "doctype", self.target_doctype))
+                # Persist the migration log immediately so it is not lost
+                # if a subsequent record triggers a rollback.
+                frappe.db.commit()
                 success += 1
 
             except Exception as exc:

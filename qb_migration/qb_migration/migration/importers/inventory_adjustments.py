@@ -72,6 +72,82 @@ class InventoryAdjustmentImporter(BaseImporter):
 
         return frappe.db.get_value("Warehouse", {"company": company}, "name")
 
+    def find_existing_target(self, doc_data):
+        if not doc_data:
+            return None
+
+        remarks = (doc_data or {}).get("remarks") or ""
+        marker = "QB_TXN:"
+        txn_id = None
+
+        if marker in remarks:
+            txn_id = remarks.split(marker, 1)[1].split()[0].strip()
+
+        if txn_id:
+            try:
+                if frappe.db.has_column("Stock Reconciliation", "remarks"):
+                    existing = frappe.db.get_value(
+                        "Stock Reconciliation",
+                        {"remarks": ["like", f"%{marker}{txn_id}%"]},
+                        "name",
+                    )
+                    if existing:
+                        return existing
+            except Exception:
+                pass
+
+        incoming_items = []
+        for item in (doc_data.get("items") or []):
+            incoming_items.append(
+                (
+                    item.get("item_code"),
+                    item.get("warehouse"),
+                    self._parse_float(item.get("qty")),
+                    self._parse_float(item.get("valuation_rate")),
+                )
+            )
+
+        if not incoming_items:
+            return None
+
+        filters = {
+            "company": doc_data.get("company"),
+            "purpose": "Stock Reconciliation",
+        }
+        posting_date = doc_data.get("posting_date")
+        if posting_date:
+            filters["posting_date"] = self.normalize_date(posting_date)
+
+        existing_docs = frappe.get_all(
+            "Stock Reconciliation",
+            filters=filters,
+            fields=["name"],
+            limit=20,
+            order_by="creation desc",
+        )
+
+        for existing_doc in existing_docs:
+            try:
+                existing_record = frappe.get_doc("Stock Reconciliation", existing_doc["name"])
+            except Exception:
+                continue
+
+            existing_items = []
+            for item in existing_record.get("items") or []:
+                existing_items.append(
+                    (
+                        item.get("item_code"),
+                        item.get("warehouse"),
+                        self._parse_float(item.get("qty")),
+                        self._parse_float(item.get("valuation_rate")),
+                    )
+                )
+
+            if incoming_items == existing_items:
+                return existing_doc["name"]
+
+        return None
+
     def post_insert(self, doc, record):
         if hasattr(doc, "submit"):
             doc.submit()
