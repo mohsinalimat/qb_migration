@@ -118,6 +118,21 @@ class PurchaseInvoiceImporter(BaseImporter):
 
         return account
 
+    def _resolve_warehouse(self):
+        company = frappe.defaults.get_global_default("company")
+        if not company:
+            return None
+
+        warehouse = frappe.db.get_value(
+            "Warehouse",
+            {"warehouse_name": "Stores", "company": company},
+            "name",
+        )
+        if warehouse:
+            return warehouse
+
+        return frappe.db.get_value("Warehouse", {"company": company}, "name")
+
     def map_record(self, record):
         company = frappe.defaults.get_global_default("company")
         supplier_name = record.get("vendor") or record.get("vend_name")
@@ -133,6 +148,7 @@ class PurchaseInvoiceImporter(BaseImporter):
                 "rate": line.get("rate", line.get("amount", 0)),
                 "amount": line.get("amount", 0),
                 "expense_account": self._resolve_account(line.get("gl_code")),
+                "warehouse": self._resolve_warehouse(),
                 "description": line.get("description", ""),
             })
 
@@ -144,6 +160,7 @@ class PurchaseInvoiceImporter(BaseImporter):
             "bill_no": record.get("ref_no", ""),
             "bill_date": self.normalize_date(record.get("date") or record.get("txn_date")),
             "company": company,
+            "update_stock": 1,
             "currency": currency,
             "debit_to": self.resolve_payable_account(supplier, currency),
             "items": items,
