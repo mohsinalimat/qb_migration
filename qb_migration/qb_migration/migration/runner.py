@@ -13,6 +13,7 @@ from .importers.customers import CustomerImporter
 from .importers.vendors import SupplierImporter
 from .importers.employees import EmployeeImporter
 from .importers.items import ItemImporter
+from .importers.item_groups import ItemGroupImporter
 from .importers.inventory_adjustments import InventoryAdjustmentImporter
 from .importers.purchase_orders import PurchaseOrderImporter
 from .importers.projects import ProjectImporter
@@ -61,6 +62,7 @@ PIPELINE = [
     ("projects", ProjectImporter),
     ("payment_methods", PaymentMethodsImporter),
     ("terms", TermsImporter),
+    ("item_groups", ItemGroupImporter),
     ("items", ItemImporter),
     ("price_levels", PriceLevelsImporter),
     ("customer_types", CustomerTypesImporter),
@@ -68,15 +70,20 @@ PIPELINE = [
     ("customers", CustomerImporter),
     ("vendors", SupplierImporter),
     ("employees", EmployeeImporter),
+
     ("purchase_orders", PurchaseOrderImporter),
+    ("item_receipts", ItemReceiptImporter),              
     ("sales_orders", SalesOrderImporter),
+
+    ("sales_tax_items", SalesTaxItemsImporter),         
+    ("sales_tax_codes", SalesTaxCodesImporter),         
+
     ("estimates", EstimateImporter),
     ("bills", PurchaseInvoiceImporter),
-    ("sales_tax_items", SalesTaxItemsImporter),
-    ("sales_tax_codes", SalesTaxCodesImporter),
     ("sales_receipts", SalesReceiptImporter),
     ("invoices", SalesInvoiceImporter),
     ("credit_memos", CreditMemoImporter),
+    ("vendor_credits", VendorCreditImporter),            
     ("bill_payments", BillPaymentImporter),
     ("payments", PaymentsImporter),
     ("deposits", DepositImporter),
@@ -85,8 +92,6 @@ PIPELINE = [
     ("cc_charges", CCChargesImporter),
     ("checks", ChecksImporter),
     ("journal_entries", JournalEntryImporter),
-    ("vendor_credits", VendorCreditImporter),
-    ("item_receipts", ItemReceiptImporter),
     ("quantity_discounts", QuantityDiscountImporter),
     ("other_names", OtherNamesImporter),
     ("inventory_adjustments", InventoryAdjustmentImporter),

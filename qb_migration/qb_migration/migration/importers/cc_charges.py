@@ -312,9 +312,9 @@ class CCChargesImporter(JournalEntryImporter, PurchaseInvoiceImporter, SalesInvo
                 }
 
                 try:
-                    invoice["debit_to"] = self.resolve_payable_account(supplier, currency)
+                    invoice["credit_to"] = self.resolve_payable_account(supplier, currency)
                 except Exception:
-                    invoice["debit_to"] = None
+                    invoice["credit_to"] = None
 
                 return invoice
 

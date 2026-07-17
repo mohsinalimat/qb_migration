@@ -42,6 +42,13 @@ class SalesInvoiceImporter(SalesOrderImporter):
     def get_source_id(self, record):
         return str(record.get("txn_id") or record.get("inv_no") or record.get("ref_no") or "")
 
+    def find_existing_target(self, doc_data):
+        """Find existing Sales Invoice by name (txn_id) to avoid duplicates on re-run."""
+        name = doc_data.get("name")
+        if name:
+            return frappe.db.get_value("Sales Invoice", {"name": name}, "name")
+        return None
+
     def resolve_income_account(self):
         company = frappe.defaults.get_global_default("company")
 

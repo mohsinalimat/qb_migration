@@ -162,7 +162,7 @@ class PurchaseInvoiceImporter(BaseImporter):
             "company": company,
             "update_stock": 1,
             "currency": currency,
-            "debit_to": self.resolve_payable_account(supplier, currency),
+            "credit_to": self.resolve_payable_account(supplier, currency),
             "items": items,
             "is_return": record.get("is_credit", False),
         }

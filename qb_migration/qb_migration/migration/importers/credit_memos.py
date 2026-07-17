@@ -299,6 +299,9 @@ class CreditMemoImporter(SalesInvoiceImporter):
                 doc.flags.ignore_mandatory = False
                 doc.insert()
 
+                if hasattr(self, "post_insert"):
+                    self.post_insert(doc, record)
+
                 if self.target_doctype in (
                     "Purchase Invoice",
                     "Sales Invoice",
@@ -306,9 +309,6 @@ class CreditMemoImporter(SalesInvoiceImporter):
                     "Journal Entry",
                 ):
                     doc.submit()
-
-                if hasattr(self, "post_insert"):
-                    self.post_insert(doc, record)
 
                 frappe.db.commit()
                 self.log_success(source_id, doc.name, getattr(doc, "doctype", self.target_doctype))

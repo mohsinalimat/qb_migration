@@ -39,26 +39,6 @@ class InventoryAdjustmentImporter(BaseImporter):
 
         return item
 
-    def _resolve_difference_account(self):
-        company = self._get_company()
-        if not company:
-            return None
-
-        for account_name in ["Stock In Hand", "Temporary Opening", "Stock Adjustment"]:
-            account = frappe.db.get_value(
-                "Account",
-                {"account_name": account_name, "company": company},
-                "name",
-            )
-            if account:
-                return account
-
-        return frappe.db.get_value(
-            "Account",
-            {"company": company, "root_type": "Asset"},
-            "name",
-        )
-
     def _resolve_or_create_warehouse(self):
         """Ensure the shared clearing warehouse exists for the current company.
 
