@@ -146,7 +146,8 @@ class ItemImporter(BaseImporter):
             "is_stock_item": is_stock,
             "is_purchase_item": 1,
             "is_sales_item": 1,
-            "valuation_rate": record.get("cost", 0),
+            "valuation_method": "Moving Average",
+            # "valuation_rate": record.get("cost", 0),
             "standard_rate": record.get("price", 0),
         }
 
