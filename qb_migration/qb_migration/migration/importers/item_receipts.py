@@ -233,6 +233,7 @@ class ItemReceiptImporter(BaseImporter):
             "tax_category": record.get("sales_tax_code") or "",
             "grand_total": total_amt or float(record.get("total_amt") or 0),
             "items": items,
+            "set_posting_time": 1,
         }
 
         if self._has_field("Purchase Receipt", "included_in_print_rate"):
