@@ -197,8 +197,12 @@ class SalesOrderImporter(BaseImporter):
             qty = line.get("qty")
             if qty is None:
                 qty = 1
-            if qty == 0 or qty == 0.0:
+            if (qty == 0 or qty == 0.0) and not (line.get("price", 0) > 0 or line.get("ext_price", 0) > 0):
                 continue
+            if (qty == 0 or qty == 0.0) and line.get("qty_invoiced", 0) > 0:
+                qty = line["qty_invoiced"]
+            if (qty == 0 or qty == 0.0) and not line.get("qty_invoiced", 0):
+                qty = 1
 
             items.append({
                 "idx": idx,
