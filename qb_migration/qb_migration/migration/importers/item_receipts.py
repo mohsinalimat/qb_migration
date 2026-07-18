@@ -155,7 +155,7 @@ class ItemReceiptImporter(BaseImporter):
         # Collect dict-like lines
         lines = [l for l in record.get("lines", []) if isinstance(l, dict)]
 
-        # If there are lines and all have qty == 0, skip the whole transaction
+        # If there are lines and all are zero-qty + zero-amount, skip the whole transaction
         if lines:
             kept_lines = []
             for l in lines:
@@ -164,7 +164,12 @@ class ItemReceiptImporter(BaseImporter):
                 except (TypeError, ValueError):
                     qty_val = 0
 
-                if qty_val == 0:
+                try:
+                    amt_val = float(l.get("amount") or 0)
+                except (TypeError, ValueError):
+                    amt_val = 0.0
+
+                if qty_val == 0 and amt_val == 0:
                     continue
                 kept_lines.append(l)
 
@@ -190,6 +195,9 @@ class ItemReceiptImporter(BaseImporter):
                 amount = float(line.get("amount") or 0)
             except (TypeError, ValueError):
                 amount = 0.0
+
+            if qty == 0 and amount > 0:
+                qty = 1
 
             rate = amount / qty if qty else 0.0
             total_amt += amount
