@@ -345,8 +345,6 @@ class CreditMemoImporter(SalesInvoiceImporter):
 
             item_code = self.resolve_item(item_name) if item_name else None
 
-            # Determine qty value carefully. We only skip lines explicitly
-            # when the source provided a numeric qty that equals 0.0.
             qty_raw = line.get("qty")
             qty_value = None
             if qty_raw is not None and qty_raw != "":
@@ -355,34 +353,46 @@ class CreditMemoImporter(SalesInvoiceImporter):
                 except (TypeError, ValueError):
                     qty_value = None
 
-            # Rule: if the line has an explicit qty and it's 0.0, skip this line.
-            if qty_value is not None and qty_value == 0.0:
+            try:
+                price_input = line.get("price")
+                price_value = None if price_input in (None, "") else float(price_input)
+            except (TypeError, ValueError):
+                price_value = None
+
+            try:
+                amount_input = line.get("ext_price")
+                amount_value = None if amount_input in (None, "") else float(amount_input)
+            except (TypeError, ValueError):
+                amount_value = None
+
+            has_negative_value = (price_value is not None and price_value < 0) or (
+                amount_value is not None and amount_value < 0
+            )
+            if has_negative_value:
                 if (line.get("tax_code") or "").strip().lower() == "tax":
                     skipped_taxable_line = True
                 continue
 
-            # Fallback behaviour: if qty was provided and parsed, use it,
-            # otherwise default to 0 (preserve previous behaviour for missing/invalid qty).
+            has_positive_amount = (price_value or 0) > 0 or (amount_value or 0) > 0
+            has_zero_amount = (price_value or 0) == 0 and (amount_value or 0) == 0
+            if has_zero_amount:
+                if (line.get("tax_code") or "").strip().lower() == "tax":
+                    skipped_taxable_line = True
+                continue
+
             if qty_value is None:
-                qty_signed = 0
+                qty_signed = 1 if has_positive_amount else 0
+            elif qty_value == 0.0:
+                qty_signed = 1 if has_positive_amount else 0
             else:
                 qty_signed = -abs(qty_value) if qty_value else 0
 
             rate_value = 0
-            try:
-                rate_input = line.get("price")
-                if rate_input not in (None, ""):
-                    rate_value = abs(float(rate_input))
-            except (TypeError, ValueError):
-                rate_value = 0
+            if price_value is not None:
+                rate_value = abs(price_value)
 
-            # compute extended amount if provided
-            try:
-                amount_value = abs(float(line.get("ext_price") or 0))
-            except (TypeError, ValueError):
-                amount_value = 0
-
-            imported_subtotal += amount_value
+            normalized_amount = abs(amount_value or 0)
+            imported_subtotal += normalized_amount
 
             item_idx += 1
             item_row = {
@@ -391,7 +401,7 @@ class CreditMemoImporter(SalesInvoiceImporter):
                 "item_name": line.get("description") or item_name or "",
                 "qty": qty_signed,
                 "rate": rate_value,
-                "amount": amount_value,
+                "amount": normalized_amount,
                 "description": line.get("description") or "",
                 "income_account": self.resolve_income_account(),
             }
@@ -406,11 +416,8 @@ class CreditMemoImporter(SalesInvoiceImporter):
             items.append(item_row)
 
         if not items:
-            # If all lines were skipped due to qty == 0.0 (or no valid lines),
-            # don't treat this as a failure. Return a dict that signals the
-            # runner to skip this transaction.
             ref_no = record.get("ref_no") or record.get("ref_number") or record.get("txn_id") or ""
-            return {"_skip": True, "_skip_reason": "All line items had qty 0.0 or no valid item lines", "ref_no": ref_no}
+            return {"_skip": True, "_skip_reason": "All line items were blank, zero-value, or invalid", "ref_no": ref_no}
 
         project = self.resolve_project(record.get("project_name"))
 
