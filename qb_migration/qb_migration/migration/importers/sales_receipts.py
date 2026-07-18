@@ -527,10 +527,31 @@ class SalesReceiptImporter(SalesInvoiceImporter):
         imported_subtotal = 0.0
 
         for line in record.get("lines", []):
-            if self._is_zero_qty(line.get("qty")):
+            qty = line.get("qty")
+            try:
+                qty_val = float(qty or 0)
+            except (TypeError, ValueError):
+                qty_val = 0
+
+            try:
+                price = abs(float(line.get("price") or 0))
+            except (TypeError, ValueError):
+                price = 0
+
+            try:
+                ext_price = abs(float(line.get("ext_price") or 0))
+            except (TypeError, ValueError):
+                ext_price = 0
+
+            if self._is_zero_qty(qty):
                 if (line.get("tax_code") or "").strip().lower() == "tax":
                     skipped_taxable_line = True
-                continue
+
+                # If both qty and financial values are 0, skip
+                if price == 0 and ext_price == 0:
+                    continue
+                # If qty is 0 but financial value exists, set qty to 1
+                qty = 1
 
             if (line.get("tax_code") or "").strip().lower() == "tax":
                 remaining_taxable_line = True
@@ -541,19 +562,7 @@ class SalesReceiptImporter(SalesInvoiceImporter):
 
             item_code = self.resolve_item(item_name) if item_name else None
 
-            qty = line.get("qty")
-            if qty is None or qty == "":
-                qty = 1
-
-            try:
-                qty_value = float(qty)
-                qty = int(qty_value) if qty_value.is_integer() else qty_value
-            except (TypeError, ValueError):
-                qty = 1
-
-            if qty == 0:
-                continue
-
+            # Qty is already set above
             try:
                 rate_value = abs(float(line.get("price") or 0))
             except (TypeError, ValueError):
