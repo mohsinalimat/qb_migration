@@ -345,7 +345,7 @@ class EstimateImporter(BaseImporter):
 
             amount = abs(float(line.get("ext_price") or line.get("amount") or 0))
             if qty <= 0:
-                if amount > 0:
+                if amount > 0 or abs(float(line.get("price") or 0)) > 0:
                     qty = 1
                 else:
                     continue
