@@ -291,10 +291,10 @@ class PurchaseInvoiceImporter(BaseImporter):
         taxes = []
         lines = [line for line in record.get("lines", []) if isinstance(line, dict)]
 
-        if lines and all("qty" in line and self._qty_is_zero(line.get("qty")) for line in lines):
+        if lines and all("amount" in line and self._qty_is_zero(line.get("amount")) for line in lines):
             return {
                 "_skip": True,
-                "_skip_reason": "Skipped purchase invoice because all line items have qty 0.0",
+                "_skip_reason": "Skipped purchase invoice because all line items have amount 0.0",
                 "ref_no": record.get("ref_no", "") or record.get("txn_id", ""),
             }
 
@@ -306,8 +306,16 @@ class PurchaseInvoiceImporter(BaseImporter):
                     taxes.append(tax_row)
                 continue
 
-            if self._qty_is_zero(line.get("qty")):
+            # Extract qty and amount for proper validation
+            qty = line.get("qty")
+            amount = line.get("amount", 0)
+
+            # Skip only if both qty and amount are zero
+            if self._qty_is_zero(qty) and self._qty_is_zero(amount):
                 continue
+            # If qty is zero but amount is not zero, set qty to 1
+            if self._qty_is_zero(qty) and not self._qty_is_zero(amount):
+                line["qty"] = 1
 
             item_data = self._build_item_row(line)
             if item_data:
