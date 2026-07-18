@@ -64,20 +64,27 @@ class VendorCreditImporter(PurchaseInvoiceImporter):
         items = []
         lines = [l for l in record.get("lines", []) if isinstance(l, dict)]
 
-        # If all lines have qty == 0, skip the whole transaction
-        if lines and all(self._qty_is_zero(l.get("qty")) for l in lines):
+        # If all lines have both qty == 0 and amount == 0, skip the whole transaction
+        if lines and all(self._qty_is_zero(l.get("qty")) and self._qty_is_zero(l.get("amount")) for l in lines):
             return {
                 "_skip": True,
-                "_skip_reason": "ALL_LINES_ZERO_QTY",
+                "_skip_reason": "ALL_LINES_ZERO_QTY_AND_AMOUNT",
                 "ref_no": record.get("ref_no", "") or record.get("txn_id", ""),
             }
 
         for line in lines:
-            # skip individual lines with zero qty
-            if self._qty_is_zero(line.get("qty")):
-                continue
+            qty = line.get("qty")
+            amount = line.get("amount", 0)
 
-            qty = self._normalize_qty(line.get("qty", 0))
+            # Skip only if both qty and amount are zero
+            if self._qty_is_zero(qty) and self._qty_is_zero(amount):
+                continue
+            # If qty is zero but amount is not zero, set qty to 1
+            if self._qty_is_zero(qty) and not self._qty_is_zero(amount):
+                qty = 1
+                line["qty"] = 1
+
+            qty = self._normalize_qty(qty)
             qty_signed = -abs(qty)
 
             raw_amount = line.get("amount") or 0
