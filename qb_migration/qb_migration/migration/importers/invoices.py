@@ -383,11 +383,25 @@ class SalesInvoiceImporter(SalesOrderImporter):
         imported_subtotal = 0.0
 
         for line in record.get("lines", []):
-            # Skip zero-qty lines and track if taxable lines were skipped
+            # Extract financial values
+            try:
+                price_val = float(line.get("price") or 0)
+            except (TypeError, ValueError):
+                price_val = 0
+            try:
+                ext_price_val = float(line.get("ext_price") or 0)
+            except (TypeError, ValueError):
+                ext_price_val = 0
+
+            # Skip only if qty is zero AND both financial values are also zero
             if self._is_zero_qty(line.get("qty")):
                 if (line.get("tax_code") or "").strip().lower() == "tax":
                     skipped_taxable_line = True
-                continue
+
+                if price_val == 0 and ext_price_val == 0:
+                    continue
+                # qty is 0 but financial value exists (positive or negative), set qty to 1
+                # Don't skip — handled below
 
             if (line.get("tax_code") or "").strip().lower() == "tax":
                 remaining_taxable_line = True
@@ -408,16 +422,19 @@ class SalesInvoiceImporter(SalesOrderImporter):
             except (TypeError, ValueError):
                 qty = 1
 
+            # If qty is 0, check if we should keep it (1) or skip it (continued above)
             if qty == 0:
-                continue
+                # Based on previous logic, we already filtered out lines where qty=0 and financial_vals=0
+                # So here, qty=0 implies financial value exists. Set to 1.
+                qty = 1
 
             try:
-                rate_value = abs(float(line.get("price") or 0))
+                rate_value = float(line.get("price") or 0)
             except (TypeError, ValueError):
                 rate_value = 0
 
             try:
-                amount_value = abs(float(line.get("ext_price") or 0))
+                amount_value = float(line.get("ext_price") or 0)
             except (TypeError, ValueError):
                 amount_value = 0
 
